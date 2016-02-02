@@ -1,26 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Data;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using AuditoriaParlamentar.Classes;
-using System.Data;
-using System.Text;
-using MySql.Data.MySqlClient;
 
 namespace AuditoriaParlamentar
 {
     public partial class AuditarSenador : System.Web.UI.Page
     {
-        protected override void OnPreInit(EventArgs e)
-        {
-            if (Session["MasterPage"] == "Farejador")
-            {
-                Page.MasterPageFile = "~/OpsFarejador.Master";
-            }
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
@@ -29,6 +17,19 @@ namespace AuditoriaParlamentar
             if (!IsPostBack)
             {
                 CarregaDados();
+            }
+
+            GridView.PreRender += GridView_PreRender;
+        }
+
+        protected void GridView_PreRender(object sender, EventArgs e)
+        {
+            try
+            {
+                GridView.HeaderRow.TableSection = TableRowSection.TableHeader;
+            }
+            catch (Exception ex)
+            {
             }
         }
 
@@ -90,7 +91,7 @@ namespace AuditoriaParlamentar
                     e.Row.Cells[7].Text = Convert.ToDouble(valor).ToString("N2");
                 else
                     e.Row.Cells[7].Text = "0,00";
-                
+
                 CheckBox chkRow = (e.Row.Cells[0].FindControl("CheckBoxSelecionar") as CheckBox);
                 chkRow.Checked = false;
 

@@ -11,14 +11,6 @@ namespace AuditoriaParlamentar
 {
     public partial class NovoDossie : System.Web.UI.Page
     {
-        protected override void OnPreInit(EventArgs e)
-        {
-            if (Session["MasterPage"] == "Farejador")
-            {
-                Page.MasterPageFile = "~/OpsFarejador.Master";
-            }
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!System.Web.HttpContext.Current.User.Identity.IsAuthenticated || !System.Web.HttpContext.Current.User.IsInRole("REVISOR"))
@@ -46,6 +38,18 @@ namespace AuditoriaParlamentar
                 {
                     ButtonExcluir.Visible = false;
                 }
+            }
+            GridViewResultado.PreRender += GridViewResultado_PreRender;
+        }
+
+        protected void GridViewResultado_PreRender(object sender, EventArgs e)
+        {
+            try
+            {
+                GridViewResultado.HeaderRow.TableSection = TableRowSection.TableHeader;
+            }
+            catch (Exception ex)
+            {
             }
         }
 
@@ -144,7 +148,7 @@ namespace AuditoriaParlamentar
         {
             Dossie dossie = new Dossie();
             dossie.IdDossie = Convert.ToInt32(HiddenFieldIdDossie.Value);
-            
+
             if (dossie.Excluir() == true)
                 Response.Redirect("~/Dossies.aspx");
             else
