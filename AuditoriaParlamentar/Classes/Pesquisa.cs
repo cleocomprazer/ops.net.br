@@ -36,9 +36,9 @@ namespace AuditoriaParlamentar
         public static String AnoMesIni { get; set; }
         public static String AnoMesFim { get; set; }
 
-        internal void Carregar(GridView grid, String userName, String documento, String periodo, String agrupamento, Boolean separarMes, String anoIni, String mesIni, String anoFim, String mesFim, ListItemCollection ItemsParlamentar, ListItemCollection ItemsDespesa, ListItemCollection ItemsFornecedor, ListItemCollection ItemsUF, ListItemCollection ItemsPartidos, string ChavePesquisa)
+        internal void Carregar(GridView grid, String userName, String documento, String periodo, String agrupamento, Boolean separarMes, String anoIni, String mesIni, String anoFim, String mesFim, ListItemCollection ItemsParlamentar, ListItemCollection ItemsDespesa, TextBox txtFornecedor, ListItemCollection ItemsUF, ListItemCollection ItemsPartidos, string ChavePesquisa)
         {
-            using(Banco banco = new Banco())
+            using (Banco banco = new Banco())
             {
                 StringBuilder sqlCmd = new StringBuilder();
                 StringBuilder sqlCampos = new StringBuilder();
@@ -89,7 +89,7 @@ namespace AuditoriaParlamentar
                     case AGRUPAMENTO_PARTIDO:
                         sqlCampos.Append("   SELECT lancamentos.sgPartido AS codigo,");
                         sqlCampos.Append("          lancamentos.sgPartido AS agrupamento,");
-                        
+
                         break;
 
                     case AGRUPAMENTO_UF:
@@ -194,127 +194,64 @@ namespace AuditoriaParlamentar
 
                 sqlCampos.Append(" SUM(lancamentos.vlrLiquido) AS vlrTotal");
 
-                if (ItemsParlamentar != null)
+                var ParlamentaresSelecionados = String.Join(",", ItemsParlamentar.Cast<ListItem>().Where(i => i.Selected).Select(i => i.Value));
+                if (!string.IsNullOrEmpty(ParlamentaresSelecionados))
                 {
-                    if (ItemsParlamentar.Count > 0)
+                    if (!ParlamentaresSelecionados.Contains(","))
                     {
-                        if (ItemsParlamentar.Count == 1)
-                        {
-                            sqlWhere.Append(" AND lancamentos.ideCadastro = " + ItemsParlamentar[0].Value.ToString());
-                        }
-                        else
-                        {
-                            StringBuilder values = new StringBuilder();
-                            for (Int32 i = 0; i < ItemsParlamentar.Count; i++)
-                            {
-                                if (i == 0)
-                                    values.Append(ItemsParlamentar[i].Value.ToString());
-                                else
-                                    values.Append("," + ItemsParlamentar[i].Value.ToString());
-                            }
-
-                            sqlWhere.Append(" AND lancamentos.ideCadastro IN (" + values.ToString() + ")");
-                        }
+                        sqlWhere.Append(" AND lancamentos.ideCadastro = " + ParlamentaresSelecionados);
+                    }
+                    else
+                    {
+                        sqlWhere.Append(" AND lancamentos.ideCadastro IN (" + ParlamentaresSelecionados + ")");
                     }
                 }
 
-                if (ItemsDespesa != null)
+                var DespesasSelecionados = String.Join(",", ItemsDespesa.Cast<ListItem>().Where(i => i.Selected).Select(i => i.Value));
+                if (!string.IsNullOrEmpty(DespesasSelecionados))
                 {
-                    if (ItemsDespesa.Count > 0)
+                    if (!DespesasSelecionados.Contains(","))
                     {
-                        if (ItemsDespesa.Count == 1)
-                        {
-                            sqlWhere.Append(" AND lancamentos.numSubCota = " + ItemsDespesa[0].Value.ToString());
-                        }
-                        else
-                        {
-                            StringBuilder values = new StringBuilder();
-                            for (Int32 i = 0; i < ItemsDespesa.Count; i++)
-                            {
-                                if (i == 0)
-                                    values.Append(ItemsDespesa[i].Value.ToString());
-                                else
-                                    values.Append("," + ItemsDespesa[i].Value.ToString());
-                            }
-
-                            sqlWhere.Append(" AND lancamentos.numSubCota IN (" + values.ToString() + ")");
-                        }
+                        sqlWhere.Append(" AND lancamentos.numSubCota = " + DespesasSelecionados);
+                    }
+                    else
+                    {
+                        sqlWhere.Append(" AND lancamentos.numSubCota IN (" + DespesasSelecionados + ")");
                     }
                 }
 
-                if (ItemsFornecedor != null)
+                if (!string.IsNullOrEmpty(txtFornecedor.Text))
                 {
-                    if (ItemsFornecedor.Count > 0)
-                    {
-                        if (ItemsFornecedor.Count == 1)
-                        {
-                            sqlWhere.Append(" AND lancamentos.txtCNPJCPF = '" + ItemsFornecedor[0].Value.ToString() + "'");
-                        }
-                        else
-                        {
-                            StringBuilder values = new StringBuilder();
-                            for (Int32 i = 0; i < ItemsFornecedor.Count; i++)
-                            {
-                                if (i == 0)
-                                    values.Append("'" + ItemsFornecedor[i].Value.ToString() + "'");
-                                else
-                                    values.Append(",'" + ItemsFornecedor[i].Value.ToString() + "'");
-                            }
+                    sqlWhere.Append(" AND lancamentos.txtCNPJCPF = '" + txtFornecedor.Text.Replace(".", "").Replace("-", "").Replace("/", "").Replace("'", "") + "'");
+                }
 
-                            sqlWhere.Append(" AND lancamentos.txtCNPJCPF IN (" + values.ToString() + ")");
-                        }
+                var UFsSelecionados = String.Join(",", ItemsUF.Cast<ListItem>().Where(i => i.Selected).Select(i => "'" + i.Value + "'"));
+                if (!string.IsNullOrEmpty(UFsSelecionados))
+                {
+                    if (!UFsSelecionados.Contains(","))
+                    {
+                        sqlWhere.Append(" AND lancamentos.sgUF = " + UFsSelecionados);
+                    }
+                    else
+                    {
+                        sqlWhere.Append(" AND lancamentos.sgUF IN (" + UFsSelecionados + ")");
                     }
                 }
 
-                if (ItemsUF != null)
+                var PartidosSelecionados = String.Join(",", ItemsPartidos.Cast<ListItem>().Where(i => i.Selected).Select(i => "'" + i.Value + "'"));
+                if (!string.IsNullOrEmpty(PartidosSelecionados))
                 {
-                    if (ItemsUF.Count > 0)
+                    if (!PartidosSelecionados.Contains(","))
                     {
-                        if (ItemsUF.Count == 1)
-                        {
-                            sqlWhere.Append(" AND lancamentos.sgUF = '" + ItemsUF[0].Value.ToString() + "'");
-                        }
-                        else
-                        {
-                            StringBuilder values = new StringBuilder();
-                            for (Int32 i = 0; i < ItemsUF.Count; i++)
-                            {
-                                if (i == 0)
-                                    values.Append("'" + ItemsUF[i].Value.ToString() + "'");
-                                else
-                                    values.Append(",'" + ItemsUF[i].Value.ToString() + "'");
-                            }
-
-                            sqlWhere.Append(" AND lancamentos.sgUF IN (" + values.ToString() + ")");
-                        }
+                        sqlWhere.Append(" AND lancamentos.sgPartido = " + PartidosSelecionados);
+                    }
+                    else
+                    {
+                        sqlWhere.Append(" AND lancamentos.sgPartido IN (" + PartidosSelecionados + ")");
                     }
                 }
 
-                if (ItemsPartidos != null)
-                {
-                    if (ItemsPartidos.Count > 0)
-                    {
-                        if (ItemsPartidos.Count == 1)
-                        {
-                            sqlWhere.Append(" AND lancamentos.sgPartido = '" + ItemsPartidos[0].Value.ToString() + "'");
-                        }
-                        else
-                        {
-                            StringBuilder values = new StringBuilder();
-                            for (Int32 i = 0; i < ItemsPartidos.Count; i++)
-                            {
-                                if (i == 0)
-                                    values.Append("'" + ItemsPartidos[i].Value.ToString() + "'");
-                                else
-                                    values.Append(",'" + ItemsPartidos[i].Value.ToString() + "'");
-                            }
-
-                            sqlWhere.Append(" AND lancamentos.sgPartido IN (" + values.ToString() + ")");
-                        }
-                    }
-                }
-
-                if (documento!= null && documento != "")
+                if (documento != null && documento != "")
                 {
                     String[] valores = documento.Split('|');
                     sqlWhere.Append(" AND lancamentos.txtNumero  = '" + valores[0].Trim() + "'");
@@ -362,12 +299,12 @@ namespace AuditoriaParlamentar
                     case AGRUPAMENTO_DOCUMENTO:
                         sqlCmd.Append(" GROUP BY 1, 2, 3, 4, 5, 6, 7, 8");
 
-                        //if (separarMes == true)
-                        //    sqlCmd.Append(" ORDER BY " + (numMes + 6).ToString() + " DESC");
-                        //else
-                        //    sqlCmd.Append(" ORDER BY 6 DESC");
+                        if (separarMes == true)
+                            sqlCmd.Append(" ORDER BY " + (numMes + 9).ToString() + " DESC");
+                        else
+                            sqlCmd.Append(" ORDER BY 9 DESC");
 
-                        sqlCmd.Append(" ORDER BY lancamentos.datEmissao");
+                        //sqlCmd.Append(" ORDER BY lancamentos.datEmissao");
 
                         break;
                 }
@@ -402,7 +339,7 @@ namespace AuditoriaParlamentar
                 }
             }
         }
-        
+
         private void FormataColunas(String agrupamento, DataTable table)
         {
             switch (agrupamento)

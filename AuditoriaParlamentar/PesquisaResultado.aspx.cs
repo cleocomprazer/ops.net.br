@@ -122,12 +122,7 @@ namespace AuditoriaParlamentar
                 listDespesas.Add(new ListItem(despesas[i], despesas[i + 1]));
             }
 
-            String[] fornecedores = HiddenFieldFornecedor.Value.Split('|');
-            ListItemCollection listFornecedores = new ListItemCollection();
-            for (Int32 i = 0; i < fornecedores.Length - 1; i += 2)
-            {
-                listFornecedores.Add(new ListItem(fornecedores[i], fornecedores[i + 1]));
-            }
+            TextBox txtFornecedor = new TextBox() { Text = HiddenFieldFornecedor.Value.Split('|')[0] };
 
             String[] uf = HiddenFieldUF.Value.Split('|');
             ListItemCollection listUF = new ListItemCollection();
@@ -148,12 +143,12 @@ namespace AuditoriaParlamentar
             {
                 case GRUPO_DEPUTADO_FEDERAL:
                     Pesquisa pesquisa = new Pesquisa();
-                    pesquisa.Carregar(GridViewResultado, HttpContext.Current.User.Identity.Name, HiddenFieldDocumento.Value, HiddenFieldPeriodo.Value, HiddenFieldAgrupamento.Value, Convert.ToBoolean(HiddenFieldSeparaMes.Value), HiddenFieldAnoIni.Value, HiddenFieldMesIni.Value, HiddenFieldAnoFim.Value, HiddenFieldMesFim.Value, listParlamentares, listDespesas, listFornecedores, listUF, listPartido, ChavePesquisa.Value);
+                    pesquisa.Carregar(GridViewResultado, HttpContext.Current.User.Identity.Name, HiddenFieldDocumento.Value, HiddenFieldPeriodo.Value, HiddenFieldAgrupamento.Value, Convert.ToBoolean(HiddenFieldSeparaMes.Value), HiddenFieldAnoIni.Value, HiddenFieldMesIni.Value, HiddenFieldAnoFim.Value, HiddenFieldMesFim.Value, listParlamentares, listDespesas, txtFornecedor, listUF, listPartido, ChavePesquisa.Value);
                     break;
 
                 case GRUPO_SENADOR:
                     PesquisaSenadores pesquisaSenadores = new PesquisaSenadores();
-                    pesquisaSenadores.Carregar(GridViewResultado, HttpContext.Current.User.Identity.Name, HiddenFieldDocumento.Value, HiddenFieldPeriodo.Value, HiddenFieldAgrupamento.Value, Convert.ToBoolean(HiddenFieldSeparaMes.Value), HiddenFieldAnoIni.Value, HiddenFieldMesIni.Value, HiddenFieldAnoFim.Value, HiddenFieldMesFim.Value, listParlamentares, listDespesas, listFornecedores, listUF, listPartido, ChavePesquisa.Value);
+                    pesquisaSenadores.Carregar(GridViewResultado, HttpContext.Current.User.Identity.Name, HiddenFieldDocumento.Value, HiddenFieldPeriodo.Value, HiddenFieldAgrupamento.Value, Convert.ToBoolean(HiddenFieldSeparaMes.Value), HiddenFieldAnoIni.Value, HiddenFieldMesIni.Value, HiddenFieldAnoFim.Value, HiddenFieldMesFim.Value, listParlamentares, listDespesas, txtFornecedor, listUF, listPartido, ChavePesquisa.Value);
                     break;
             }
 
@@ -358,7 +353,7 @@ namespace AuditoriaParlamentar
             else if (e.Row.RowType == DataControlRowType.Footer)
             {
                 e.Row.Cells[e.Row.Cells.Count - 1].Text = mTotalGeral.ToString("N2");
-                e.Row.Cells[e.Row.Cells.Count - 1].HorizontalAlign = HorizontalAlign.Right;
+                //e.Row.Cells[e.Row.Cells.Count - 1].HorizontalAlign = HorizontalAlign.Right;
             }
         }
     }

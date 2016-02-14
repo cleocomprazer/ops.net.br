@@ -162,7 +162,7 @@ namespace AuditoriaParlamentar
             try
             {
                 GridViewResultado.HeaderRow.TableSection = TableRowSection.TableHeader;
-        }
+            }
             catch (Exception ex)
             {
             }
@@ -241,11 +241,11 @@ namespace AuditoriaParlamentar
                 DropDownListGrupo.SelectedValue = parametros.Cargo;
                 DropDownListAgrupamento.SelectedValue = parametros.Agrupamento;
                 DropDownListPerido.SelectedValue = Pesquisa.PERIODO_INFORMAR;
-                //hidListBoxParlamentar.Value = parametros.Parlamentares;
-                //hidListBoxDespesa.Value = parametros.Despesas;
-                //hidListBoxFornecedor.Value = parametros.Fornecedores;
-                //hidListBoxPartido.Value = parametros.Partidos;
-                //hidListBoxUF.Value = parametros.Ufs;
+                DropDownListParlamentar.SelectedItems(parametros.Parlamentares);
+                DropDownListDespesa.SelectedItems(parametros.Despesas);
+                txtFornecedor.Text = parametros.Fornecedores.Split('|')[0];
+                DropDownListPartido.SelectedItems(parametros.Partidos);
+                DropDownListUF.SelectedItems(parametros.Ufs);
                 DropDownListMesInicial.SelectedValue = parametros.MesInicial.ToString("00");
                 DropDownListAnoInicial.SelectedValue = parametros.AnoInicial.ToString("00");
                 DropDownListMesFinal.SelectedValue = parametros.MesFinal.ToString("00");
@@ -326,7 +326,7 @@ namespace AuditoriaParlamentar
                         DropDownListMesFinal.SelectedValue,
                         DropDownListParlamentar.Items,
                         DropDownListDespesa.Items,
-                        DropDownListFornecedor.Items,
+                        txtFornecedor,
                         DropDownListUF.Items,
                         DropDownListPartido.Items,
                         ViewState["ChavePesquisa"].ToString());
@@ -346,7 +346,7 @@ namespace AuditoriaParlamentar
                         DropDownListMesFinal.SelectedValue,
                         DropDownListParlamentar.Items,
                         DropDownListDespesa.Items,
-                        DropDownListFornecedor.Items,
+                        txtFornecedor,
                         DropDownListUF.Items,
                         DropDownListPartido.Items,
                         ViewState["ChavePesquisa"].ToString());
@@ -414,156 +414,159 @@ namespace AuditoriaParlamentar
 
         protected void GridViewResultado_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            e.Row.Cells[1].Visible = false;
-
-            for (Int32 i = 0; i < e.Row.Cells.Count; i++)
-                e.Row.Cells[i].Wrap = false;
-
-            Int32 inicioColunaValores = 0;
-
-            switch (DropDownListAgrupamento.SelectedValue)
+            if (e.Row.RowType != DataControlRowType.EmptyDataRow)
             {
-                case Pesquisa.AGRUPAMENTO_PARLAMENTAR:
-                    inicioColunaValores = 6;
-                    e.Row.Cells[5].Visible = false; //url
-                    break;
+                e.Row.Cells[1].Visible = false;
 
-                case Pesquisa.AGRUPAMENTO_FORNECEDOR:
-                    inicioColunaValores = 7;
+                for (Int32 i = 0; i < e.Row.Cells.Count; i++)
+                    e.Row.Cells[i].Wrap = false;
 
-                    if (mAuthenticated == false)
-                    {
-                        e.Row.Cells[Pesquisa.INDEX_COLUNA_AUDITEI + 1].Visible = false;
-                    }
-
-                    break;
-
-                case Pesquisa.AGRUPAMENTO_DESPESA:
-                case Pesquisa.AGRUPAMENTO_PARTIDO:
-                case Pesquisa.AGRUPAMENTO_UF:
-                    inicioColunaValores = 3;
-                    break;
-
-                case Pesquisa.AGRUPAMENTO_DOCUMENTO:
-                    inicioColunaValores = 9;
-
-                    e.Row.Cells[6].Visible = false;
-                    e.Row.Cells[7].Visible = false;
-                    e.Row.Cells[8].Visible = false;
-
-                    break;
-
-            }
-
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                for (Int32 i = inicioColunaValores; i < e.Row.Cells.Count; i++)
-                {
-                    Double valor;
-
-                    if (Double.TryParse(e.Row.Cells[i].Text, out valor))
-                        e.Row.Cells[i].Text = Convert.ToDouble(valor).ToString("N2");
-                    else
-                        e.Row.Cells[i].Text = "0,00";
-
-                    //e.Row.Cells[i].HorizontalAlign = HorizontalAlign.Right;
-                }
-
-                Button buttonAuditar = (Button)e.Row.FindControl("ButtonAuditar");
+                Int32 inicioColunaValores = 0;
 
                 switch (DropDownListAgrupamento.SelectedValue)
                 {
+                    case Pesquisa.AGRUPAMENTO_PARLAMENTAR:
+                        inicioColunaValores = 6;
+                        e.Row.Cells[5].Visible = false; //url
+                        break;
+
                     case Pesquisa.AGRUPAMENTO_FORNECEDOR:
-                        buttonAuditar.Text = "Auditar";
+                        inicioColunaValores = 7;
 
-                        if (mAuthenticated == true)
+                        if (mAuthenticated == false)
                         {
-                            buttonAuditar.Visible = true;
-
-                            if (HttpUtility.HtmlDecode(e.Row.Cells[1].Text).Trim() == "")
-                            {
-                                buttonAuditar.OnClientClick = "window.parent.AlertaSemCnpj();return false;";
-                            }
-                            else
-                            {
-                                if (e.Row.Cells[1].Text.Length == 11)
-                                {
-                                    // Pessoa física
-                                    buttonAuditar.OnClientClick = "window.parent.TabAuditoria('F','" + e.Row.Cells[1].Text + "');UpdateGridView(" + (e.Row.RowIndex + 1) + "," + Pesquisa.INDEX_COLUNA_AUDITEI.ToString() + ",'Sim');return false;";
-                                }
-                                else
-                                {
-                                    // Pessoa juridica
-                                    buttonAuditar.OnClientClick = "window.parent.TabAuditoria('J','" + e.Row.Cells[1].Text + "');UpdateGridView(" + (e.Row.RowIndex + 1) + "," + Pesquisa.INDEX_COLUNA_AUDITEI.ToString() + ",'Sim');return false;";
-                                }
-                            }
+                            e.Row.Cells[Pesquisa.INDEX_COLUNA_AUDITEI + 1].Visible = false;
                         }
-                        else
-                        {
-                            buttonAuditar.Visible = false;
-                        }
-
-                        e.Row.Cells[2].ControlStyle.CssClass = "maxWidthGrid";
-
-                        try { e.Row.Cells[5].Text = Convert.ToDateTime(e.Row.Cells[5].Text).ToString("dd/MM/yyyy"); }
-                        catch { }
 
                         break;
 
-                    case Pesquisa.AGRUPAMENTO_PARLAMENTAR:
-                        buttonAuditar.Text = "Site";
-
-                        switch (DropDownListGrupo.SelectedValue)
-                        {
-                            case GRUPO_DEPUTADO_FEDERAL:
-                                buttonAuditar.OnClientClick = "window.open('http://www.camara.leg.br/internet/Deputado/dep_Detalhe.asp?id=" + e.Row.Cells[1].Text + "');return false;";
-                                break;
-                            case GRUPO_SENADOR:
-                                buttonAuditar.OnClientClick = "window.open('" + e.Row.Cells[5].Text + "');return false;";
-                                break;
-                        }
-
+                    case Pesquisa.AGRUPAMENTO_DESPESA:
+                    case Pesquisa.AGRUPAMENTO_PARTIDO:
+                    case Pesquisa.AGRUPAMENTO_UF:
+                        inicioColunaValores = 3;
                         break;
 
                     case Pesquisa.AGRUPAMENTO_DOCUMENTO:
-                        buttonAuditar.Visible = false;
+                        inicioColunaValores = 9;
 
-                        try { e.Row.Cells[3].Text = Convert.ToDateTime(e.Row.Cells[3].Text).ToString("dd/MM/yyyy"); }
-                        catch { }
-
-                        long refDoc;
-
-                        if (Int64.TryParse(e.Row.Cells[8].Text, out refDoc))
-                        {
-                            if (refDoc > 0)
-                            {
-                                HyperLink url = new HyperLink();
-                                url.NavigateUrl = "http://www.camara.gov.br/cota-parlamentar/documentos/publ/" + e.Row.Cells[6].Text + "/" + e.Row.Cells[7].Text + "/" + e.Row.Cells[8].Text + ".pdf";
-                                url.Target = "_blank";
-                                url.Text = e.Row.Cells[2].Text;
-                                e.Row.Cells[2].Controls.Clear();
-                                e.Row.Cells[2].Controls.Add(url);
-                            }
-                        }
+                        e.Row.Cells[6].Visible = false;
+                        e.Row.Cells[7].Visible = false;
+                        e.Row.Cells[8].Visible = false;
 
                         break;
 
-                    default:
-                        buttonAuditar.Visible = false;
-                        break;
                 }
 
-                mTotalGeral += Convert.ToDouble(e.Row.Cells[e.Row.Cells.Count - 1].Text);
-            }
-            else if (e.Row.RowType == DataControlRowType.Header)
-            {
-                for (Int32 i = inicioColunaValores; i < e.Row.Cells.Count; i++)
-                    e.Row.Cells[i].HorizontalAlign = HorizontalAlign.Right;
-            }
-            else if (e.Row.RowType == DataControlRowType.Footer)
-            {
-                e.Row.Cells[e.Row.Cells.Count - 1].Text = mTotalGeral.ToString("N2");
-                e.Row.Cells[e.Row.Cells.Count - 1].HorizontalAlign = HorizontalAlign.Right;
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+                    for (Int32 i = inicioColunaValores; i < e.Row.Cells.Count; i++)
+                    {
+                        Double valor;
+
+                        if (Double.TryParse(e.Row.Cells[i].Text, out valor))
+                            e.Row.Cells[i].Text = Convert.ToDouble(valor).ToString("N2");
+                        else
+                            e.Row.Cells[i].Text = "0,00";
+
+                        //e.Row.Cells[i].HorizontalAlign = HorizontalAlign.Right;
+                    }
+
+                    Button buttonAuditar = (Button)e.Row.FindControl("ButtonAuditar");
+
+                    switch (DropDownListAgrupamento.SelectedValue)
+                    {
+                        case Pesquisa.AGRUPAMENTO_FORNECEDOR:
+                            buttonAuditar.Text = "Auditar";
+
+                            if (mAuthenticated == true)
+                            {
+                                buttonAuditar.Visible = true;
+
+                                if (HttpUtility.HtmlDecode(e.Row.Cells[1].Text).Trim() == "")
+                                {
+                                    buttonAuditar.OnClientClick = "window.parent.AlertaSemCnpj();return false;";
+                                }
+                                else
+                                {
+                                    if (e.Row.Cells[1].Text.Length == 11)
+                                    {
+                                        // Pessoa física
+                                        buttonAuditar.OnClientClick = "window.parent.TabAuditoria('F','" + e.Row.Cells[1].Text + "');UpdateGridView(" + (e.Row.RowIndex + 1) + "," + Pesquisa.INDEX_COLUNA_AUDITEI.ToString() + ",'Sim');return false;";
+                                    }
+                                    else
+                                    {
+                                        // Pessoa juridica
+                                        buttonAuditar.OnClientClick = "window.parent.TabAuditoria('J','" + e.Row.Cells[1].Text + "');UpdateGridView(" + (e.Row.RowIndex + 1) + "," + Pesquisa.INDEX_COLUNA_AUDITEI.ToString() + ",'Sim');return false;";
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                buttonAuditar.Visible = false;
+                            }
+
+                            e.Row.Cells[2].ControlStyle.CssClass = "maxWidthGrid";
+
+                            try { e.Row.Cells[5].Text = Convert.ToDateTime(e.Row.Cells[5].Text).ToString("dd/MM/yyyy"); }
+                            catch { }
+
+                            break;
+
+                        case Pesquisa.AGRUPAMENTO_PARLAMENTAR:
+                            buttonAuditar.Text = "Site";
+
+                            switch (DropDownListGrupo.SelectedValue)
+                            {
+                                case GRUPO_DEPUTADO_FEDERAL:
+                                    buttonAuditar.OnClientClick = "window.open('http://www.camara.leg.br/internet/Deputado/dep_Detalhe.asp?id=" + e.Row.Cells[1].Text + "');return false;";
+                                    break;
+                                case GRUPO_SENADOR:
+                                    buttonAuditar.OnClientClick = "window.open('" + e.Row.Cells[5].Text + "');return false;";
+                                    break;
+                            }
+
+                            break;
+
+                        case Pesquisa.AGRUPAMENTO_DOCUMENTO:
+                            buttonAuditar.Visible = false;
+
+                            try { e.Row.Cells[3].Text = Convert.ToDateTime(e.Row.Cells[3].Text).ToString("dd/MM/yyyy"); }
+                            catch { }
+
+                            long refDoc;
+
+                            if (Int64.TryParse(e.Row.Cells[8].Text, out refDoc))
+                            {
+                                if (refDoc > 0)
+                                {
+                                    HyperLink url = new HyperLink();
+                                    url.NavigateUrl = "http://www.camara.gov.br/cota-parlamentar/documentos/publ/" + e.Row.Cells[6].Text + "/" + e.Row.Cells[7].Text + "/" + e.Row.Cells[8].Text + ".pdf";
+                                    url.Target = "_blank";
+                                    url.Text = e.Row.Cells[2].Text;
+                                    e.Row.Cells[2].Controls.Clear();
+                                    e.Row.Cells[2].Controls.Add(url);
+                                }
+                            }
+
+                            break;
+
+                        default:
+                            buttonAuditar.Visible = false;
+                            break;
+                    }
+
+                    mTotalGeral += Convert.ToDouble(e.Row.Cells[e.Row.Cells.Count - 1].Text);
+                }
+                //else if (e.Row.RowType == DataControlRowType.Header)
+                //{
+                //    for (Int32 i = inicioColunaValores; i < e.Row.Cells.Count; i++)
+                //        e.Row.Cells[i].HorizontalAlign = HorizontalAlign.Right;
+                //}
+                else if (e.Row.RowType == DataControlRowType.Footer)
+                {
+                    e.Row.Cells[e.Row.Cells.Count - 1].Text = mTotalGeral.ToString("N2");
+                    //e.Row.Cells[e.Row.Cells.Count - 1].HorizontalAlign = HorizontalAlign.Right;
+                }
             }
         }
 
@@ -610,7 +613,7 @@ namespace AuditoriaParlamentar
             parametros.Agrupamento = DropDownListAgrupamento.SelectedValue;
             parametros.Parlamentares = DropDownListParlamentar.SelectedItems();
             parametros.Despesas = DropDownListDespesa.SelectedItems();
-            parametros.Fornecedores = DropDownListFornecedor.SelectedItems();
+            parametros.Fornecedores = txtFornecedor.Text;
             parametros.Partidos = DropDownListPartido.SelectedItems();
             parametros.Ufs = DropDownListUF.SelectedItems();
             parametros.MesInicial = Convert.ToInt32(DropDownListMesInicial.SelectedValue);

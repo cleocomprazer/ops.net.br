@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI.WebControls;
 
 namespace AuditoriaParlamentar.Classes
@@ -17,6 +15,16 @@ namespace AuditoriaParlamentar.Classes
                         .ToList();
 
             return string.Join(",", selectedItems);
+        }
+
+        public static void SelectedItems(this ListControl lc, string strItens)
+        {
+            var lstItens = strItens.Split(',');
+
+            foreach (ListItem item in lc.Items)
+            {
+                item.Selected = lstItens.Contains(item.Value);
+            }
         }
     }
 }

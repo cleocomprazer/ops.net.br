@@ -51,7 +51,7 @@
                 $("#<%= DropDownListMesFinal.ClientID %>").val(),
                 $("#<%= DropDownListParlamentar.ClientID %>").val(),
                 $("#<%= DropDownListDespesa.ClientID %>").val(),
-                $("#<%= DropDownListFornecedor.ClientID %>").val(),
+                $("#<%= txtFornecedor.ClientID %>").val(),
                 $("#<%= DropDownListUF.ClientID %>").val(),
                 $("#<%= DropDownListPartido.ClientID %>").val(),
                 '',
@@ -123,8 +123,8 @@
                         <asp:ListBox ID="DropDownListDespesa" runat="server" CssClass="form-control input-sm selectpicker" SelectionMode="Multiple"></asp:ListBox>
                     </div>
                     <div class="form-group">
-                        <label>Fornecedores</label>
-                        <asp:ListBox ID="DropDownListFornecedor" runat="server" CssClass="form-control input-sm selectpicker" SelectionMode="Multiple"></asp:ListBox>
+                        <label>Fornecedor</label>
+                        <asp:TextBox ID="txtFornecedor" runat="server" CssClass="form-control input-sm" placeholder="CNPJ/CPF do fornecedor sem pontuação"></asp:TextBox>
                     </div>
                     <div class="form-group">
                         <label>UF (Parlamentar)</label>
@@ -170,7 +170,8 @@
                     <asp:GridView ID="GridViewResultado" runat="server" AllowSorting="True"
                         OnRowDataBound="GridViewResultado_RowDataBound" OnSorting="GridViewResultado_Sorting"
                         ShowFooter="True" ViewStateMode="Disabled" UseAccessibleHeader="true"
-                        CssClass="table table-hover table-striped table-responsive" GridLines="None" EnableViewState="false">
+                        CssClass="table table-hover table-striped table-responsive" GridLines="None" EnableViewState="false"
+                        EmptyDataText="Nenhum registro Encontrado!" EmptyDataRowStyle-HorizontalAlign="Center">
                         <Columns>
                             <asp:TemplateField>
                                 <FooterTemplate>

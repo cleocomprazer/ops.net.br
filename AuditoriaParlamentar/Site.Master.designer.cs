@@ -40,15 +40,6 @@ namespace AuditoriaParlamentar {
         protected global::System.Web.UI.HtmlControls.HtmlForm form_auditoria;
         
         /// <summary>
-        /// ImageLogo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ImageLogo;
-        
-        /// <summary>
         /// HyperLinkDeputadoFederal control.
         /// </summary>
         /// <remarks>

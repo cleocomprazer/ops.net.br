@@ -15,7 +15,7 @@ namespace AuditoriaParlamentar.Classes
         public static String AnoMesIni { get; set; }
         public static String AnoMesFim { get; set; }
 
-        internal void Carregar(GridView grid, String userName, String documento, String periodo, String agrupamento, Boolean separarMes, String anoIni, String mesIni, String anoFim, String mesFim, ListItemCollection ItemsParlamentar, ListItemCollection ItemsDespesa, ListItemCollection ItemsFornecedor, ListItemCollection ItemsUF, ListItemCollection ItemsPartidos, string ChavePesquisa)
+        internal void Carregar(GridView grid, String userName, String documento, String periodo, String agrupamento, Boolean separarMes, String anoIni, String mesIni, String anoFim, String mesFim, ListItemCollection ItemsParlamentar, ListItemCollection ItemsDespesa, TextBox txtFornecedor, ListItemCollection ItemsUF, ListItemCollection ItemsPartidos, string ChavePesquisa)
         {
             using (Banco banco = new Banco())
             {
@@ -38,7 +38,7 @@ namespace AuditoriaParlamentar.Classes
                         sqlCampos.Append("          senadores.url,");
 
                         sqlWhere.Append(" AND lancamentos_senadores.CodigoParlamentar = senadores.CodigoParlamentar");
-                        sqlFrom.Append(", senadores "); 
+                        sqlFrom.Append(", senadores ");
                         tabSenadores = true;
 
                         break;
@@ -75,7 +75,7 @@ namespace AuditoriaParlamentar.Classes
                         sqlCampos.Append("          senadores.SiglaPartido AS agrupamento,");
 
                         sqlWhere.Append(" AND lancamentos_senadores.CodigoParlamentar = senadores.CodigoParlamentar");
-                        sqlFrom.Append(", senadores "); 
+                        sqlFrom.Append(", senadores ");
                         tabSenadores = true;
 
                         break;
@@ -85,7 +85,7 @@ namespace AuditoriaParlamentar.Classes
                         sqlCampos.Append("          senadores.SiglaUf AS agrupamento,");
 
                         sqlWhere.Append(" AND lancamentos_senadores.CodigoParlamentar = senadores.CodigoParlamentar");
-                        sqlFrom.Append(", senadores "); 
+                        sqlFrom.Append(", senadores ");
                         tabSenadores = true;
 
                         break;
@@ -230,28 +230,9 @@ namespace AuditoriaParlamentar.Classes
                     }
                 }
 
-                if (ItemsFornecedor != null)
+                if (!string.IsNullOrEmpty(txtFornecedor.Text))
                 {
-                    if (ItemsFornecedor.Count > 0)
-                    {
-                        if (ItemsFornecedor.Count == 1)
-                        {
-                            sqlWhere.Append(" AND lancamentos_senadores.CNPJCPF = '" + ItemsFornecedor[0].Value.ToString() + "'");
-                        }
-                        else
-                        {
-                            StringBuilder values = new StringBuilder();
-                            for (Int32 i = 0; i < ItemsFornecedor.Count; i++)
-                            {
-                                if (i == 0)
-                                    values.Append("'" + ItemsFornecedor[i].Value.ToString() + "'");
-                                else
-                                    values.Append(",'" + ItemsFornecedor[i].Value.ToString() + "'");
-                            }
-
-                            sqlWhere.Append(" AND lancamentos_senadores.CNPJCPF IN (" + values.ToString() + ")");
-                        }
-                    }
+                    sqlWhere.Append(" AND lancamentos_senadores.CNPJCPF = '" + txtFornecedor.Text.Replace(".", "").Replace("-", "").Replace("/", "").Replace("'", "") + "'");
                 }
 
                 if (ItemsUF != null)
