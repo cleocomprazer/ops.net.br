@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `auditoria` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `auditoria`;
--- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
 --
 -- Host: localhost    Database: auditoria
 -- ------------------------------------------------------
--- Server version	5.6.13
+-- Server version	5.7.11-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,6 +16,25 @@ USE `auditoria`;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `comandosql`
+--
+
+DROP TABLE IF EXISTS `comandosql`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comandosql` (
+  `IdComandoSql` int(11) NOT NULL AUTO_INCREMENT,
+  `Nome` varchar(100) DEFAULT NULL,
+  `Descricao` varchar(8000) DEFAULT NULL,
+  `ComandoSQL` varchar(8000) DEFAULT NULL,
+  `Grupo` tinyint(4) DEFAULT NULL,
+  `Ordem` tinyint(4) DEFAULT NULL,
+  `ConnectionString` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`IdComandoSql`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `denuncias`
@@ -38,7 +57,7 @@ CREATE TABLE `denuncias` (
   KEY `Index_1` (`txtCNPJCPF`),
   KEY `Index_2` (`UserNameDenuncia`),
   KEY `Index_3` (`Situacao`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -56,7 +75,7 @@ CREATE TABLE `denuncias_anexo` (
   `Arquivo` varchar(255) NOT NULL,
   PRIMARY KEY (`idAnexo`),
   KEY `Index_1` (`idDenuncia`)
-) ENGINE=MyISAM AUTO_INCREMENT=107 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +93,7 @@ CREATE TABLE `denuncias_msg` (
   `Texto` varchar(255) NOT NULL,
   PRIMARY KEY (`idMensagem`),
   KEY `Index_1` (`idDenuncia`)
-) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +121,7 @@ CREATE TABLE `despesas_senadores` (
   `CodigoDespesa` int(11) NOT NULL AUTO_INCREMENT,
   `TipoDespesa` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`CodigoDespesa`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +135,7 @@ CREATE TABLE `dossies` (
   `IdDossie` int(11) NOT NULL AUTO_INCREMENT,
   `NomeDossie` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`IdDossie`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,7 +167,7 @@ CREATE TABLE `email_pendencia` (
   `assunto` varchar(255) DEFAULT NULL,
   `texto` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,7 +188,7 @@ CREATE TABLE `estatistica_pesquisa` (
   `dataPesquisa` datetime DEFAULT NULL,
   `sqlCmd` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=173 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,7 +226,7 @@ CREATE TABLE `fornecedores` (
   `NaturezaJuridica` varchar(100) DEFAULT NULL,
   `Logradouro` varchar(100) DEFAULT NULL,
   `Numero` varchar(10) DEFAULT NULL,
-  `Complemento` varchar(100) DEFAULT NULL,
+  `Complemento` varchar(500) DEFAULT NULL,
   `Cep` varchar(10) DEFAULT NULL,
   `Bairro` varchar(100) DEFAULT NULL,
   `Cidade` varchar(100) DEFAULT NULL,
@@ -223,6 +242,9 @@ CREATE TABLE `fornecedores` (
   `Doador` tinyint(4) DEFAULT NULL,
   `PendenteFoto` tinyint(4) DEFAULT NULL,
   `DataUltimaNotaFiscal` date DEFAULT NULL,
+  `Email` varchar(255) DEFAULT NULL,
+  `Telefone` varchar(255) DEFAULT NULL,
+  `EnteFederativoResponsavel` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`txtCNPJCPF`) USING BTREE,
   KEY `ix1_fornecedores` (`PendenteFoto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -242,7 +264,7 @@ CREATE TABLE `fornecedores_atu` (
   `IdKey` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`Id`),
   KEY `ix1_fornecedores_atu` (`IdKey`)
-) ENGINE=MyISAM AUTO_INCREMENT=218 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -310,7 +332,9 @@ CREATE TABLE `lancamentos` (
   `txtTrecho` varchar(100) DEFAULT NULL,
   `numLote` int(11) DEFAULT NULL,
   `numRessarcimento` int(11) DEFAULT NULL,
+  `ide_documento_fiscal` varchar(20) DEFAULT NULL,
   `anomes` decimal(6,0) DEFAULT NULL,
+  `vlrRestituicao` decimal(10,2) DEFAULT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `Index_6` (`numAno`,`numMes`,`ideCadastro`),
   KEY `Index_1` (`ideCadastro`),
@@ -320,7 +344,7 @@ CREATE TABLE `lancamentos` (
   KEY `Index_5` (`numSubCota`),
   KEY `Index_7` (`txtNumero`),
   KEY `Index_8` (`anomes`)
-) ENGINE=MyISAM AUTO_INCREMENT=1115789 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -351,7 +375,7 @@ CREATE TABLE `lancamentos_senadores` (
   KEY `Index_3` (`CodigoParlamentar`),
   KEY `Index_4` (`CodigoDespesa`),
   KEY `Index_5` (`CnpjCpf`)
-) ENGINE=MyISAM AUTO_INCREMENT=132252 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -377,7 +401,7 @@ CREATE TABLE `lancamentos_senadores_tmp` (
   PRIMARY KEY (`Id`),
   KEY `Index_1` (`Ano`,`Mes`,`CodigoParlamentar`),
   KEY `Index_2` (`CnpjCpf`)
-) ENGINE=MyISAM AUTO_INCREMENT=3388 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -414,6 +438,9 @@ CREATE TABLE `lancamentos_tmp` (
   `txtTrecho` varchar(100) DEFAULT NULL,
   `numLote` int(11) DEFAULT NULL,
   `numRessarcimento` int(11) DEFAULT NULL,
+  `ide_documento_fiscal` varchar(20) DEFAULT NULL,
+  `vlrRestituicao` decimal(10,2) DEFAULT NULL,
+  `nuDeputadoId` int(11) DEFAULT NULL,
   KEY `Index_1` (`numAno`,`numMes`,`ideCadastro`),
   KEY `Index_2` (`txtCNPJCPF`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -433,7 +460,7 @@ CREATE TABLE `noticias` (
   `DataNoticia` datetime DEFAULT NULL,
   `UserName` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`IdNoticia`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -464,7 +491,7 @@ CREATE TABLE `parametros` (
   `menorAnoSenadores` decimal(4,0) DEFAULT NULL,
   `ultimaAtualizacaoSenadores` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -477,7 +504,9 @@ DROP TABLE IF EXISTS `parlamentares`;
 CREATE TABLE `parlamentares` (
   `ideCadastro` bigint(20) unsigned NOT NULL,
   `txNomeParlamentar` varchar(100) NOT NULL,
-  UNIQUE KEY `idParlamentar` (`ideCadastro`) USING BTREE
+  `nuDeputadoId` int(11) DEFAULT NULL,
+  UNIQUE KEY `idParlamentar` (`ideCadastro`) USING BTREE,
+  KEY `ix_txNomeParlamentar` (`txNomeParlamentar`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -527,7 +556,7 @@ CREATE TABLE `receitas_eleicao` (
   `valorReceita` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`raizCnpjCpfDoador`)
-) ENGINE=MyISAM AUTO_INCREMENT=426557 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -583,6 +612,30 @@ CREATE TABLE `senadores` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `share_parametros`
+--
+
+DROP TABLE IF EXISTS `share_parametros`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `share_parametros` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cargo` varchar(45) DEFAULT NULL,
+  `agrupamento` varchar(45) DEFAULT NULL,
+  `parlamentares` varchar(255) DEFAULT NULL,
+  `despesas` varchar(255) DEFAULT NULL,
+  `fornecedores` varchar(255) DEFAULT NULL,
+  `partidos` varchar(255) DEFAULT NULL,
+  `uf` varchar(255) DEFAULT NULL,
+  `mes_inicial` decimal(2,0) DEFAULT NULL,
+  `ano_inicial` decimal(4,0) DEFAULT NULL,
+  `mes_final` decimal(2,0) DEFAULT NULL,
+  `ano_final` decimal(4,0) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `user_recover`
 --
 
@@ -595,7 +648,7 @@ CREATE TABLE `user_recover` (
   `username` varchar(255) DEFAULT NULL,
   `data` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -671,4 +724,4 @@ CREATE TABLE `usersinroles` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-11 20:15:23
+-- Dump completed on 2016-02-22  0:33:57
