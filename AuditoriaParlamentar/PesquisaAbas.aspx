@@ -108,7 +108,24 @@
             tabCounter++;
             idCounter++;
 
-            var src = "PesquisaResultado.aspx?id=" + idCounter + "&filtro=" + mFiltro + "&descricao=" + mDescricao + "&grupo=" + mGrupo + "&agrupamentoAtual=" + mAgrupamentoAtual + "&agrupamentoNovo=" + agrupamentoNovo + "&separaMes=" + mSeparaMes + "&periodo=" + mPeriodo + "&anoIni=" + mAnoIni + "&mesIni=" + mMesIni + "&anoFim=" + mAnoFim + "&mesFim=" + mMesFim + "&parlamentar=" + mParlamentar + "&despesa=" + mDespesa + "&fornecedor=" + mFornecedor + "&uf=" + mUF + "&partido=" + mPartido + "&documento=" + mDocumento;
+            var src = "PesquisaResultado.aspx?id=" + idCounter +
+                "&filtro=" + mFiltro +
+                "&descricao=" + mDescricao +
+                "&grupo=" + (mGrupo || '') +
+                "&agrupamentoAtual=" + (mAgrupamentoAtual || '') +
+                "&agrupamentoNovo=" + (agrupamentoNovo || '') +
+                "&separaMes=" + mSeparaMes +
+                "&periodo=" + (mPeriodo || '') +
+                "&anoIni=" + (mAnoIni || '') +
+                "&mesIni=" + (mMesIni || '') +
+                "&anoFim=" + (mAnoFim || '') +
+                "&mesFim=" + (mMesFim || '') +
+                "&parlamentar=" + (mParlamentar || '') +
+                "&despesa=" + (mDespesa || '') +
+                "&fornecedor=" + (mFornecedor || '') +
+                "&uf=" + (mUF || '') +
+                "&partido=" + (mPartido || '') +
+                "&documento=" + (mDocumento || '');
 
             addTab(agrupamentoNovo, src);
         }
@@ -167,7 +184,9 @@
             addTab(title, src);
         }
 
-        function TabPesquisa(filtro, descricao, grupo, agrupamentoAtual, separaMes, periodo, anoIni, mesIni, anoFim, mesFim, parlamentar, despesa, fornecedor, uf, partido, documento, novoAgrupamento) {
+        function TabPesquisa(filtro, descricao, grupo, agrupamentoAtual, separaMes, periodo, anoIni, mesIni, anoFim, mesFim,
+            parlamentar, despesa, fornecedor, uf, partido, documento, novoAgrupamento) {
+            
             mFiltro = filtro;
             mDescricao = descricao;
             mGrupo = grupo;

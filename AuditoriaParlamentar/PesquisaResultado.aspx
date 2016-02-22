@@ -44,7 +44,7 @@
     <form id="form_auditoria" runat="server">
         <div id="conteudo" class="container-fluid" style="overflow:auto">
             <fieldset>
-                <legend runat="server" id="LabelFiltro" viewstatemode="Enabled"></legend>
+                <legend runat="server" id="LabelFiltro"></legend>
                 <div class="text-center">
                     <button class="btn btn-default btn-sm" onclick="__doPostBack('ButtonExportar_Click', '');">Exportar Consulta em CSV</button>
                 </div>
@@ -61,7 +61,7 @@
                                 <asp:Label ID="LabelTotal" runat="server" Text="Total Geral:"></asp:Label>
                             </FooterTemplate>
                             <ItemTemplate>
-                                <input type="button" class="btn btn-primary btn-sm" onclick="NovoNivel('<%# Eval("codigo") %>    ','<%# Eval("[1]") %>    ');" value="Detalhar" />
+                                <input type="button" class="btn btn-primary btn-sm" onclick="NovoNivel('<%# Eval("codigo") %>','<%# Eval("[1]") %>');" value="Detalhar" />
                                 <asp:Button ID="ButtonAuditar" runat="server" Text="Auditar" CssClass="btn btn-success btn-sm" />
                             </ItemTemplate>
                         </asp:TemplateField>

@@ -264,51 +264,13 @@ namespace AuditoriaParlamentar
                 }
             }
 
-            //String[] parlamentares = hidListBoxParlamentar.Value.Split('|');
-            //ListBoxParlamentar.Items.Clear();
-            //for (Int32 i = 0; i < parlamentares.Length - 1; i += 2)
-            //{
-            //    if (i == 0)
-            //        Session["ParlamentarQueEstaSendoAuditado"] = parlamentares[i + 1];
-
-            //    if (!ListBoxParlamentar.Items.Contains(new ListItem(parlamentares[i], parlamentares[i + 1])))
-            //        ListBoxParlamentar.Items.Add(new ListItem(parlamentares[i], parlamentares[i + 1]));
-            //}
-
-            //String[] despesas = hidListBoxDespesa.Value.Split('|');
-            //ListBoxDespesa.Items.Clear();
-            //for (Int32 i = 0; i < despesas.Length - 1; i += 2)
-            //{
-            //    if (!ListBoxDespesa.Items.Contains(new ListItem(despesas[i], despesas[i + 1])))
-            //        ListBoxDespesa.Items.Add(new ListItem(despesas[i], despesas[i + 1]));
-            //}
-
-            //String[] fornecedor = hidListBoxFornecedor.Value.Split('|');
-            //ListBoxFornecedor.Items.Clear();
-            //for (Int32 i = 0; i < fornecedor.Length - 1; i += 2)
-            //{
-            //    if (!ListBoxFornecedor.Items.Contains(new ListItem(fornecedor[i], fornecedor[i + 1])))
-            //        ListBoxFornecedor.Items.Add(new ListItem(fornecedor[i], fornecedor[i + 1]));
-            //}
-
-            //String[] uf = hidListBoxUF.Value.Split('|');
-            //ListBoxUF.Items.Clear();
-            //for (Int32 i = 0; i < uf.Length - 1; i += 2)
-            //{
-            //    if (!ListBoxUF.Items.Contains(new ListItem(uf[i], uf[i + 1])))
-            //        ListBoxUF.Items.Add(new ListItem(uf[i], uf[i + 1]));
-            //}
-
-            //String[] partidos = hidListBoxPartido.Value.Split('|');
-            //ListBoxPartido.Items.Clear();
-            //for (Int32 i = 0; i < partidos.Length - 1; i += 2)
-            //{
-            //    if (!ListBoxPartido.Items.Contains(new ListItem(partidos[i], partidos[i + 1])))
-            //        ListBoxPartido.Items.Add(new ListItem(partidos[i], partidos[i + 1]));
-            //}
-
             //HiddenFieldGrupo.Value = DropDownListGrupo.SelectedValue;
             //HiddenFieldAgrupamentoAtual.Value = DropDownListAgrupamento.SelectedValue;
+
+            var lstParlamentar = String.Join(",", DropDownListParlamentar.Items.Cast<ListItem>().Where(i => i.Selected).Select(i => i.Value));
+            var lstDespesa = String.Join(",", DropDownListDespesa.Items.Cast<ListItem>().Where(i => i.Selected).Select(i => i.Value));
+            var lstUF = String.Join(",", DropDownListUF.Items.Cast<ListItem>().Where(i => i.Selected).Select(i => i.Value));
+            var lstPartido = String.Join(",", DropDownListPartido.Items.Cast<ListItem>().Where(i => i.Selected).Select(i => i.Value));
 
             switch (DropDownListGrupo.SelectedValue)
             {
@@ -324,11 +286,11 @@ namespace AuditoriaParlamentar
                         DropDownListMesInicial.SelectedValue,
                         DropDownListAnoFinal.SelectedValue,
                         DropDownListMesFinal.SelectedValue,
-                        DropDownListParlamentar.Items,
-                        DropDownListDespesa.Items,
-                        txtFornecedor,
-                        DropDownListUF.Items,
-                        DropDownListPartido.Items,
+                        lstParlamentar,
+                        lstDespesa,
+                        txtFornecedor.Text,
+                        lstUF,
+                        lstPartido,
                         ViewState["ChavePesquisa"].ToString());
                     break;
 
@@ -344,11 +306,11 @@ namespace AuditoriaParlamentar
                         DropDownListMesInicial.SelectedValue,
                         DropDownListAnoFinal.SelectedValue,
                         DropDownListMesFinal.SelectedValue,
-                        DropDownListParlamentar.Items,
-                        DropDownListDespesa.Items,
-                        txtFornecedor,
-                        DropDownListUF.Items,
-                        DropDownListPartido.Items,
+                        lstParlamentar,
+                        lstDespesa,
+                        txtFornecedor.Text,
+                        lstUF,
+                        lstPartido,
                         ViewState["ChavePesquisa"].ToString());
                     break;
             }
@@ -426,12 +388,12 @@ namespace AuditoriaParlamentar
                 switch (DropDownListAgrupamento.SelectedValue)
                 {
                     case Pesquisa.AGRUPAMENTO_PARLAMENTAR:
-                        inicioColunaValores = 6;
-                        e.Row.Cells[5].Visible = false; //url
+                        inicioColunaValores = 7;
+                        e.Row.Cells[6].Visible = false; //url
                         break;
 
                     case Pesquisa.AGRUPAMENTO_FORNECEDOR:
-                        inicioColunaValores = 7;
+                        inicioColunaValores = 8;
 
                         if (mAuthenticated == false)
                         {
@@ -447,11 +409,11 @@ namespace AuditoriaParlamentar
                         break;
 
                     case Pesquisa.AGRUPAMENTO_DOCUMENTO:
-                        inicioColunaValores = 9;
+                        inicioColunaValores = 10;
 
-                        e.Row.Cells[6].Visible = false;
                         e.Row.Cells[7].Visible = false;
                         e.Row.Cells[8].Visible = false;
+                        e.Row.Cells[9].Visible = false;
 
                         break;
 
@@ -507,7 +469,7 @@ namespace AuditoriaParlamentar
 
                             e.Row.Cells[2].ControlStyle.CssClass = "maxWidthGrid";
 
-                            try { e.Row.Cells[5].Text = Convert.ToDateTime(e.Row.Cells[5].Text).ToString("dd/MM/yyyy"); }
+                            try { e.Row.Cells[6].Text = Convert.ToDateTime(e.Row.Cells[6].Text).ToString("dd/MM/yyyy"); }
                             catch { }
 
                             break;
@@ -535,12 +497,12 @@ namespace AuditoriaParlamentar
 
                             long refDoc;
 
-                            if (Int64.TryParse(e.Row.Cells[8].Text, out refDoc))
+                            if (Int64.TryParse(e.Row.Cells[9].Text, out refDoc))
                             {
                                 if (refDoc > 0)
                                 {
                                     HyperLink url = new HyperLink();
-                                    url.NavigateUrl = "http://www.camara.gov.br/cota-parlamentar/documentos/publ/" + e.Row.Cells[6].Text + "/" + e.Row.Cells[7].Text + "/" + e.Row.Cells[8].Text + ".pdf";
+                                    url.NavigateUrl = "http://www.camara.gov.br/cota-parlamentar/documentos/publ/" + e.Row.Cells[7].Text + "/" + e.Row.Cells[8].Text + "/" + e.Row.Cells[9].Text + ".pdf";
                                     url.Target = "_blank";
                                     url.Text = e.Row.Cells[2].Text;
                                     e.Row.Cells[2].Controls.Clear();

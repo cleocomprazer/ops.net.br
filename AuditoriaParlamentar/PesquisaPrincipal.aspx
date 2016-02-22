@@ -13,15 +13,6 @@
     <script type="text/javascript" src="assets/js/bootstrap-select.min.js"></script>
     <script language="javascript" type="text/javascript">
         $(function () {
-            //var $frame = $('#frame');
-            //var heightTop = $frame.offset().top;
-            //$frame.height(window.innerHeight - heightTop - 5);
-
-            ////And if the outer div has no set specific height set.. 
-            //$(window).resize(function () {
-            //   $frame.css('height', window.innerHeight - heightTop - 5);
-            //});
-
             $('#<%= DropDownListPerido.ClientID %>').change(function(){
                 if($(this).val() == 'Informar Período'){ 
                     $('.periodo').show();
@@ -64,6 +55,18 @@
             grd.rows[row].cells[column].textContent = value;
         }
 
+        function LimparFiltros(){
+            $("#<%= DropDownListGrupo.ClientID %>").val('Deputado Federal');
+            $("#<%= DropDownListAgrupamento.ClientID %>").val('Por Parlamentar');
+            $("#<%= CheckBoxSepararMes.ClientID %>").removeAttr('checked');
+            $("#<%= DropDownListPerido.ClientID %>").val('Mês Atual').trigger('change');
+            $("#<%= DropDownListParlamentar.ClientID %>").selectpicker('deselectAll');
+            $("#<%= DropDownListDespesa.ClientID %>").selectpicker('deselectAll');
+            $("#<%= txtFornecedor.ClientID %>").val('');
+            $("#<%= DropDownListUF.ClientID %>").selectpicker('deselectAll');
+            $("#<%= DropDownListPartido.ClientID %>").selectpicker('deselectAll');
+        }
+
     </script>
     <style type="text/css">
         label { margin-bottom: 2px; }
@@ -77,7 +80,7 @@
     <form id="form_auditoria" runat="server">
         <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
 
-        <div id="conteudo" class="container-fluid" style="overflow:auto">
+        <div id="conteudo" class="container-fluid" style="overflow: auto">
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
@@ -116,25 +119,29 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Parlamentares</label>
-                        <asp:ListBox ID="DropDownListParlamentar" runat="server" CssClass="form-control input-sm selectpicker" SelectionMode="Multiple"></asp:ListBox>
+                        <asp:ListBox ID="DropDownListParlamentar" runat="server" CssClass="form-control input-sm selectpicker" 
+                            SelectionMode="Multiple" data-selected-text-format="count > 2" data-live-search="true"></asp:ListBox>
                     </div>
                     <div class="form-group">
                         <label>Despesas</label>
-                        <asp:ListBox ID="DropDownListDespesa" runat="server" CssClass="form-control input-sm selectpicker" SelectionMode="Multiple"></asp:ListBox>
-                    </div>
-                    <div class="form-group">
-                        <label>Fornecedor</label>
-                        <asp:TextBox ID="txtFornecedor" runat="server" CssClass="form-control input-sm" placeholder="CNPJ/CPF do fornecedor sem pontuação"></asp:TextBox>
+                        <asp:ListBox ID="DropDownListDespesa" runat="server" CssClass="form-control input-sm selectpicker" 
+                            SelectionMode="Multiple" data-selected-text-format="count > 2" data-live-search="true"></asp:ListBox>
                     </div>
                     <div class="form-group">
                         <label>UF (Parlamentar)</label>
-                        <asp:ListBox ID="DropDownListUF" runat="server" CssClass="form-control input-sm selectpicker" SelectionMode="Multiple"></asp:ListBox>
+                        <asp:ListBox ID="DropDownListUF" runat="server" CssClass="form-control input-sm selectpicker" 
+                            SelectionMode="Multiple" data-selected-text-format="count > 2" data-live-search="true"></asp:ListBox>
+                    </div>
+                    <div class="form-group">
+                        <label>Partido</label>
+                        <asp:ListBox ID="DropDownListPartido" runat="server" CssClass="form-control input-sm selectpicker" 
+                            SelectionMode="Multiple" data-selected-text-format="count > 2" data-live-search="true"></asp:ListBox>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Partido</label>
-                        <asp:ListBox ID="DropDownListPartido" runat="server" CssClass="form-control input-sm selectpicker" SelectionMode="Multiple"></asp:ListBox>
+                     <div class="form-group">
+                        <label>Fornecedor</label>
+                        <asp:TextBox ID="txtFornecedor" runat="server" CssClass="form-control input-sm" placeholder="CNPJ/CPF"></asp:TextBox>
                     </div>
                     <div class="form-group">
                         <label>Agrupar</label>
@@ -146,9 +153,11 @@
                             Exibir mês a mês?
                         </label>
                     </div>
-                    <asp:Button ID="ButtonPesquisar" runat="server" OnClick="ButtonPesquisar_Click" Text="Clique para Pesquisar" CssClass="btn btn-success btn-block btn-sm" UseSubmitBehavior="false" />
-                    <asp:Button ID="ButtonShare" runat="server" OnClick="ButtonShare_Click" Text="Compartilhar" CssClass="btn btn-default btn-block" Visible="false" />
-                    <br />
+                    <div class="form-group">
+                        <asp:Button ID="ButtonPesquisar" runat="server" OnClick="ButtonPesquisar_Click" Text="Clique para Pesquisar" CssClass="btn btn-success btn-sm" UseSubmitBehavior="false" />
+                        <input type="button" value="Limpar Filtros" class="btn btn-default btn-sm" onclick="LimparFiltros();" />
+                        <asp:Button ID="ButtonShare" runat="server" OnClick="ButtonShare_Click" Text="Compartilhar" CssClass="btn btn-default btn-block" Visible="false" />
+                    </div>
                     <a href="javascript:void(0);" class="text-center" style="display: block;" onclick="__doPostBack('ButtonExportar_Click', '');">Exportar Consulta em CSV</a>
                     <asp:UpdatePanel ID="UpdatePanelUltimaAtualizacao" runat="server"
                         UpdateMode="Conditional">

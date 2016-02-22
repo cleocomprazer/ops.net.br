@@ -15,7 +15,9 @@ namespace AuditoriaParlamentar.Classes
         public static String AnoMesIni { get; set; }
         public static String AnoMesFim { get; set; }
 
-        internal void Carregar(GridView grid, String userName, String documento, String periodo, String agrupamento, Boolean separarMes, String anoIni, String mesIni, String anoFim, String mesFim, ListItemCollection ItemsParlamentar, ListItemCollection ItemsDespesa, TextBox txtFornecedor, ListItemCollection ItemsUF, ListItemCollection ItemsPartidos, string ChavePesquisa)
+        internal void Carregar(GridView grid, String userName, String documento, String periodo, String agrupamento, 
+            Boolean separarMes, String anoIni, String mesIni, String anoFim, String mesFim, 
+            string lstParlamentar, string lstDespesa, string lstFornecedor, string lstUF, string lstPartido, string ChavePesquisa)
         {
             using (Banco banco = new Banco())
             {
@@ -35,6 +37,7 @@ namespace AuditoriaParlamentar.Classes
                         sqlCampos.Append("          senadores.NomeParlamentar AS agrupamento,");
                         sqlCampos.Append("          senadores.SiglaUF,");
                         sqlCampos.Append("          senadores.SiglaPartido,");
+                        sqlCampos.Append("          COUNT(1) As TotalNotas,");
                         sqlCampos.Append("          senadores.url,");
 
                         sqlWhere.Append(" AND lancamentos_senadores.CodigoParlamentar = senadores.CodigoParlamentar");
@@ -56,6 +59,7 @@ namespace AuditoriaParlamentar.Classes
                         sqlCampos.Append("   SELECT lancamentos_senadores.CnpjCpf AS codigo,");
                         sqlCampos.Append("          SUBSTRING(IFNULL(fornecedores.txtbeneficiario, lancamentos_senadores.Fornecedor), 1, 50) AS txtbeneficiario,");
                         sqlCampos.Append("          lancamentos_senadores.CnpjCpf AS agrupamento,");
+                        sqlCampos.Append("          fornecedores.uf,");
                         sqlCampos.Append("          CASE WHEN UserName IS NULL THEN '' ELSE 'Sim' END AS auditei,");
                         sqlCampos.Append("          fornecedores.DataUltimaNotaFiscal,");
                         sqlCampos.Append("          CASE WHEN doador = 1 THEN 'Sim' ELSE '' END AS doador,");
@@ -96,10 +100,11 @@ namespace AuditoriaParlamentar.Classes
                         sqlCampos.Append("          lancamentos_senadores.DataDoc,");
                         sqlCampos.Append("          lancamentos_senadores.CnpjCpf AS agrupamento,");
                         sqlCampos.Append("          SUBSTRING(IFNULL(fornecedores.txtbeneficiario, lancamentos_senadores.Fornecedor), 1, 50) AS txtbeneficiario,");
+                        sqlCampos.Append("          senadores.NomeParlamentar,");
                         sqlCampos.Append("          0, 0, 0,");
 
-                        sqlFrom.Append(" LEFT JOIN fornecedores");
-                        sqlFrom.Append("        ON fornecedores.txtCNPJCPF = lancamentos_senadores.CnpjCpf");
+                        sqlFrom.Append(" LEFT JOIN senadores ON lancamentos_senadores.CodigoParlamentar = senadores.CodigoParlamentar");
+                        sqlFrom.Append(" LEFT JOIN fornecedores ON fornecedores.txtCNPJCPF = lancamentos_senadores.CnpjCpf");
 
                         separarMes = false;
 
@@ -182,118 +187,43 @@ namespace AuditoriaParlamentar.Classes
 
                 sqlCampos.Append(" SUM(lancamentos_senadores.Valor) AS vlrTotal");
 
-                if (ItemsParlamentar != null)
+                if (!string.IsNullOrEmpty(lstParlamentar))
                 {
-                    if (ItemsParlamentar.Count > 0)
-                    {
-                        if (ItemsParlamentar.Count == 1)
-                        {
-                            sqlWhere.Append(" AND lancamentos_senadores.CodigoParlamentar = " + ItemsParlamentar[0].Value.ToString());
-                        }
-                        else
-                        {
-                            StringBuilder values = new StringBuilder();
-                            for (Int32 i = 0; i < ItemsParlamentar.Count; i++)
-                            {
-                                if (i == 0)
-                                    values.Append(ItemsParlamentar[i].Value.ToString());
-                                else
-                                    values.Append("," + ItemsParlamentar[i].Value.ToString());
-                            }
+                    sqlWhere.Append(" AND lancamentos_senadores.CodigoParlamentar IN (" + lstParlamentar + ")");
+                }
 
-                            sqlWhere.Append(" AND lancamentos_senadores.CodigoParlamentar IN (" + values.ToString() + ")");
-                        }
+                if (!string.IsNullOrEmpty(lstDespesa))
+                {
+                    sqlWhere.Append(" AND lancamentos_senadores.CodigoDespesa IN (" + lstDespesa + ")");
+                }
+
+                if (!string.IsNullOrEmpty(lstFornecedor))
+                {
+                    sqlWhere.Append(" AND lancamentos_senadores.CNPJCPF IN ('" + 
+                        lstFornecedor.Replace(",", "','").Replace(".", "").Replace("-", "").Replace("/", "").Replace("'", "") + "')");
+                }
+
+                if (!string.IsNullOrEmpty(lstUF))
+                {
+                    sqlWhere.Append(" AND senadores.SiglaUf IN ('" + lstUF.Replace(",", "','") + "')");
+
+                    if (tabSenadores == false)
+                    {
+                        sqlWhere.Append(" AND lancamentos_senadores.CodigoParlamentar = senadores.CodigoParlamentar");
+                        sqlFrom.Append(", senadores");
+                        tabSenadores = true;
                     }
                 }
 
-                if (ItemsDespesa != null)
+                if (!string.IsNullOrEmpty(lstPartido))
                 {
-                    if (ItemsDespesa.Count > 0)
+                    sqlWhere.Append(" AND senadores.SiglaPartido IN ('" + lstPartido.Replace(",", "','") + "')");
+
+                    if (tabSenadores == false)
                     {
-                        if (ItemsDespesa.Count == 1)
-                        {
-                            sqlWhere.Append(" AND lancamentos_senadores.CodigoDespesa = " + ItemsDespesa[0].Value.ToString());
-                        }
-                        else
-                        {
-                            StringBuilder values = new StringBuilder();
-                            for (Int32 i = 0; i < ItemsDespesa.Count; i++)
-                            {
-                                if (i == 0)
-                                    values.Append(ItemsDespesa[i].Value.ToString());
-                                else
-                                    values.Append("," + ItemsDespesa[i].Value.ToString());
-                            }
-
-                            sqlWhere.Append(" AND lancamentos_senadores.CodigoDespesa IN (" + values.ToString() + ")");
-                        }
-                    }
-                }
-
-                if (!string.IsNullOrEmpty(txtFornecedor.Text))
-                {
-                    sqlWhere.Append(" AND lancamentos_senadores.CNPJCPF = '" + txtFornecedor.Text.Replace(".", "").Replace("-", "").Replace("/", "").Replace("'", "") + "'");
-                }
-
-                if (ItemsUF != null)
-                {
-                    if (ItemsUF.Count > 0)
-                    {
-                        if (ItemsUF.Count == 1)
-                        {
-                            sqlWhere.Append(" AND senadores.SiglaUf = '" + ItemsUF[0].Value.ToString() + "'");
-                        }
-                        else
-                        {
-                            StringBuilder values = new StringBuilder();
-                            for (Int32 i = 0; i < ItemsUF.Count; i++)
-                            {
-                                if (i == 0)
-                                    values.Append("'" + ItemsUF[i].Value.ToString() + "'");
-                                else
-                                    values.Append(",'" + ItemsUF[i].Value.ToString() + "'");
-                            }
-
-                            sqlWhere.Append(" AND senadores.SiglaUf IN (" + values.ToString() + ")");
-                        }
-
-                        if (tabSenadores == false)
-                        {
-                            sqlWhere.Append(" AND lancamentos_senadores.CodigoParlamentar = senadores.CodigoParlamentar");
-                            sqlFrom.Append(", senadores");
-                            tabSenadores = true;
-                        }
-                    }
-                }
-
-                if (ItemsPartidos != null)
-                {
-                    if (ItemsPartidos.Count > 0)
-                    {
-                        if (ItemsPartidos.Count == 1)
-                        {
-                            sqlWhere.Append(" AND senadores.SiglaPartido = '" + ItemsPartidos[0].Value.ToString() + "'");
-                        }
-                        else
-                        {
-                            StringBuilder values = new StringBuilder();
-                            for (Int32 i = 0; i < ItemsPartidos.Count; i++)
-                            {
-                                if (i == 0)
-                                    values.Append("'" + ItemsPartidos[i].Value.ToString() + "'");
-                                else
-                                    values.Append(",'" + ItemsPartidos[i].Value.ToString() + "'");
-                            }
-
-                            sqlWhere.Append(" AND senadores.SiglaPartido IN (" + values.ToString() + ")");
-                        }
-
-                        if (tabSenadores == false)
-                        {
-                            sqlWhere.Append(" AND lancamentos_senadores.CodigoParlamentar = senadores.CodigoParlamentar");
-                            sqlFrom.Append(", senadores");
-                            tabSenadores = true;
-                        }
+                        sqlWhere.Append(" AND lancamentos_senadores.CodigoParlamentar = senadores.CodigoParlamentar");
+                        sqlFrom.Append(", senadores");
+                        tabSenadores = true;
                     }
                 }
 
@@ -311,12 +241,12 @@ namespace AuditoriaParlamentar.Classes
                 switch (agrupamento)
                 {
                     case Pesquisa.AGRUPAMENTO_PARLAMENTAR:
-                        sqlCmd.Append(" GROUP BY 1, 2, 3, 4, 5");
+                        sqlCmd.Append(" GROUP BY 1, 2, 3, 4, 6");
 
                         if (separarMes == true)
-                            sqlCmd.Append(" ORDER BY " + (numMes + 6).ToString() + " DESC");
+                            sqlCmd.Append(" ORDER BY " + (numMes + 7).ToString() + " DESC");
                         else
-                            sqlCmd.Append(" ORDER BY 6 DESC");
+                            sqlCmd.Append(" ORDER BY 7 DESC");
 
                         break;
 
@@ -333,24 +263,24 @@ namespace AuditoriaParlamentar.Classes
                         break;
 
                     case Pesquisa.AGRUPAMENTO_FORNECEDOR:
-                        sqlCmd.Append(" GROUP BY 1, 2, 3, 4, 5, 6");
+                        sqlCmd.Append(" GROUP BY 1, 2, 3, 4, 5, 6, 7");
 
                         if (separarMes == true)
-                            sqlCmd.Append(" ORDER BY " + (numMes + 7).ToString() + " DESC");
+                            sqlCmd.Append(" ORDER BY " + (numMes + 8).ToString() + " DESC");
                         else
-                            sqlCmd.Append(" ORDER BY 7 DESC");
+                            sqlCmd.Append(" ORDER BY 8 DESC");
 
                         break;
 
                     case Pesquisa.AGRUPAMENTO_DOCUMENTO:
-                        sqlCmd.Append(" GROUP BY 1, 2, 3, 4, 5, 6, 7, 8");
+                        sqlCmd.Append(" GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9");
 
-                        //if (separarMes == true)
-                        //    sqlCmd.Append(" ORDER BY " + (numMes + 6).ToString() + " DESC");
-                        //else
-                        //    sqlCmd.Append(" ORDER BY 6 DESC");
+                        if (separarMes == true)
+                            sqlCmd.Append(" ORDER BY " + (numMes + 10).ToString() + " DESC");
+                        else
+                            sqlCmd.Append(" ORDER BY 10 DESC");
 
-                        sqlCmd.Append(" ORDER BY lancamentos_senadores.DataDoc");
+                        //sqlCmd.Append(" ORDER BY lancamentos_senadores.DataDoc");
 
                         break;
                 }
@@ -401,6 +331,7 @@ namespace AuditoriaParlamentar.Classes
 
         private void FormataColunas(String agrupamento, DataTable table)
         {
+            int i = 1;
             switch (agrupamento)
             {
                 case Pesquisa.AGRUPAMENTO_PARLAMENTAR:
@@ -416,14 +347,15 @@ namespace AuditoriaParlamentar.Classes
                     break;
 
                 case Pesquisa.AGRUPAMENTO_FORNECEDOR:
-                    table.Columns[1].ColumnName = "Razão Social";
-                    table.Columns[2].ColumnName = "CNPJ/CPF";
+                    table.Columns[i++].ColumnName = "Razão Social";
+                    table.Columns[i++].ColumnName = "CNPJ/CPF";
+                    table.Columns[i++].ColumnName = "UF";
 
                     //Setar a INDEX_COLUNA_AUDITEI
-                    table.Columns[3].ColumnName = "Auditei?";
+                    table.Columns[i++].ColumnName = "Auditei?";
 
-                    table.Columns[4].ColumnName = "Última NF";
-                    table.Columns[5].ColumnName = "Doador?";
+                    table.Columns[i++].ColumnName = "Última NF";
+                    table.Columns[i++].ColumnName = "Doador?";
                     table.Columns[table.Columns.Count - 1].ColumnName = "Valor Total";
                     break;
 
@@ -438,10 +370,11 @@ namespace AuditoriaParlamentar.Classes
                     break;
 
                 case Pesquisa.AGRUPAMENTO_DOCUMENTO:
-                    table.Columns[1].ColumnName = "NF/Recibo";
-                    table.Columns[2].ColumnName = "Data Emissão";
-                    table.Columns[3].ColumnName = "CNPJ/CPF";
-                    table.Columns[4].ColumnName = "Razão Social/Nome";
+                    table.Columns[i++].ColumnName = "NF/Recibo";
+                    table.Columns[i++].ColumnName = "Data Emissão";
+                    table.Columns[i++].ColumnName = "CNPJ/CPF";
+                    table.Columns[i++].ColumnName = "Razão Social/Nome";
+                    table.Columns[i++].ColumnName = "Senador";
                     table.Columns[table.Columns.Count - 1].ColumnName = "Valor Total";
                     break;
             }

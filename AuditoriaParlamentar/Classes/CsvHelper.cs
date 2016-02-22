@@ -13,7 +13,7 @@ namespace AuditoriaParlamentar.Classes
             var result = new StringBuilder();
             for (int i = 0; i < table.Columns.Count; i++)
             {
-                result.Append(table.Columns[i].ColumnName);
+                result.Append("\"" + table.Columns[i].ColumnName + "\"");
                 result.Append(i == table.Columns.Count - 1 ? "\n" : ",");
             }
 
@@ -21,7 +21,7 @@ namespace AuditoriaParlamentar.Classes
             {
                 for (int i = 0; i < table.Columns.Count; i++)
                 {
-                    result.Append(row[i].ToString());
+                    result.Append("\"" + row[i].ToString() + "\"");
                     result.Append(i == table.Columns.Count - 1 ? "\n" : ",");
                 }
             }
