@@ -1,4 +1,4 @@
-# Site OPS - Operação Politica Supervisionada [ops.net.br]()
+# [Site OPS - Operação Politica Supervisionada](ops.net.br)
 ### Sistema para auditoria publica de gastos com a Cota Parlamentar dos Deputados e Senadores.
 
 <a href="http://luciobig.com.br/o-que-e-ops/">Saiba mais sobre a OPS</a>
@@ -12,6 +12,6 @@
 * Sitema desenvolvido em ASP.NET WebForms (.NET 4.0) e MySQL
 
 Pra você fazê-lo funcionar faça o seguinte:
-* Execute o Arquivo [auditoria.sql]() para Criar a Estrutura do Banco de Dados.
+* Execute o Arquivo [auditoria.sql](https://github.com/ops-org/ops.net.br/blob/master/auditoria.sql) para Criar a Estrutura do Banco de Dados.
 * Carga Iniciar dos Dados é Feita Através da Tela CarregaDados.aspx
 
