@@ -185,6 +185,10 @@ namespace AuditoriaParlamentar.Classes
 
                 textoHTML = textoHTML.Substring(textoHTML.IndexOf("CAPITAL SOCIAL:")).Replace("CAPITAL SOCIAL:", "").Trim();
                 fornecedor.CapitalSocial = textoHTML.Substring(0, textoHTML.IndexOf("\r\n")).Trim();
+                if (!fornecedor.CapitalSocial.Contains("R$"))
+                {
+                    fornecedor.CapitalSocial = "";
+                }
 
                 while (textoHTML.Contains("Nome/Nome Empresarial:"))
                 {
@@ -195,6 +199,23 @@ namespace AuditoriaParlamentar.Classes
 
                     textoHTML = ReplaceFirst(textoHTML.Substring(textoHTML.IndexOf("Qualificação:")), "Qualificação:", "").Trim();
                     fornecedorQuadroSocietario.Qualificacao = textoHTML.Substring(0, textoHTML.IndexOf("\r\n")).Trim();
+
+                    //Valor Opcional. ex: 07436265000186
+                    if (textoHTML.IndexOf("Qualif. Rep. Legal:") > 0 && 
+                        (textoHTML.IndexOf("Nome/Nome Empresarial:") < 0 || textoHTML.IndexOf("Qualif. Rep. Legal:") < textoHTML.IndexOf("Nome/Nome Empresarial:")))
+                    {
+                        textoHTML = ReplaceFirst(textoHTML.Substring(textoHTML.IndexOf("Qualif. Rep. Legal:")), "Qualif. Rep. Legal:", "").Trim();
+                        fornecedorQuadroSocietario.QualificacaoRepresentanteLegal = textoHTML.Substring(0, textoHTML.IndexOf("\r\n")).Trim();
+                    }
+
+                    //Valor Opcional. ex: 07436265000186
+                    if (textoHTML.IndexOf("Nome do Repres. Legal:") > 0 &&
+                        (textoHTML.IndexOf("Nome/Nome Empresarial:") < 0 || textoHTML.IndexOf("Nome do Repres. Legal:") < textoHTML.IndexOf("Nome/Nome Empresarial:")))
+                    {
+                        textoHTML = ReplaceFirst(textoHTML.Substring(textoHTML.IndexOf("Nome do Repres. Legal:")), "Nome do Repres. Legal:", "").Trim();
+                        fornecedorQuadroSocietario.NomeRepresentanteLegal = textoHTML.Substring(0, textoHTML.IndexOf("\r\n")).Trim();
+
+                    }
 
                     fornecedor.lstFornecedorQuadroSocietario.Add(fornecedorQuadroSocietario);
                 }

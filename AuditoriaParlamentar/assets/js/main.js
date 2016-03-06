@@ -426,7 +426,7 @@ var ObterDados = function () {
                     PreencheDados(data.d.dados, false);
                     $("#buscar-modal").modal("hide");
 
-                    $("#fsConsultaReceita").hide();
+                    $("#fsConsultaReceita, #dvInfoDataConsultaCNPJ").hide();
                     $("#fsDadosReceita, #fsQuadroSocietario, #dvBotoesAcao").show();
 
                 } else {
@@ -447,6 +447,7 @@ var ObterDados = function () {
             $loader.remove();
             if (data.responseJSON && data.responseJSON.Message) {
                 alert(data.responseJSON.Message);
+                BuscarCaptcha();
             } else {
                 alert("erro de comunicação.");
             }
@@ -481,7 +482,10 @@ var PreencheDados = function (dados) {
 
     var str = '';
     for (var i = 0; i < dados.lstFornecedorQuadroSocietario.length; i++) {
-        str += '<tr><td>' + dados.lstFornecedorQuadroSocietario[i].Nome + '</td><td>' + dados.lstFornecedorQuadroSocietario[i].Qualificacao + '</td></tr>';
+        str += '<tr><td>' + dados.lstFornecedorQuadroSocietario[i].Nome + '</td>' +
+            '<td>' + dados.lstFornecedorQuadroSocietario[i].Qualificacao + '</td>' +
+            '<td>' + (dados.lstFornecedorQuadroSocietario[i].NomeRepresentanteLegal || '') + '</td>' +
+            '<td>' + (dados.lstFornecedorQuadroSocietario[i].QualificacaoRepresentanteLegal || '') + '</td></tr>';
     }
     if (str == '') {
         str = '<td colspan="2" class="text-center">A natureza jurídica não permite o preenchimento do QSA</td>';

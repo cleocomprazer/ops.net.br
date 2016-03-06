@@ -2,13 +2,41 @@
 
 <!DOCTYPE html>
 <html lang="pt-br">
-<head runat="server">
+<head runat="server" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
     <title>OPS - Operação Política Supervisionada</title>
 
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="OPS - Operação Política Supervisionada" />
+    <meta name="description" content="O controle social é indispensável para combatermos a corrupção em nosso país." />
+
+    <link rel="canonical" href="http://ops.net.br" />
+
+    <meta itemprop="name" content="OPS - Operação Política Supervisionada" />
+    <meta itemprop="description" content="O controle social é indispensável para combatermos a corrupção em nosso país." />
+    <meta itemprop="image" content="http://ops.net.br/assets/img/social.png" />
+    <meta itemprop="url" content="http://ops.net.br" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="OPS - Operação Política Supervisionada" />
+    <meta property="og:site_name" content="Operação Política Supervisionada" />
+    <meta property="og:url" content="http://ops.net.br" />
+    <meta property="og:description" content="O controle social é indispensável para combatermos a corrupção em nosso país." />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:image" content="http://ops.net.br/assets/img/social.png" />
+    <meta property="article:author" content="https://www.facebook.com/LucioBigg" />
+    <meta property="fb:page_id" content="1033624573364106" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:description" content="O controle social é indispensável para combatermos a corrupção em nosso país." />
+    <meta name="twitter:title" content="OPS - Operação Política Supervisionada" />
+    <meta name="twitter:site" content="@LucioBig" />
+    <meta name="twitter:domain" content="OPS" />
+    <meta property="og:image" content="http://ops.net.br/assets/img/social.png" />
+
+    <link rel="alternate" hreflang="x-default" href="http://ops.net.br" />
+    <meta name="msapplication-TileColor" content="#5A7A9A" />
+    <meta name="theme-color" content="#5A7A9A" />
 
     <link href="<%= ResolveClientUrl("~/") %>assets/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -16,7 +44,33 @@
 
     <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/main.js"></script>
+    <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/main.js?v=1"></script>
+
+    <% if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+        { %>
+    <script type="text/javascript"> 
+    var _urq = _urq || []; 
+    _urq.push(['setGACode', 'UA-38537890-5']); 
+    _urq.push(['setPerformInitialShorctutAnimation', false]); 
+    _urq.push(['initSite', '9cf4c59a-d438-48b0-aa5e-e16f549b9c8c']); 
+
+    (function() { 
+    var ur = document.createElement('script'); ur.type = 'text/javascript'; ur.async = true; 
+    ur.src = ('https:' == document.location.protocol ? 'https://cdn.userreport.com/userreport.js' : 'http://cdn.userreport.com/userreport.js'); 
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ur, s); 
+    })();
+
+    $(function () {
+        var interval = setInterval(function () {
+            if ($('#crowd-shortcut').length == 1) {
+                clearInterval(interval);
+
+                $('#crowd-shortcut').parent().css('top', '54px');
+            }
+        }, 100)
+    });
+    </script> 
+    <% } %>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,7 +89,7 @@
 <body>
     <form id="form_auditoria" runat="server">
         <nav class="navbar navbar-default navbar-static-top topnav" role="navigation">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Alternar Navegação</span>

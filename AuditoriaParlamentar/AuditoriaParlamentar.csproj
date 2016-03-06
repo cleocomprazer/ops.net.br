@@ -93,10 +93,12 @@
     <Content Include="assets\css\auditoria.css" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\img\ajax-loader-facebook.gif" />
+    <Content Include="assets\img\logo200x200.jpg" />
     <Content Include="assets\img\logo_fiscalize.png" />
     <Content Include="assets\img\logo_grande.png" />
     <Content Include="assets\img\logo_opaca.png" />
     <Content Include="assets\img\logo_ops.png" />
+    <Content Include="assets\img\ops_fiscalize.png" />
     <Content Include="assets\img\senado_transparente.png" />
     <Content Include="assets\img\tutorial1.jpg" />
     <Content Include="assets\img\tutorial2.jpg" />

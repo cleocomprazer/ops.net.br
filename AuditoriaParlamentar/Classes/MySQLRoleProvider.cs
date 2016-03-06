@@ -41,8 +41,8 @@ namespace AuditoriaParlamentar
         // Global connection string, generic exception message, event log info.
         //
 
-        private string rolesTable = "Roles";
-        private string usersInRolesTable = "UsersInRoles";
+        private string rolesTable = "roles";
+        private string usersInRolesTable = "usersinroles";
 
         private string eventSource = "MySqlRoleProvider";
         private string eventLog = "Application";

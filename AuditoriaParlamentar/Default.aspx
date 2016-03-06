@@ -59,7 +59,7 @@
                 <div class="media">
                     <div class="media-left media-middle">
                         <a href="#">
-                            <img class="media-object" src="Figuras/ops_fiscalize.png" alt="OPS Fiscalize" />
+                            <img class="media-object" src="assets/img/ops_fiscalize.png" alt="OPS Fiscalize" />
                         </a>
                     </div>
                     <div class="media-body">
@@ -128,11 +128,11 @@
     </div>
 
     <div id="fb-root"></div>
-    <script>(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1033624573364106";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 </asp:Content>

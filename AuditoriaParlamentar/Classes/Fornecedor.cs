@@ -292,6 +292,12 @@ namespace AuditoriaParlamentar.Classes
                             try { fornecedorQuadroSocietario.Qualificacao = Convert.ToString(reader["Qualificacao"]); }
                             catch { fornecedorQuadroSocietario.Qualificacao = ""; }
 
+                            try { fornecedorQuadroSocietario.NomeRepresentanteLegal = Convert.ToString(reader["NomeRepresentanteLegal"]); }
+                            catch { fornecedorQuadroSocietario.NomeRepresentanteLegal = ""; }
+
+                            try { fornecedorQuadroSocietario.QualificacaoRepresentanteLegal = Convert.ToString(reader["QualificacaoRepresentanteLegal"]); }
+                            catch { fornecedorQuadroSocietario.QualificacaoRepresentanteLegal = ""; }
+
                             lstFornecedorQuadroSocietario.Add(fornecedorQuadroSocietario);
                         }
 
@@ -421,15 +427,19 @@ namespace AuditoriaParlamentar.Classes
                     if (lstFornecedorQuadroSocietario != null)
                     {
                         banco.AddParameter("txtCNPJCPF", Cnpj);
-                        banco.ExecuteScalar("DELETE FROM FornecedorQuadroSocietario WHERE txtCNPJCPF = @txtCNPJCPF");
+                        banco.ExecuteScalar("DELETE FROM fornecedorquadrosocietario WHERE txtCNPJCPF = @txtCNPJCPF");
 
                         foreach (var qas in lstFornecedorQuadroSocietario)
                         {
                             banco.AddParameter("txtCNPJCPF", Cnpj);
                             banco.AddParameter("Nome", qas.Nome);
                             banco.AddParameter("Qualificacao", qas.Qualificacao);
+                            banco.AddParameter("NomeRepresentanteLegal", qas.NomeRepresentanteLegal);
+                            banco.AddParameter("QualificacaoRepresentanteLegal", qas.QualificacaoRepresentanteLegal);
 
-                            banco.ExecuteNonQuery("INSERT FornecedorQuadroSocietario (txtCNPJCPF, Nome, Qualificacao) VALUES (@txtCNPJCPF, @Nome, @Qualificacao)");
+                            banco.ExecuteNonQuery(
+                                "INSERT fornecedorquadrosocietario (txtCNPJCPF, Nome, Qualificacao, NomeRepresentanteLegal, QualificacaoRepresentanteLegal) VALUES " +
+                                "(@txtCNPJCPF, @Nome, @Qualificacao, @NomeRepresentanteLegal, @QualificacaoRepresentanteLegal)");
                         }
                     }
 

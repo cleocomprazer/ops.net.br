@@ -252,6 +252,8 @@
                                 <tr>
                                     <th>Nome/Nome Empresarial</th>
                                     <th>Qualificação</th>
+                                    <th>Nome do Repres. Legal</th>
+                                    <th>Qualif. Rep. Legal</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -260,6 +262,8 @@
                                         <tr>
                                             <td><%# Eval("Nome") %></td>
                                             <td><%# Eval("Qualificacao") %></td>
+                                            <td><%# Eval("NomeRepresentanteLegal") %></td>
+                                            <td><%# Eval("QualificacaoRepresentanteLegal") %></td>
                                         </tr>
                                     </ItemTemplate>
                                 </asp:Repeater>

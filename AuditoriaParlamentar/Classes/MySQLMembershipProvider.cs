@@ -63,7 +63,7 @@ namespace AuditoriaParlamentar
         private string eventSource = "MySqlMembershipProvider";
         private string eventLog = "Application";
         private string exceptionMessage = "An exception occurred. Please check the Event Log.";
-        private string tableName = "Users";
+        private string tableName = "users";
         private string connectionString;
 
         private const string encryptionKey = "42524153494C5045474153414641444F";

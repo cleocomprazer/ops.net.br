@@ -30,7 +30,7 @@ namespace AuditoriaParlamentar.Classes
             {
                 using (Banco banco = new Banco())
                 {
-                    dtResultadoComandoSQL = banco.GetTable("SELECT Nome, ComandoSQL, '' as Resultado FROM ComandoSQL WHERE Grupo=" + grupo + " ORDER BY Ordem");
+                    dtResultadoComandoSQL = banco.GetTable("SELECT Nome, ComandoSQL, '' as Resultado FROM comandosql WHERE Grupo=" + grupo + " ORDER BY Ordem");
 
                     if (dtResultadoComandoSQL != null)
                     {
