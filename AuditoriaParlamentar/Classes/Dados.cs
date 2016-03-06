@@ -41,8 +41,8 @@ namespace AuditoriaParlamentar
                     //}
                 }
 
-                PreviaDados(grid, banco);
-                AcertoDados(gridAcerto, banco);
+                //PreviaDados(grid, banco);
+                //AcertoDados(gridAcerto, banco);
 
                 //DownaloadFotosProcessa(banco);
             }
@@ -50,47 +50,47 @@ namespace AuditoriaParlamentar
             return true;
         }
 
-        private void PreviaDados(GridView grid, Banco banco)
-        {
-            StringBuilder sql = new StringBuilder();
+        //private void PreviaDados(GridView grid, Banco banco)
+        //{
+        //    StringBuilder sql = new StringBuilder();
 
-            sql.Append("SELECT DISTINCT");
-            sql.Append("       lancamentos_tmp.txNomeParlamentar");
-            sql.Append("  FROM lancamentos_tmp");
-            sql.Append(" LIMIT 100");
+        //    sql.Append("SELECT DISTINCT");
+        //    sql.Append("       lancamentos_tmp.txNomeParlamentar");
+        //    sql.Append("  FROM lancamentos_tmp");
+        //    sql.Append(" LIMIT 100");
 
-            using (MySqlDataReader reader = banco.ExecuteReader(sql.ToString(), 300))
-            {
-                DataTable table = new DataTable("denuncias");
-                table.Load(reader);
+        //    using (MySqlDataReader reader = banco.ExecuteReader(sql.ToString(), 300))
+        //    {
+        //        DataTable table = new DataTable("denuncias");
+        //        table.Load(reader);
 
-                table.Columns[0].ColumnName = "Parlamentar";
+        //        table.Columns[0].ColumnName = "Parlamentar";
 
-                grid.DataSource = table;
-                grid.DataBind();
-            }
-        }
+        //        grid.DataSource = table;
+        //        grid.DataBind();
+        //    }
+        //}
 
-        private void AcertoDados(GridView grid, Banco banco)
-        {
-            StringBuilder sql = new StringBuilder();
+        //private void AcertoDados(GridView grid, Banco banco)
+        //{
+        //    StringBuilder sql = new StringBuilder();
 
-            sql.Append("SELECT DISTINCT");
-            sql.Append("       lancamentos_tmp.txNomeParlamentar");
-            sql.Append("  FROM lancamentos_tmp");
-            sql.Append(" WHERE NOT EXISTS (SELECT ideCadastro FROM parlamentares WHERE lancamentos_tmp.txNomeParlamentar = parlamentares.txNomeParlamentar)");
+        //    sql.Append("SELECT DISTINCT");
+        //    sql.Append("       lancamentos_tmp.txNomeParlamentar");
+        //    sql.Append("  FROM lancamentos_tmp");
+        //    sql.Append(" WHERE NOT EXISTS (SELECT ideCadastro FROM parlamentares WHERE lancamentos_tmp.txNomeParlamentar = parlamentares.txNomeParlamentar)");
 
-            using (MySqlDataReader reader = banco.ExecuteReader(sql.ToString(), 300))
-            {
-                DataTable table = new DataTable("denuncias");
-                table.Load(reader);
+        //    using (MySqlDataReader reader = banco.ExecuteReader(sql.ToString(), 300))
+        //    {
+        //        DataTable table = new DataTable("denuncias");
+        //        table.Load(reader);
 
-                table.Columns[0].ColumnName = "Parlamentar sem ide";
+        //        table.Columns[0].ColumnName = "Parlamentar sem ide";
 
-                grid.DataSource = table;
-                grid.DataBind();
-            }
-        }
+        //        grid.DataSource = table;
+        //        grid.DataBind();
+        //    }
+        //}
 
         internal Boolean EfetivaDados()
         {
@@ -126,6 +126,68 @@ namespace AuditoriaParlamentar
             return CarregaDadosXml(file, banco, "lancamentos_tmp");
         }
 
+        //Metodo antigo (não funciona com arquivos grandes)
+        //private Boolean CarregaDadosXml(String file, Banco banco, String tabela)
+        //{
+        //    StreamReader stream = null;
+
+        //    try
+        //    {
+        //        if (file.EndsWith("AnoAnterior.xml"))
+        //            stream = new StreamReader(file, Encoding.GetEncoding(850)); //"ISO-8859-1"
+        //        else
+        //            stream = new StreamReader(file, Encoding.GetEncoding("ISO-8859-1"));
+        //        XmlDocument doc = new XmlDocument();
+        //        doc.Load(stream);
+        //        XmlNodeList projectsGroup = doc.SelectNodes("//DESPESAS/DESPESA");
+
+        //        StringBuilder sqlFields = new StringBuilder();
+        //        StringBuilder sqlValues = new StringBuilder();
+        //        String nodeName;
+
+        //        foreach (XmlNode projectNode in projectsGroup)
+        //        {
+        //            XmlNodeList files = projectNode.SelectNodes("*");
+
+        //            sqlFields.Clear();
+        //            sqlValues.Clear();
+
+        //            foreach (XmlNode fileNode in files)
+        //            {
+        //                if (sqlFields.Length > 0)
+        //                {
+        //                    sqlFields.Append(",");
+        //                    sqlValues.Append(",");
+        //                }
+
+        //                nodeName = fileNode.Name;
+
+        //                if (nodeName == "txtFornecedor")
+        //                    nodeName = "txtBeneficiario";
+
+        //                sqlFields.Append(nodeName);
+        //                sqlValues.Append("@" + nodeName);
+
+        //                banco.AddParameter(nodeName, fileNode.InnerText.ToUpper());
+        //            }
+
+        //            banco.ExecuteNonQuery("INSERT INTO " + tabela + " (" + sqlFields.ToString() + ") VALUES (" + sqlValues.ToString() + ")");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MsgErro = ex.Message;
+        //        return false;
+        //    }
+        //    finally
+        //    {
+        //        stream.Close();
+        //        stream.Dispose();
+        //    }
+
+        //    return true;
+        //}
+
         private Boolean CarregaDadosXml(String file, Banco banco, String tabela)
         {
             StreamReader stream = null;
@@ -136,41 +198,55 @@ namespace AuditoriaParlamentar
                     stream = new StreamReader(file, Encoding.GetEncoding(850)); //"ISO-8859-1"
                 else
                     stream = new StreamReader(file, Encoding.GetEncoding("ISO-8859-1"));
-                XmlDocument doc = new XmlDocument();
-                doc.Load(stream);
-                XmlNodeList projectsGroup = doc.SelectNodes("//DESPESAS/DESPESA");
-
+                //XmlDocument doc = new XmlDocument();
+                //doc.Load(stream);
+                //XmlNodeList projectsGroup = doc.SelectNodes("//DESPESAS/DESPESA");
                 StringBuilder sqlFields = new StringBuilder();
                 StringBuilder sqlValues = new StringBuilder();
                 String nodeName;
 
-                foreach (XmlNode projectNode in projectsGroup)
+                using (XmlReader reader = XmlReader.Create(stream, new XmlReaderSettings() { IgnoreComments = true }))
                 {
-                    XmlNodeList files = projectNode.SelectNodes("*");
+                    reader.ReadToDescendant("DESPESAS");
+                    reader.ReadToDescendant("DESPESA");
 
-                    sqlFields.Clear();
-                    sqlValues.Clear();
-
-                    foreach (XmlNode fileNode in files)
+                    do
                     {
-                        if (sqlFields.Length > 0)
+                        var strXmlNodeDespeza = reader.ReadOuterXml();
+                        if (string.IsNullOrEmpty(strXmlNodeDespeza))
+                            break;
+
+                        XmlDocument doc = new XmlDocument();
+                        doc.LoadXml(strXmlNodeDespeza);
+                        XmlNodeList files = doc.DocumentElement.SelectNodes("*");
+
+                        sqlFields.Clear();
+                        sqlValues.Clear();
+
+                        foreach (XmlNode fileNode in files)
                         {
-                            sqlFields.Append(",");
-                            sqlValues.Append(",");
+                            if (sqlFields.Length > 0)
+                            {
+                                sqlFields.Append(",");
+                                sqlValues.Append(",");
+                            }
+
+                            nodeName = fileNode.Name;
+
+                            if (nodeName == "txtFornecedor")
+                                nodeName = "txtBeneficiario";
+
+                            sqlFields.Append(nodeName);
+                            sqlValues.Append("@" + nodeName);
+
+                            banco.AddParameter(nodeName, fileNode.InnerText.ToUpper());
                         }
 
-                        nodeName = fileNode.Name;
-
-                        if (nodeName == "txtFornecedor")
-                            nodeName = "txtBeneficiario";
-
-                        sqlFields.Append(nodeName);
-                        sqlValues.Append("@" + nodeName);
-
-                        banco.AddParameter(nodeName, fileNode.InnerText.ToUpper());
+                        banco.ExecuteNonQuery("INSERT INTO " + tabela + " (" + sqlFields.ToString() + ") VALUES (" + sqlValues.ToString() + ")");
                     }
+                    while (true);//reader.ReadToNextSibling("DESPESA")
 
-                    banco.ExecuteNonQuery("INSERT INTO " + tabela + " (" + sqlFields.ToString() + ") VALUES (" + sqlValues.ToString() + ")");
+                    reader.Close();
                 }
             }
             catch (Exception ex)
@@ -191,8 +267,11 @@ namespace AuditoriaParlamentar
         {
             //Para contornar a retirada do campo ideCadastro pelo câmara mas últimas alterações do xml
             //Para contornar o problema dos valores virem aleatoriamente com sinal negativo
-            banco.ExecuteNonQuery("UPDATE lancamentos_tmp SET ideCadastro = (SELECT ideCadastro FROM parlamentares WHERE lancamentos_tmp.txNomeParlamentar = parlamentares.txNomeParlamentar), vlrLiquido = ABS(vlrLiquido)", 300);
+            //ideCadastro voltou e pode vir com valor negativo quando cancelamento de passagem aerea
+            //banco.ExecuteNonQuery("UPDATE lancamentos_tmp SET ideCadastro = (SELECT ideCadastro FROM parlamentares WHERE lancamentos_tmp.txNomeParlamentar = parlamentares.txNomeParlamentar), vlrLiquido = ABS(vlrLiquido)", 300);
 
+
+            //Atualiza lançamentos onde o valor foi alterado
             StringBuilder sql = new StringBuilder();
 
             sql.Append("   SELECT numano,");
@@ -216,8 +295,8 @@ namespace AuditoriaParlamentar
                     banco.ExecuteNonQuery("DELETE FROM lancamentos WHERE numano = @numano AND nummes = @nummes AND ideCadastro = @ideCadastro", 0);
 
                     sql.Clear();
-                    sql.Append("INSERT INTO lancamentos (ideCadastro, txNomeParlamentar, nuCarteiraParlamentar, nuLegislatura, sgUF, sgPartido, codLegislatura, numSubCota, txtDescricao, numEspecificacaoSubCota, txtDescricaoEspecificacao, txtBeneficiario, txtCNPJCPF, txtNumero, indTipoDocumento, datEmissao, vlrDocumento, vlrGlosa, vlrLiquido, numMes, numAno, numParcela, txtPassageiro, txtTrecho, numLote, numRessarcimento, ide_documento_fiscal, vlrRestituicao)");
-                    sql.Append("SELECT ideCadastro, txNomeParlamentar, nuCarteiraParlamentar, nuLegislatura, sgUF, sgPartido, codLegislatura, numSubCota, txtDescricao, numEspecificacaoSubCota, txtDescricaoEspecificacao, txtBeneficiario, txtCNPJCPF, txtNumero, indTipoDocumento, datEmissao, vlrDocumento, vlrGlosa, vlrLiquido, numMes, numAno, numParcela, txtPassageiro, txtTrecho, numLote, numRessarcimento, ide_documento_fiscal, vlrRestituicao");
+                    sql.Append("INSERT INTO lancamentos (ideCadastro, txNomeParlamentar, nuCarteiraParlamentar, nuLegislatura, sgUF, sgPartido, codLegislatura, numSubCota, txtDescricao, numEspecificacaoSubCota, txtDescricaoEspecificacao, txtBeneficiario, txtCNPJCPF, txtNumero, indTipoDocumento, datEmissao, vlrDocumento, vlrGlosa, vlrLiquido, numMes, numAno, numParcela, txtPassageiro, txtTrecho, numLote, numRessarcimento, ideDocumento, vlrRestituicao)");
+                    sql.Append("SELECT ideCadastro, txNomeParlamentar, nuCarteiraParlamentar, nuLegislatura, sgUF, sgPartido, codLegislatura, numSubCota, txtDescricao, numEspecificacaoSubCota, txtDescricaoEspecificacao, txtBeneficiario, txtCNPJCPF, txtNumero, indTipoDocumento, datEmissao, vlrDocumento, vlrGlosa, vlrLiquido, numMes, numAno, numParcela, txtPassageiro, txtTrecho, numLote, numRessarcimento, ideDocumento, vlrRestituicao");
                     sql.Append("  FROM lancamentos_tmp");
                     sql.Append(" WHERE lancamentos_tmp.numano      = @numano");
                     sql.Append("   AND lancamentos_tmp.nummes      = @nummes");

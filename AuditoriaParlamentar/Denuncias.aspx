@@ -1,4 +1,6 @@
-﻿<%@ Page Title="OPS - Operação Política Supervisionada" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Denuncias.aspx.cs" Inherits="AuditoriaParlamentar.Denuncias" %>
+﻿<%@ Page Title="OPS - Operação Política Supervisionada" Language="C#" MasterPageFile="~/Site.Master"
+    CodeBehind="Denuncias.aspx.cs" Inherits="AuditoriaParlamentar.Denuncias"
+    AutoEventWireup="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>

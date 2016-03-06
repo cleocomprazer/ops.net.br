@@ -12,24 +12,13 @@ namespace AuditoriaParlamentar.Account
     {
         protected override void OnPreInit(EventArgs e)
         {
-            if (Session["MasterPage"] == "Farejador")
-            {
-                Page.MasterPageFile = "~/OpsFarejador.Master";
-            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             RegisterHyperLink.NavigateUrl = "Register.aspx?ReturnUrl=" + HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
 
-            if (Session["MasterPage"] == "Farejador")
-            {
-                LoginUser.DestinationPageUrl = "~/PesquisaFarejador.aspx";
-            }
-            else
-            {
-                LoginUser.DestinationPageUrl = "~/PesquisaInicio.aspx";
-            }
+            LoginUser.DestinationPageUrl = "~/PesquisaInicio.aspx";
         }
 
         protected void LoginUser_LoginError(object sender, EventArgs e)

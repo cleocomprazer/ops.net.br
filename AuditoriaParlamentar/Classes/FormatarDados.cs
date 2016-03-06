@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace AuditoriaParlamentar.Classes
@@ -173,6 +174,31 @@ namespace AuditoriaParlamentar.Classes
                 return text;
             }
             return text.Substring(0, pos) + replace + text.Substring(pos + search.Length);
+        }
+
+        internal void MontarObjFornecedorQuadroSocietario(Fornecedor fornecedor, string responseFromServer)
+        {
+            fornecedor.lstFornecedorQuadroSocietario = new List<FornecedorQuadroSocietario>();
+            if (responseFromServer.IndexOf("CAPITAL SOCIAL:") > 0)
+            {
+                string textoHTML = Regex.Replace(responseFromServer, @"<[^>]*>", string.Empty);
+
+                textoHTML = textoHTML.Substring(textoHTML.IndexOf("CAPITAL SOCIAL:")).Replace("CAPITAL SOCIAL:", "").Trim();
+                fornecedor.CapitalSocial = textoHTML.Substring(0, textoHTML.IndexOf("\r\n")).Trim();
+
+                while (textoHTML.Contains("Nome/Nome Empresarial:"))
+                {
+                    var fornecedorQuadroSocietario = new FornecedorQuadroSocietario();
+
+                    textoHTML = ReplaceFirst(textoHTML.Substring(textoHTML.IndexOf("Nome/Nome Empresarial:")), "Nome/Nome Empresarial:", "").Trim();
+                    fornecedorQuadroSocietario.Nome = textoHTML.Substring(0, textoHTML.IndexOf("\r\n")).Trim();
+
+                    textoHTML = ReplaceFirst(textoHTML.Substring(textoHTML.IndexOf("Qualificação:")), "Qualificação:", "").Trim();
+                    fornecedorQuadroSocietario.Qualificacao = textoHTML.Substring(0, textoHTML.IndexOf("\r\n")).Trim();
+
+                    fornecedor.lstFornecedorQuadroSocietario.Add(fornecedorQuadroSocietario);
+                }
+            }
         }
     }
 }

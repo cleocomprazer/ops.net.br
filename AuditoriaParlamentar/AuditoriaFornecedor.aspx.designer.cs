@@ -13,15 +13,6 @@ namespace AuditoriaParlamentar {
     public partial class AuditoriaFornecedor {
         
         /// <summary>
-        /// form1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
-        /// <summary>
         /// fsConsultaReceita control.
         /// </summary>
         /// <remarks>
@@ -353,5 +344,41 @@ namespace AuditoriaParlamentar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblTelefone;
+        
+        /// <summary>
+        /// fsQuadroSocietario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fsQuadroSocietario;
+        
+        /// <summary>
+        /// lblCapitalSocial control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblCapitalSocial;
+        
+        /// <summary>
+        /// rptQuadroSocietario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptQuadroSocietario;
+        
+        /// <summary>
+        /// ltrSemQuadroSocios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltrSemQuadroSocios;
     }
 }

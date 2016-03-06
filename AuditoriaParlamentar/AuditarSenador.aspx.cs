@@ -29,8 +29,7 @@ namespace AuditoriaParlamentar
                 GridView.HeaderRow.TableSection = TableRowSection.TableHeader;
             }
             catch (Exception ex)
-            {
-            }
+            { }
         }
 
         private void CarregaDados()

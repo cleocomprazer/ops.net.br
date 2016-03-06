@@ -78,11 +78,12 @@ namespace AuditoriaParlamentar
             {
                 if (Request["__EVENTTARGET"] == "ButtonExportar_Click")
                 {
-                    DataTable ultimaConsulta = HttpContext.Current.Session["AuditoriaUltimaConsulta" + ChavePesquisa.Value] as DataTable;
-                    if (ultimaConsulta != null)
+                    DataTable dtUltimaConsulta = HttpContext.Current.Session["AuditoriaUltimaConsulta" + ChavePesquisa.Value] as DataTable;
+                    if (dtUltimaConsulta != null)
                     {
-                        ultimaConsulta.Columns.RemoveAt(0);
-                        CsvHelper.ExportarCSV(ultimaConsulta);
+                        DataTable dtExport = dtUltimaConsulta.Copy();
+                        dtExport.Columns.RemoveAt(0);
+                        CsvHelper.ExportarCSV(dtExport);
                     }
                 }
             }

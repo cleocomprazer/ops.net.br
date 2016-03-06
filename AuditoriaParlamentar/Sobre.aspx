@@ -17,7 +17,7 @@
         <div class="container" id="sobre-page">
             <div class="row">
                 <div class="col-md-3 col-sm-4 col-xs-12 text-center">
-                <asp:Image ID="logo_ops" runat="server" ImageUrl="~/Figuras/logo_grande.png" Width="200" Height="122" />
+                <asp:Image ID="logo_ops" runat="server" ImageUrl="~/assets/img/logo_grande.png" Width="200" Height="122" />
                 <br />
             </div>
             <div class="col-md-9 col-sm-8 col-xs-12">
@@ -44,15 +44,15 @@
         <br />
         <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12 text-center">
-                <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/Figuras/tutorial1.jpg"
+                <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/assets/img/tutorial1.jpg"
                     NavigateUrl="http://www.youtube.com/watch?v=ESenZF_G1qI" Target="_blank">HyperLink</asp:HyperLink>
             </div>
             <div class="col-md-4 col-sm-6 col-xs-12 text-center">
-                <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/Figuras/tutorial2.jpg"
+                <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/assets/img/tutorial2.jpg"
                     NavigateUrl="http://www.youtube.com/watch?v=RY9wiZ-Wfz8" Target="_blank">HyperLink</asp:HyperLink>
             </div>
             <div class="col-md-4 col-sm-6 col-xs-12 text-center">
-                <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/Figuras/tutorial3.jpg"
+                <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/assets/img/tutorial3.jpg"
                     NavigateUrl="http://www.youtube.com/watch?v=OQTyD9Ta4lk" Target="_blank">HyperLink</asp:HyperLink>
             </div>
         </div>
@@ -67,7 +67,7 @@
                 </p>
                 <br />
                 <p class="text-center">
-                    <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/Figuras/tutorial4.jpg"
+                    <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/assets/img/tutorial4.jpg"
                         NavigateUrl="http://www.youtube.com/watch?v=UmSL6_8IAaE" Target="_blank">HyperLink</asp:HyperLink>
                 </p>
                 <p class="style2">

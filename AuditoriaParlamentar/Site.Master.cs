@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Web.Security;
+using System.Web.UI.HtmlControls;
 
 namespace AuditoriaParlamentar
 {
     public partial class SiteMaster : System.Web.UI.MasterPage
     {
-
         public bool autenticado;
         protected void Page_Load(object sender, EventArgs e)
         {

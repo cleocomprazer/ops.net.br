@@ -124,6 +124,8 @@ namespace AuditoriaParlamentar
                         if (fornecedor.AtividadeSecundaria20 != "" && fornecedor.AtividadeSecundaria20 != null)
                             lblAtividadeSecundaria.InnerHtml += "<br />" + fornecedor.AtividadeSecundaria20;
 
+                        lblCapitalSocial.InnerText = fornecedor.CapitalSocial;
+
                         fsConsultaReceita.Style.Add("display", "none");
 
                         ButtonListarDoacoes.Visible = fornecedor.Doador;
@@ -135,10 +137,21 @@ namespace AuditoriaParlamentar
                             dvInfoDataConsultaCNPJ.InnerHtml = string.Format("As informações abaixo foram consultadas em {0:dd/MM/yyyy HH:mm}. Clique <a href='#' onclick='ReconsultarDadosReceita(); return false;'>aqui</a> para atualizar os dados a partir da Receita Federal.", fornecedor.DataInclusao);
                         }
 
+                        if (fornecedor.CarregaDadosQuadroSocietario(lblCNPJ.InnerText))
+                        {
+                            rptQuadroSocietario.DataSource = fornecedor.lstFornecedorQuadroSocietario;
+                            rptQuadroSocietario.DataBind();
+                        }
+                        else
+                        {
+                            rptQuadroSocietario.Visible = false;
+                            ltrSemQuadroSocios.Text = "<td colspan=\"2\" class=\"text - center\">A natureza jurídica não permite o preenchimento do QSA</td>";
+                        }
                     }
                     else
                     {
                         fsDadosReceita.Style.Add("display", "none");
+                        fsQuadroSocietario.Style.Add("display", "none");
                         dvBotoesAcao.Style.Add("display", "none");
 
                         captcha_img.Src = GetCaptcha();
@@ -216,88 +229,67 @@ namespace AuditoriaParlamentar
         public static dynamic ConsultarDados(string cnpj, string captcha)
         {
             var msg = string.Empty;
-            var resp = ObterDados(cnpj, captcha);
+            Fornecedor fornecedor = ObterDados(cnpj, captcha);
 
-            if (resp.Contains("Verifique se o mesmo foi digitado corretamente"))
-                msg = "O número do CNPJ não foi localizado na Receita Federal";
-
-            if (resp.Contains("Erro na Consulta"))
-                msg += "Os caracteres não conferem com a imagem";
-
-            Fornecedor fornecedor = null;
-            if (resp.Length > 0)
+            if (fornecedor != null)
             {
-                fornecedor = new FormatarDados().MontarObjFornecedor(cnpj, resp);
-                if (fornecedor != null)
-                {
-                    var UserName = HttpContext.Current.User.Identity.Name;
+                if (fornecedor.AtividadeSecundaria02 != "" && fornecedor.AtividadeSecundaria02 != null)
+                    fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria02;
 
-                    fornecedor.IdAtualizacao = Comum.Encrypt(fornecedor.PreparaAtualizacao(UserName).ToString());
-                    fornecedor.UsuarioInclusao = UserName;
-                    fornecedor.DataInclusao = DateTime.Now;
+                if (fornecedor.AtividadeSecundaria03 != "" && fornecedor.AtividadeSecundaria03 != null)
+                    fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria03;
 
-                    fornecedor.AtualizaDados();
+                if (fornecedor.AtividadeSecundaria04 != "" && fornecedor.AtividadeSecundaria04 != null)
+                    fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria04;
 
-                    fornecedor.MarcaVisitado(UserName);
-                }
+                if (fornecedor.AtividadeSecundaria05 != "" && fornecedor.AtividadeSecundaria05 != null)
+                    fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria05;
+
+                if (fornecedor.AtividadeSecundaria06 != "" && fornecedor.AtividadeSecundaria06 != null)
+                    fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria06;
+
+                if (fornecedor.AtividadeSecundaria07 != "" && fornecedor.AtividadeSecundaria07 != null)
+                    fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria07;
+
+                if (fornecedor.AtividadeSecundaria08 != "" && fornecedor.AtividadeSecundaria08 != null)
+                    fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria08;
+
+                if (fornecedor.AtividadeSecundaria09 != "" && fornecedor.AtividadeSecundaria09 != null)
+                    fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria09;
+
+                if (fornecedor.AtividadeSecundaria10 != "" && fornecedor.AtividadeSecundaria10 != null)
+                    fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria10;
+
+                if (fornecedor.AtividadeSecundaria11 != "" && fornecedor.AtividadeSecundaria11 != null)
+                    fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria11;
+
+                if (fornecedor.AtividadeSecundaria12 != "" && fornecedor.AtividadeSecundaria12 != null)
+                    fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria12;
+
+                if (fornecedor.AtividadeSecundaria13 != "" && fornecedor.AtividadeSecundaria13 != null)
+                    fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria13;
+
+                if (fornecedor.AtividadeSecundaria14 != "" && fornecedor.AtividadeSecundaria14 != null)
+                    fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria14;
+
+                if (fornecedor.AtividadeSecundaria15 != "" && fornecedor.AtividadeSecundaria15 != null)
+                    fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria15;
+
+                if (fornecedor.AtividadeSecundaria16 != "" && fornecedor.AtividadeSecundaria16 != null)
+                    fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria16;
+
+                if (fornecedor.AtividadeSecundaria17 != "" && fornecedor.AtividadeSecundaria17 != null)
+                    fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria17;
+
+                if (fornecedor.AtividadeSecundaria18 != "" && fornecedor.AtividadeSecundaria18 != null)
+                    fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria18;
+
+                if (fornecedor.AtividadeSecundaria19 != "" && fornecedor.AtividadeSecundaria19 != null)
+                    fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria19;
+
+                if (fornecedor.AtividadeSecundaria20 != "" && fornecedor.AtividadeSecundaria20 != null)
+                    fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria20;
             }
-
-            if (fornecedor.AtividadeSecundaria02 != "" && fornecedor.AtividadeSecundaria02 != null)
-                fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria02;
-
-            if (fornecedor.AtividadeSecundaria03 != "" && fornecedor.AtividadeSecundaria03 != null)
-                fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria03;
-
-            if (fornecedor.AtividadeSecundaria04 != "" && fornecedor.AtividadeSecundaria04 != null)
-                fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria04;
-
-            if (fornecedor.AtividadeSecundaria05 != "" && fornecedor.AtividadeSecundaria05 != null)
-                fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria05;
-
-            if (fornecedor.AtividadeSecundaria06 != "" && fornecedor.AtividadeSecundaria06 != null)
-                fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria06;
-
-            if (fornecedor.AtividadeSecundaria07 != "" && fornecedor.AtividadeSecundaria07 != null)
-                fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria07;
-
-            if (fornecedor.AtividadeSecundaria08 != "" && fornecedor.AtividadeSecundaria08 != null)
-                fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria08;
-
-            if (fornecedor.AtividadeSecundaria09 != "" && fornecedor.AtividadeSecundaria09 != null)
-                fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria09;
-
-            if (fornecedor.AtividadeSecundaria10 != "" && fornecedor.AtividadeSecundaria10 != null)
-                fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria10;
-
-            if (fornecedor.AtividadeSecundaria11 != "" && fornecedor.AtividadeSecundaria11 != null)
-                fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria11;
-
-            if (fornecedor.AtividadeSecundaria12 != "" && fornecedor.AtividadeSecundaria12 != null)
-                fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria12;
-
-            if (fornecedor.AtividadeSecundaria13 != "" && fornecedor.AtividadeSecundaria13 != null)
-                fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria13;
-
-            if (fornecedor.AtividadeSecundaria14 != "" && fornecedor.AtividadeSecundaria14 != null)
-                fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria14;
-
-            if (fornecedor.AtividadeSecundaria15 != "" && fornecedor.AtividadeSecundaria15 != null)
-                fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria15;
-
-            if (fornecedor.AtividadeSecundaria16 != "" && fornecedor.AtividadeSecundaria16 != null)
-                fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria16;
-
-            if (fornecedor.AtividadeSecundaria17 != "" && fornecedor.AtividadeSecundaria17 != null)
-                fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria17;
-
-            if (fornecedor.AtividadeSecundaria18 != "" && fornecedor.AtividadeSecundaria18 != null)
-                fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria18;
-
-            if (fornecedor.AtividadeSecundaria19 != "" && fornecedor.AtividadeSecundaria19 != null)
-                fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria19;
-
-            if (fornecedor.AtividadeSecundaria20 != "" && fornecedor.AtividadeSecundaria20 != null)
-                fornecedor.AtividadeSecundaria01 += "<br />" + fornecedor.AtividadeSecundaria20;
 
             return
                 new
@@ -307,10 +299,10 @@ namespace AuditoriaParlamentar
                 };
         }
 
-        private static string ObterDados(string aCNPJ, string aCaptcha)
+        private static Fornecedor ObterDados(string aCNPJ, string aCaptcha)
         {
-            CookieContainer _cookies = new CookieContainer();
-            _cookies = (CookieContainer)HttpContext.Current.Session["cookies"];
+            string cnpj = new Regex(@"[^\d]").Replace(aCNPJ, string.Empty);
+            CookieContainer _cookies = (CookieContainer)HttpContext.Current.Session["cookies"];
 
             var request = (HttpWebRequest)WebRequest.Create(urlBaseReceitaFederal + paginaValidacao);
             request.ProtocolVersion = HttpVersion.Version10;
@@ -319,7 +311,7 @@ namespace AuditoriaParlamentar
 
             var postData = string.Empty;
             postData += "origem=comprovante&";
-            postData += "cnpj=" + new Regex(@"[^\d]").Replace(aCNPJ, string.Empty) + "&";
+            postData += "cnpj=" + cnpj + "&";
             postData += "txtTexto_captcha_serpro_gov_br=" + aCaptcha + "&";
             postData += "submit1=Consultar&";
             postData += "search_type=cnpj";
@@ -332,8 +324,46 @@ namespace AuditoriaParlamentar
             dataStream.Write(byteArray, 0, byteArray.Length);
             dataStream.Close();
 
-            var stHtml = new StreamReader(request.GetResponse().GetResponseStream(), Encoding.GetEncoding("ISO-8859-1"));
-            return stHtml.ReadToEnd();
+            var response = request.GetResponse();
+            var stHtml = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("ISO-8859-1"));
+            var strHtmlFornecedor = stHtml.ReadToEnd();
+
+            if (strHtmlFornecedor.Contains("Verifique se o mesmo foi digitado corretamente"))
+                throw new Exception("O número do CNPJ não foi localizado na Receita Federal");
+
+            if (strHtmlFornecedor.Contains("Erro na Consulta"))
+                throw new Exception("Os caracteres não conferem com a imagem");
+
+            if (strHtmlFornecedor.Length > 0)
+            {
+                var requestQAS = (HttpWebRequest)HttpWebRequest.Create(urlBaseReceitaFederal + paginaQuadroSocietario);
+                requestQAS.CookieContainer = _cookies;
+                requestQAS.Method = "GET";
+                var res = (HttpWebResponse)requestQAS.GetResponse();
+                StreamReader sr = new StreamReader(res.GetResponseStream(), Encoding.GetEncoding("ISO-8859-1"));
+                string strHtmlQuadroSocietario = sr.ReadToEnd();
+
+                var formataDados = new FormatarDados();
+                Fornecedor fornecedor = formataDados.MontarObjFornecedor(cnpj, strHtmlFornecedor);
+                if (fornecedor != null)
+                {
+                    formataDados.MontarObjFornecedorQuadroSocietario(fornecedor, strHtmlQuadroSocietario);
+
+                    var UserName = HttpContext.Current.User.Identity.Name;
+
+                    fornecedor.IdAtualizacao = Comum.Encrypt(fornecedor.PreparaAtualizacao(UserName).ToString());
+                    fornecedor.UsuarioInclusao = UserName;
+                    fornecedor.DataInclusao = DateTime.Now;
+
+                    fornecedor.AtualizaDados();
+
+                    fornecedor.MarcaVisitado(UserName);
+                }
+
+                return fornecedor;
+            }
+
+            return null;
         }
     }
 }

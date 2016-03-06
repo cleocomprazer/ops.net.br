@@ -65,11 +65,14 @@ namespace AuditoriaParlamentar
         {
             if (e.Row.RowType == DataControlRowType.Header)
             {
-                e.Row.Cells[1].Width = 25;
-                e.Row.Cells[2].Width = 60;
-                e.Row.Cells[3].Width = 130;
-                e.Row.Cells[4].Width = 300;
-                e.Row.Cells[5].Width = 160;
+                e.Row.Cells[0].Width = Unit.Percentage(3);
+                e.Row.Cells[1].Width = Unit.Percentage(3);
+                e.Row.Cells[2].Width = Unit.Percentage(4);
+                e.Row.Cells[3].Width = Unit.Percentage(10);
+                e.Row.Cells[4].Width = Unit.Percentage(40);
+                e.Row.Cells[5].Width = Unit.Percentage(16);
+                e.Row.Cells[6].Width = Unit.Percentage(16);
+                e.Row.Cells[7].Width = Unit.Percentage(18);
             }
 
             if (e.Row.RowType != DataControlRowType.EmptyDataRow)

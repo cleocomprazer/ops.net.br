@@ -4,23 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script type="text/javascript" src="Scripts/MaxLength.min.js"></script>
     <script type="text/javascript">
-        $(function () {
-            //Specifying the Character Count control explicitly
-            $("[id*=TextBoxNoticia]").MaxLength(
-            {
-                MaxLength: 255,
-                CharacterCountControl: $('#counterTexto')
-            });
-            $("[id*=TextBoxLink]").MaxLength(
-            {
-                MaxLength: 255,
-                CharacterCountControl: $('#counterLink')
-            });
-        });
-
-        function AnexoValidation(source, args) {
-            args.IsValid = $("#FileUpload").val() != '';
-        }
+        $(loadNovaNoticia);
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">

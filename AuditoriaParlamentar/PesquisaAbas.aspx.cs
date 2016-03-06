@@ -40,21 +40,7 @@ namespace AuditoriaParlamentar
             {
                 Pagina = "PesquisaPrincipal.aspx";
                 Titulo = "Auditar";
-            }
-
-            if (!IsPostBack)
-            {
-                rptAgrupamento.DataSource = new List<string>()
-                {
-                    Pesquisa.AGRUPAMENTO_PARLAMENTAR,
-                    Pesquisa.AGRUPAMENTO_DESPESA,
-                    Pesquisa.AGRUPAMENTO_FORNECEDOR,
-                    Pesquisa.AGRUPAMENTO_PARTIDO,
-                    Pesquisa.AGRUPAMENTO_UF,
-                    Pesquisa.AGRUPAMENTO_DOCUMENTO
-                };
-                rptAgrupamento.DataBind();
-            }
+            }           
         }
     }
 }

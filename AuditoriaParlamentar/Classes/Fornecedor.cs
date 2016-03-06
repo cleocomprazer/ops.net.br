@@ -61,6 +61,9 @@ namespace AuditoriaParlamentar.Classes
         public String UsuarioInclusao { get; set; }
         public DateTime DataInclusao { get; set; }
         public int Matriz { get; internal set; }
+        public String CapitalSocial { get; set; }
+
+        public List<FornecedorQuadroSocietario> lstFornecedorQuadroSocietario { get; internal set; }
 
         internal Boolean EstaAtualizado(String cnpj)
         {
@@ -89,12 +92,12 @@ namespace AuditoriaParlamentar.Classes
                 banco.AddParameter("UserName", UserName);
 
                 banco.ExecuteNonQuery("INSERT INTO fornecedores_atu (UserName, Date) VALUES (@UserName, NOW())");
-                
+
                 retorno = banco.LastInsertedId;
 
                 banco.ExecuteNonQuery("UPDATE fornecedores_atu SET IdKey = '" + Comum.Encrypt(retorno.ToString()) + "' WHERE id = " + retorno.ToString());
 
-                
+
             }
 
             return retorno;
@@ -253,6 +256,10 @@ namespace AuditoriaParlamentar.Classes
 
                         try { DataInclusao = Convert.ToDateTime(reader["DataInclusao"]); }
                         catch { DataInclusao = DateTime.MinValue; }
+
+                        try { CapitalSocial = Convert.ToString(reader["CapitalSocial"]); }
+                        catch { CapitalSocial = ""; }
+
                     }
 
                     reader.Close();
@@ -260,6 +267,42 @@ namespace AuditoriaParlamentar.Classes
             }
 
             return true;
+        }
+
+
+        internal Boolean CarregaDadosQuadroSocietario(String cnpj)
+        {
+            try
+            {
+                lstFornecedorQuadroSocietario = new List<FornecedorQuadroSocietario>();
+
+                using (Banco banco = new Banco())
+                {
+                    banco.AddParameter("Cnpj", cnpj);
+
+                    using (MySql.Data.MySqlClient.MySqlDataReader reader = banco.ExecuteReader("SELECT * FROM FornecedorQuadroSocietario WHERE txtCNPJCPF = @Cnpj"))
+                    {
+                        while (reader.Read())
+                        {
+                            var fornecedorQuadroSocietario = new FornecedorQuadroSocietario();
+
+                            try { fornecedorQuadroSocietario.Nome = Convert.ToString(reader["Nome"]); }
+                            catch { fornecedorQuadroSocietario.Nome = ""; }
+
+                            try { fornecedorQuadroSocietario.Qualificacao = Convert.ToString(reader["Qualificacao"]); }
+                            catch { fornecedorQuadroSocietario.Qualificacao = ""; }
+
+                            lstFornecedorQuadroSocietario.Add(fornecedorQuadroSocietario);
+                        }
+
+                        reader.Close();
+                        return lstFornecedorQuadroSocietario.Count() > 0;
+                    }
+                }
+            }
+            catch (Exception)
+            { } //TODO: logar erro
+            return false;
         }
 
         internal Boolean AtualizaDados()
@@ -291,7 +334,6 @@ namespace AuditoriaParlamentar.Classes
                     banco.AddParameter("MotivoSituacao", MotivoSituacao);
                     banco.AddParameter("SituacaoEspecial", SituacaoEspecial);
                     banco.AddParameter("DataSituacaoEspecial", DataSituacaoEspecial);
-                    banco.AddParameter("UsuarioInclusao", UsuarioInclusao);
 
                     banco.AddParameter("Email", Email);
                     banco.AddParameter("Telefone", Telefone);
@@ -317,6 +359,8 @@ namespace AuditoriaParlamentar.Classes
                     banco.AddParameter("AtividadeSecundaria18", AtividadeSecundaria18);
                     banco.AddParameter("AtividadeSecundaria19", AtividadeSecundaria19);
                     banco.AddParameter("AtividadeSecundaria20", AtividadeSecundaria20);
+                    banco.AddParameter("CapitalSocial", CapitalSocial);
+                    banco.AddParameter("UsuarioInclusao", UsuarioInclusao);
                     banco.AddParameter("Cnpj", Cnpj);
 
                     System.Text.StringBuilder sql = new System.Text.StringBuilder();
@@ -364,6 +408,7 @@ namespace AuditoriaParlamentar.Classes
                     sql.Append("       AtividadeSecundaria18 = @AtividadeSecundaria18,");
                     sql.Append("       AtividadeSecundaria19 = @AtividadeSecundaria19,");
                     sql.Append("       AtividadeSecundaria20 = @AtividadeSecundaria20,");
+                    sql.Append("       CapitalSocial         = @CapitalSocial,");
                     sql.Append("       UsuarioInclusao       = @UsuarioInclusao,");
                     sql.Append("       DataInclusao          = NOW()");
                     sql.Append(" WHERE txtCNPJCPF            = @Cnpj");
@@ -371,6 +416,21 @@ namespace AuditoriaParlamentar.Classes
                     if (banco.ExecuteNonQuery(sql.ToString()) == false)
                     {
                         return false;
+                    }
+
+                    if (lstFornecedorQuadroSocietario != null)
+                    {
+                        banco.AddParameter("txtCNPJCPF", Cnpj);
+                        banco.ExecuteScalar("DELETE FROM FornecedorQuadroSocietario WHERE txtCNPJCPF = @txtCNPJCPF");
+
+                        foreach (var qas in lstFornecedorQuadroSocietario)
+                        {
+                            banco.AddParameter("txtCNPJCPF", Cnpj);
+                            banco.AddParameter("Nome", qas.Nome);
+                            banco.AddParameter("Qualificacao", qas.Qualificacao);
+
+                            banco.ExecuteNonQuery("INSERT FornecedorQuadroSocietario (txtCNPJCPF, Nome, Qualificacao) VALUES (@txtCNPJCPF, @Nome, @Qualificacao)");
+                        }
                     }
 
                     banco.AddParameter("IdAtualizacao", IdAtualizacao);
@@ -551,7 +611,7 @@ namespace AuditoriaParlamentar.Classes
                                 corpo.Append(@"<tr><td>Para visualizar todas as cidades onde precisamos de sua ajuda acesse o <a href=""http://www.ops.net.br/CidadesPendencia.aspx"">Portal da OPS</a>.</td></tr>");
                                 corpo.Append(@"</table></body></html>");
                             }
-                            
+
                             ArrayList destinatario = new ArrayList();
                             destinatario.Add(row["Email"]);
                             envio.Enviar(destinatario, "[O.P.S.] Nova Pendência", corpo.ToString());
@@ -561,5 +621,5 @@ namespace AuditoriaParlamentar.Classes
             };
             new Thread(work).Start();
         }
-     }
+    }
 }

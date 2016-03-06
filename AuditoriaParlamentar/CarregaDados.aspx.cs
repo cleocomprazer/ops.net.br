@@ -17,15 +17,33 @@ namespace AuditoriaParlamentar
     {
         protected override void OnPreInit(EventArgs e)
         {
-            if (Session["MasterPage"] == "Farejador")
-            {
-                Page.MasterPageFile = "~/OpsFarejador.Master";
-            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             //CifrarStringConexao();
+            GridViewAcerto.PreRender += GridViewAcerto_PreRender;
+            GridViewPrevia.PreRender += GridViewPrevia_PreRender;
+        }
+
+        private void GridViewPrevia_PreRender(object sender, EventArgs e)
+        {
+            try
+            {
+                GridViewPrevia.HeaderRow.TableSection = TableRowSection.TableHeader;
+            }
+            catch (Exception)
+            { }
+        }
+
+        private void GridViewAcerto_PreRender(object sender, EventArgs e)
+        {
+            try
+            {
+                GridViewAcerto.HeaderRow.TableSection = TableRowSection.TableHeader;
+            }
+            catch (Exception)
+            { }
         }
 
         protected void ButtonEnviar_Click(object sender, EventArgs e)
@@ -66,14 +84,16 @@ namespace AuditoriaParlamentar
                 //    }
                 //}
 
+                if (!Directory.Exists(atualDir))
+                    Directory.CreateDirectory(atualDir);
 
-                FileUpload.SaveAs(atualDir + "//" + FileUpload.FileName);
+                FileUpload.SaveAs(atualDir + "\\" + FileUpload.FileName);
 
                 ICSharpCode.SharpZipLib.Zip.ZipFile file = null;
 
                 try
                 {
-                    file = new ICSharpCode.SharpZipLib.Zip.ZipFile(atualDir + "//" + FileUpload.FileName);
+                    file = new ICSharpCode.SharpZipLib.Zip.ZipFile(atualDir + "\\" + FileUpload.FileName);
 
                     if (file.TestArchive(true) == false)
                     {
@@ -113,16 +133,12 @@ namespace AuditoriaParlamentar
         protected void Carregar(String atualDir)
         {
             Dados dados = new Dados();
-            Boolean temFile = false;
-
             DirectoryInfo dir = new DirectoryInfo(atualDir);
 
             dados.DirFiguras = Server.MapPath("Figuras");
 
             foreach (FileInfo file in dir.GetFiles("*.xml"))
             {
-                temFile = true;
-
                 if (dados.CarregaDados(file.FullName, CheckBoxDiferenca.Checked, GridViewPrevia, GridViewAcerto))
                 {
                     File.Delete(file.FullName);
@@ -245,14 +261,10 @@ namespace AuditoriaParlamentar
         private void CarregarSenadores(String atualDir)
         {
             DadosSenadores dados = new DadosSenadores();
-            Boolean temFile = false;
-
             DirectoryInfo dir = new DirectoryInfo(atualDir);
 
             foreach (FileInfo file in dir.GetFiles("*.csv"))
             {
-                temFile = true;
-
                 if (dados.CarregaDados(file.FullName, CheckBoxDiferenca.Checked, GridViewPrevia))
                 {
                     File.Delete(file.FullName);

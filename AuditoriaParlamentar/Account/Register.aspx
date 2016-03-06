@@ -3,11 +3,7 @@
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
     <script type="text/javascript">
-        $(function () {
-            var $alert = $('#MainContent_RegisterUser_CreateUserStepContainer_dvErrorMessage');
-            if ($alert.find('span').text().trim())
-                $alert.show();
-        })
+        $(loadRegister);
     </script>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">

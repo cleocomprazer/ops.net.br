@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <a href="http://youtu.be/_f5zUlpcq1U" target="_blank">
-                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Figuras/senado_transparente.png"
+                    <asp:Image ID="Image1" runat="server" ImageUrl="~/assets/img/senado_transparente.png"
                         ToolTip="Assista ao vídeo" /></a>
             </div>
             <div class="col-md-12 text-center">

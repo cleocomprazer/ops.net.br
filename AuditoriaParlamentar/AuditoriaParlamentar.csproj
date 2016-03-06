@@ -90,16 +90,24 @@
     <Content Include="assets\css\bootstrap.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\landing-page.css" />
-    <Content Include="assets\css\style.css" />
+    <Content Include="assets\css\auditoria.css" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\img\ajax-loader-facebook.gif" />
-    <Content Include="assets\img\banner-bg.jpg" />
+    <Content Include="assets\img\logo_fiscalize.png" />
+    <Content Include="assets\img\logo_grande.png" />
+    <Content Include="assets\img\logo_opaca.png" />
+    <Content Include="assets\img\logo_ops.png" />
+    <Content Include="assets\img\senado_transparente.png" />
+    <Content Include="assets\img\tutorial1.jpg" />
+    <Content Include="assets\img\tutorial2.jpg" />
+    <Content Include="assets\img\tutorial3.jpg" />
+    <Content Include="assets\img\tutorial4.jpg" />
     <Content Include="assets\js\bootstrap-select.js" />
     <Content Include="assets\js\bootstrap-select.min.js" />
     <Content Include="assets\js\bootstrap.js" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\jquery-1.11.3.min.js" />
-    <Content Include="assets\js\jquery.js" />
+    <Content Include="assets\js\main.js" />
     <Content Include="assets\js\MaxLength.min.js" />
     <Content Include="BackupViaSchedule.aspx" />
     <Content Include="CidadesPendencia.aspx" />
@@ -107,10 +115,7 @@
     <Content Include="CidadesPendenciaGrid.aspx" />
     <Content Include="AuditarSenador.aspx" />
     <Content Include="AuditoriaPF.aspx" />
-    <Content Include="DossiesOld.aspx" />
-    <Content Include="Figuras\tutorial1.jpg" />
-    <Content Include="Figuras\logo_opaca.png" />
-    <Content Include="Figuras\senado_transparente.png" />
+    <Content Include="EmailPendente.aspx" />
     <Content Include="Sobre.aspx" />
     <Content Include="Account\ChangePassword.aspx" />
     <Content Include="Account\ChangePasswordSuccess.aspx" />
@@ -130,14 +135,7 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="assets\js\bootstrap-select.js.map" />
     <Content Include="assets\js\jquery-1.11.3.min.map" />
-    <None Include="EmailComentario.htm" />
     <Content Include="Dossies.aspx" />
-    <Content Include="EmailPendente.aspx" />
-    <Content Include="Figuras\logo_grande.png" />
-    <Content Include="Figuras\logo_ops5.png" />
-    <Content Include="Figuras\tutorial2.jpg" />
-    <Content Include="Figuras\tutorial3.jpg" />
-    <Content Include="Figuras\tutorial4.jpg" />
     <Content Include="FornecedorParlamentares.aspx" />
     <Content Include="Membros.aspx" />
     <Content Include="Noticias.aspx" />
@@ -153,7 +151,6 @@
     <Content Include="Denuncias.aspx" />
     <Content Include="PesquisaInicio.aspx" />
     <Content Include="assets\img\disk.png" />
-    <Content Include="Figuras\logo_ops4.png" />
     <Content Include="Figuras\messages-new.png" />
     <Content Include="Oops.aspx" />
     <Content Include="PesquisaPrincipal.aspx" />
@@ -231,12 +228,20 @@
     <Compile Include="Classes\Empresa.cs" />
     <Compile Include="Classes\Extenssion.cs" />
     <Compile Include="Classes\FormatarDados.cs" />
-    <Compile Include="DossiesOld.aspx.cs">
-      <DependentUpon>DossiesOld.aspx</DependentUpon>
+    <Compile Include="Classes\FornecedorQuadroSocietario.cs" />
+    <Compile Include="EmailPendente.aspx.cs">
+      <DependentUpon>EmailPendente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DossiesOld.aspx.designer.cs">
-      <DependentUpon>DossiesOld.aspx</DependentUpon>
+    <Compile Include="EmailPendente.aspx.designer.cs">
+      <DependentUpon>EmailPendente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaginaInterna.Master.cs">
+      <DependentUpon>PaginaInterna.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaginaInterna.Master.designer.cs">
+      <DependentUpon>PaginaInterna.Master</DependentUpon>
     </Compile>
     <Compile Include="Sobre.aspx.cs">
       <DependentUpon>Sobre.aspx</DependentUpon>
@@ -322,13 +327,6 @@
     </Compile>
     <Compile Include="Dossies.aspx.designer.cs">
       <DependentUpon>Dossies.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="EmailPendente.aspx.cs">
-      <DependentUpon>EmailPendente.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="EmailPendente.aspx.designer.cs">
-      <DependentUpon>EmailPendente.aspx</DependentUpon>
     </Compile>
     <Compile Include="FornecedorParlamentares.aspx.cs">
       <DependentUpon>FornecedorParlamentares.aspx</DependentUpon>
@@ -535,6 +533,7 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="PaginaInterna.Master" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

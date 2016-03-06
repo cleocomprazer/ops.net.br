@@ -113,7 +113,7 @@ namespace AuditoriaParlamentar
                         sqlCampos.Append("          lancamentos.txNomeParlamentar,");
                         sqlCampos.Append("          parlamentares.nuDeputadoId,");
                         sqlCampos.Append("          lancamentos.numano,");
-                        sqlCampos.Append("          lancamentos.ide_documento_fiscal,");
+                        sqlCampos.Append("          lancamentos.ideDocumento,");
 
                         sqlFrom.Append(" LEFT JOIN fornecedores");
                         sqlFrom.Append("        ON fornecedores.txtCNPJCPF = lancamentos.txtCNPJCPF");
@@ -380,7 +380,7 @@ namespace AuditoriaParlamentar
             sql.Append("           lancamentos.vlrDocumento,");
             sql.Append("           parlamentares.nuDeputadoId,");
             sql.Append("           lancamentos.numano,");
-            sql.Append("           lancamentos.ide_documento_fiscal");
+            sql.Append("           lancamentos.ideDocumento");
             sql.Append("      FROM lancamentos");
             sql.Append(" LEFT JOIN parlamentares");
             sql.Append("        ON parlamentares.ideCadastro = lancamentos.ideCadastro");

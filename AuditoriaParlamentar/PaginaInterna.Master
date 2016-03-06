@@ -1,0 +1,39 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PaginaInterna.master.cs" Inherits="AuditoriaParlamentar.PaginaInterna" %>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>OPS - Operação Política Supervisionada</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="OPS - Operação Política Supervisionada" />
+
+    <link href="<%= ResolveClientUrl("~/") %>assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="<%= ResolveClientUrl("~/") %>assets/css/bootstrap-select.min.css" rel="stylesheet" />
+    
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/main.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form_auditoria" runat="server">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+    </form>
+</body>
+</html>
+

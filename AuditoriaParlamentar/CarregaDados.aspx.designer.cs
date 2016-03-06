@@ -40,15 +40,6 @@ namespace AuditoriaParlamentar {
         protected global::System.Web.UI.WebControls.Button ButtonEnviar;
         
         /// <summary>
-        /// ButtonSenadores control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonSenadores;
-        
-        /// <summary>
         /// ButtonEfetivaDep control.
         /// </summary>
         /// <remarks>
@@ -56,6 +47,15 @@ namespace AuditoriaParlamentar {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonEfetivaDep;
+        
+        /// <summary>
+        /// ButtonSenadores control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonSenadores;
         
         /// <summary>
         /// ButtonEfetivaSen control.

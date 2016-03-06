@@ -14,7 +14,10 @@ namespace AuditoriaParlamentar
         {
             if (!IsPostBack)
             {
-                AcompanhaDenuncias denuncia = new AcompanhaDenuncias();
+                if (!HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    btnAuditar.HRef = System.Web.Security.FormsAuthentication.LoginUrl;
+                }
 
                 try
                 {
@@ -26,9 +29,15 @@ namespace AuditoriaParlamentar
                     rptResumoAuditoria.Visible = false;
                 }
 
-
-                Noticia noticia = new Noticia();
-                noticia.UltimasNoticias(Cache, rptNoticia);
+                //try
+                //{
+                //    Noticia noticia = new Noticia();
+                //    noticia.UltimasNoticias(Cache, rptNoticia);
+                //}
+                //catch (Exception)
+                //{
+                //    dvNoticias.Visible = false;
+                //}
             }
         }
     }

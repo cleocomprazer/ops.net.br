@@ -1,17 +1,11 @@
-﻿<%@ Page Title="OPS - Operação Política Supervisionada" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CidadesPendencia.aspx.cs" Inherits="AuditoriaParlamentar.CidadesPendencia" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <script type="text/javascript">
-        $(function () {
-            //$('#frame').get(0).contentWindow
-            var $frame = $('#frame');
-            var heightTop = $frame.offset().top;
-            $frame.height(window.innerHeight - heightTop);
+﻿<%@ Page Title="OPS - Operação Política Supervisionada" Language="C#" MasterPageFile="~/Site.Master"
+    CodeBehind="CidadesPendencia.aspx.cs" Inherits="AuditoriaParlamentar.CidadesPendencia"
+    AutoEventWireup="true" %>
 
-            //And if the outer div has no set specific height set.. 
-            $(window).resize(function () {
-                $frame.css('height', window.innerHeight - heightTop);
-            });
-        });
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/main.js"></script>
+    <script type="text/javascript">
+        $(loadCidadesPendencia);
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">

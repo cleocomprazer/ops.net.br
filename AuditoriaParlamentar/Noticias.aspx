@@ -30,7 +30,7 @@
                     <div class="col-lg-3 col-sm-4 col-xs-12" style="margin-top: 10px;">
                         <a class="list-group-item" href='<%# DataBinder.Eval(Container.DataItem, "LinkNoticia") %>' target="_blank" runat="server">
                             <p class="text-center">
-                                <img class="img-thumbnail" src='<%# ResolveClientUrl("~/") %>Noticias/<%# DataBinder.Eval(Container.DataItem, "IdNoticia") %>.png' alt="" />
+                                <img class="img-thumbnail" src='<%# ResolveClientUrl("~/Noticias/") %><%# DataBinder.Eval(Container.DataItem, "IdNoticia") %>.png' alt="" />
                             </p>
                             <p class="text-justify" style="min-height: 150px"><%# DataBinder.Eval(Container.DataItem, "TextoNoticia") %></p>
                             <p class="text-muted small text-right"><%# DataBinder.Eval(Container.DataItem, "UserName") %> - <%# DataBinder.Eval(Container.DataItem, "DataNoticia", "{0:dd/MM/yyyy HH:mm}") %></p>

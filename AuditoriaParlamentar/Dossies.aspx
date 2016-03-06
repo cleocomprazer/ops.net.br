@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="OPS - Operação Política Supervisionada" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="Dossies.aspx.cs" Inherits="AuditoriaParlamentar.Dossies1" %>
+    CodeBehind="Dossies.aspx.cs" Inherits="AuditoriaParlamentar.Dossies1" EnableViewState="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style type="text/css">
@@ -10,7 +10,7 @@
      <div id="dossie-page" class="container-fluid">
         <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
             <li class="active"><a href="#tabs-1" data-toggle="tab">Dossiê 1</a></li>
-            <li><a href="#tabs-2" data-toggle="tab">Dossiê 2</a></li>
+            <%--<li><a href="#tabs-2" data-toggle="tab">Dossiê 2</a></li>--%>
         </ul>
         <br />
         <div class="tab-content">

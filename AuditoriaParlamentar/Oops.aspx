@@ -5,10 +5,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>404 - OPS - Operação Política Supervisionada</title>
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <%--<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>--%>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="OPS - Operação Política Supervisionada" />
+    <link href="<%= ResolveClientUrl("~/") %>assets/css/bootstrap.min.css" rel="stylesheet" />
+
     <style type="text/css">
-        #error_page { background: #f1f1f1 url('Figuras/logo_opaca.png') no-repeat center center}
+        #error_page { background: #f1f1f1 url('assets/img/logo_opaca.png') no-repeat top 20px center}
         .error-template {padding: 40px 15px;text-align: center;}
         .error-template p { font-size: 18px }
         .error-template h1{ font-size: 90px; color: #c3c3c3}

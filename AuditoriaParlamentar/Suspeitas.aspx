@@ -1,10 +1,10 @@
 ﻿<%@ Page Title="OPS - Operação Política Supervisionada" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="Suspeitas.aspx.cs" Inherits="AuditoriaParlamentar.Suspeitas" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<asp:Content ID="HeaderContent" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div id="container" class="container-fluid">
+    <div id="BodyContent" class="container-fluid">
         <asp:GridView ID="GridView" runat="server" OnRowCommand="GridView_RowCommand"
             UseAccessibleHeader="true" OnRowDataBound="GridView_RowDataBound"
             AllowSorting="True" OnSorting="GridView_Sorting"

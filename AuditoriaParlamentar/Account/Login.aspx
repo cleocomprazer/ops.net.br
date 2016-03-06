@@ -5,11 +5,7 @@
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <script type="text/javascript">
-        $(function () {
-            var $alert = $('#MainContent_LoginUser_dvFailureText');
-            if ($alert.find('span').text().trim())
-                $alert.show();
-        })
+        $(loadLogin);
     </script>
     <div class="container">
         <div class="row">
@@ -67,9 +63,6 @@
                 <br />
                 <p>
                     <asp:HyperLink ID="RegisterHyperLink" runat="server" EnableViewState="false" CssClass="btn btn-info">Crie uma conta caso ainda não tenha.</asp:HyperLink>
-                </p>
-                <p>
-                    
                 </p>
             </div>
         </div>

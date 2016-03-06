@@ -1,29 +1,22 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="AuditoriaParlamentar.SiteMaster" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head id="Head1" runat="server">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head runat="server">
     <title>OPS - Operação Política Supervisionada</title>
 
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta name="description" content="OPS - Operação Política Supervisionada" />
 
-    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="<%= ResolveClientUrl("~/") %>assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+
     <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/bootstrap.min.js"></script>
-
-
-    <!-- Bootstrap Core CSS -->
-    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!-- Custom CSS -->
-    <link href="~/assets/css/landing-page.css" rel="stylesheet" />
-
-    <!-- Custom Fonts -->
-    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/main.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,14 +28,14 @@
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
     <style type="text/css">
-        #content { background-image: url('<%= ResolveClientUrl("~/") %>Figuras/logo_opaca.png'); background-repeat: no-repeat; background-position: center center; }
+        #content { background-image: url('<%= ResolveClientUrl("~/") %>assets/img/logo_opaca.png'); background-repeat: no-repeat; background-position: center center; }
         .navbar { margin-bottom: 10px; }
     </style>
 </head>
 <body>
     <form id="form_auditoria" runat="server">
         <nav class="navbar navbar-default navbar-static-top topnav" role="navigation">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Alternar Navegação</span>
@@ -50,43 +43,45 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand topnav" href="~/" runat="server" title="OPS - Operação Política Supervisionada" style="font-size: 3em;">OPS</a>
+                    <a class="navbar-brand topnav" href="<%= ResolveClientUrl("~/") %>" title="OPS - Operação Política Supervisionada" style="padding: 5px; margin-left: 0">
+                        <img src="<%= ResolveClientUrl("~/") %>assets/img/logo_ops.png" width="64" height="40" alt="OPS" />
+                    </a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-usd"></i>&nbsp;Auditar<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Auditar<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#" id="HyperLinkDeputadoFederal" runat="server"><i class="glyphicon glyphicon-usd"></i>&nbsp;Parlamentar</a></li>
-                                <li><a href="#" id="HyperLinkSenador" runat="server"><i class="glyphicon glyphicon-usd"></i>&nbsp;Senado Tranparente</a></li>
+                                <li><a href="#" id="HyperLinkDeputadoFederal" runat="server">Parlamentar</a></li>
+                                <li><a href="#" id="HyperLinkSenador" runat="server">Senado Tranparente</a></li>
                             </ul>
                         </li>
                         <asp:PlaceHolder ID="plcRevisor" runat="server">
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Revisar<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="~/Revisao.aspx" runat="server"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;Revisão</a></li>
-                                    <li><a href="~/RelParlamentarFornecedor.aspx" runat="server"><i class="glyphicon glyphicon-stats"></i>&nbsp;Relatórios</a></li>
+                                    <li><a href="~/Revisao.aspx" runat="server">Revisão</a></li>
+                                    <li><a href="~/RelParlamentarFornecedor.aspx" runat="server">Relatórios</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
-                        <li><a href="~/Dossies.aspx" runat="server"><i class="glyphicon glyphicon-bullhorn"></i>&nbsp;Dossiês</a></li>
-                        <li><a href="~/CidadesPendencia.aspx" runat="server"><i class="glyphicon glyphicon-warning-sign"></i>&nbsp;Pendências</a></li>
-                         <% if (autenticado)
-                             { %>
-                                <li><a href="~/Denuncias.aspx" runat="server"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;Denúncias</a></li>
-                                <%} %>
+                        <%--<li><a href="~/Dossies.aspx" runat="server">Dossiês</a></li>--%>
+                        <li><a href="~/CidadesPendencia.aspx" runat="server">Pendências</a></li>
+                        <% if (autenticado)
+                            { %>
+                        <li><a href="~/Denuncias.aspx" runat="server">Denúncias</a></li>
+                        <%} %>
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mais<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <% if (autenticado)
                                     { %>
-                                <li><a href="~/Membros.aspx" runat="server"><i class="glyphicon glyphicon-user"></i>&nbsp;Membros</a></li>
+                                <li><a href="~/Membros.aspx" runat="server">Auditores</a></li>
                                 <%} %>
-                                <li><a href="~/Noticias.aspx" runat="server"><i class="glyphicon glyphicon-comment"></i>&nbsp;Notícias</a></li>
+                                <li><a href="~/Noticias.aspx" runat="server">Notícias</a></li>
                                 <%--<li><a href="~/Sobre.aspx" runat="server"><i class="glyphicon glyphicon-info-sign"></i>&nbsp;Sobre</a></li>--%>
-                                <li><a href="http://luciobig.com.br/o-que-e-ops/" target="_blank"><i class="glyphicon glyphicon-info-sign"></i>&nbsp;Sobre</a></li>
+                                <li><a href="http://luciobig.com.br/o-que-e-ops/" target="_blank">Sobre</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -96,7 +91,8 @@
                                 <li><a href="~/Account/Login.aspx" runat="server"><i class="glyphicon glyphicon-log-in"></i>&nbsp;Entrar</a></li>
                             </AnonymousTemplate>
                             <LoggedInTemplate>
-                                <li><a href="~/Account/UpdateAccount.aspx" runat="server"><i class='glyphicon glyphicon-user'></i>
+                                <li><a href="~/Account/UpdateAccount.aspx" runat="server" title="Visualizar Perfil">
+                                    <i class='glyphicon glyphicon-user'></i>
                                     <asp:LoginName ID="LoginName1" runat="server" />
                                 </a></li>
                                 <li>

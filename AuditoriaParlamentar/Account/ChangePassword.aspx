@@ -2,12 +2,9 @@
     CodeBehind="ChangePassword.aspx.cs" Inherits="AuditoriaParlamentar.Account.ChangePassword" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
+    <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/main.js"></script>
     <script type="text/javascript">
-        $(function () {
-            var $alert = $('#MainContent_ChangeUserPassword_ChangePasswordContainerID_dvFailureText');
-            if ($alert.find('span').text().trim())
-                $alert.show();
-        })
+        $(loadChangePassword);
     </script>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
