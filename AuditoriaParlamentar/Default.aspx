@@ -2,7 +2,7 @@
     AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="AuditoriaParlamentar.Default" %>
 
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeadContent" runat="server">
-    <link href="<%= ResolveClientUrl("~/") %>assets/css/landing-page.css" rel="stylesheet" />
+    <link href="<%= ResolveClientUrl("~/") %>assets/css/landing-page.css?v=<%= Configuracao.VersaoSite %>" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="bg">
@@ -31,19 +31,42 @@
             </div>
         </div>
 
+        <div class="container" id="info-geral">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="bs-callout bs-callout-info">
+                        <h4 class="media-heading">O que é CEAP (CEAPS)?</h4>
+                        <br />
+                        <p class="text-justify">CEAP é a sigla da Cota para o Exercício da Atividade Parlamentar (No Senado se chama CEAPS).</p>
+                        <p class="text-justify">Trata-se de um recurso público disponível mensalmente aos deputados e senadores para o custeio de suas atividades parlamentares.</p>
+                        <p class="text-justify">Apesar de ser dinheiro público, fato que já implicaria no seu enquadramento à Lei Nº 8.666, o uso da verba dispensa qualquer tipo de burocracia exigida pela lei de licitações, dando ao deputado e ao senador a livre escolha da empresa a ser contratada para fornecimento do produto ou serviço.</p>
+                        <p class="text-justify">Não é raro encontrar irregularidades escandalosas, como locações de veículos feitas em padarias ou cópias de trabalhos escolares transformados em «pareceres jurídicos» generosamente pagos com o dinheiro do contribuinte.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="bs-callout bs-callout-info">
+                        <h4 class="media-heading">O que é a OPS?</h4>
+                        <br />
+                        <p class="text-justify">A Operação Política Supervisionada - OPS - fiscaliza de forma detalhada os gastos realizados via CEAP ou CEAPS. Até o momento já foram economizados mais de R$ 5,5 milhões do dinheiro público graças a estas fiscalizações e às exigências feitas diretamente aos parlamentares para que devolvam o dinheiro público indevidamente utilizado.</p>
+                        <p class="text-justify">A OPS conta com a ajuda de seus colaboradores, espalhados pelo Brasil, para o levantamento de informações necessárias para a conclusão de fiscalizações, como por exemplo, o envio de fotos de endereços suspeitos em diversas cidades do país. Além disso, qualquer um pode ser um fiscal dos gastos públicos e este site oferece dados suficientes para isso.</p>
+                        <p class="text-justify">Apesar de ser especialista na fiscalização dos gastos com a verba indenizatória, a OPS também aceita denúncias de outros setores públicos, dando a elas o destino certo para que sejam apuradas pelas autoridades competentes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="container banner1">
             <div class="row">
-                <div class="col-lg-12 text-center">
+                <div class="col-lg-12 text-center text-success">
                     <h2>Mais de <b>R$5,5 MILHÕES</b> de Economia aos Cofres Públicos</h2>
                 </div>
             </div>
-            <hr class="intro-divider">
             <div class="row text-center">
                 <div class="col-lg-12">
                     <asp:Repeater runat="server" ID="rptResumoAuditoria">
                         <ItemTemplate>
-                            <div class="col-xs-4 text-center">
-                                <div class="thumbnail">
+                            <div class="col-xs-12 col-sm-4 text-center">
+                                <div class="bs-callout bs-callout-info">
                                     <h3><%# Eval("Resultado") %></h3>
                                     <p><%# Eval("Nome") %></p>
                                 </div>
@@ -56,17 +79,17 @@
         </div>
         <div class="content-section-a">
             <div class="container">
-                <div class="media">
-                    <div class="media-left media-middle">
-                        <a href="#">
-                            <img class="media-object" src="assets/img/ops_fiscalize.png" alt="OPS Fiscalize" />
-                        </a>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 media-middle">
+                        <div class="form-group text-center">
+                            <img src="assets/img/ops_fiscalize.png" alt="OPS Fiscalize" />
+                        </div>
                     </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">OPS Fiscalize</h4>
+                    <div class="col-xs-12 col-sm-8">
+                        <h4>OPS Fiscalize</h4>
                         <br />
-                        <p>Já está disponível o OPS Fiscalize, aplicativo que permite a qualquer pessoa fiscalizar os gastos realizados por deputados federais com a verba indenizatória, dinheiro público destinado à reposição de despesas feitas pelos parlamentares no exercício do mandato.</p>
-                        <p>Disponível para Android e IOS, o OPS Fiscalize reúne, atualizadamente, os custos gerados por deputados da 55ª legislatura.</p>
+                        <p class="text-justify">Já está disponível o OPS Fiscalize, aplicativo que permite a qualquer pessoa fiscalizar os gastos realizados por deputados federais com a verba indenizatória, dinheiro público destinado à reposição de despesas feitas pelos parlamentares no exercício do mandato.</p>
+                        <p class="text-justify">Disponível para Android e IOS, o OPS Fiscalize reúne, atualizadamente, os custos gerados por deputados da 55ª legislatura.</p>
                         <br />
                         <div class="ops-fiscalize-button">
                             <div class="form-group">
@@ -83,31 +106,6 @@
                 </div>
             </div>
         </div>
-        <%-- <div runat="server" id="dvNoticias" class="content-section-b">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h2 class="section-heading text-center">Notícias e Artigos</h2>
-                    </div>
-                    <asp:Repeater runat="server" ID="rptNoticia">
-                        <ItemTemplate>
-                            <div class="col-lg-3 col-sm-4 col-xs-12" style="margin-top: 10px;">
-                                <a class="list-group-item" href='<%# DataBinder.Eval(Container.DataItem, "LinkNoticia") %>' target="_blank" runat="server">
-                                    <p class="text-center">
-                                        <img class="img-thumbnail" src='<%# ResolveClientUrl("~/") %>Noticias/<%# DataBinder.Eval(Container.DataItem, "IdNoticia") %>.png' alt="" />
-                                    </p>
-                                    <p class="text-justify" style="min-height: 150px"><%# DataBinder.Eval(Container.DataItem, "TextoNoticia") %></p>
-                                    <p class="text-muted small text-right"><%# DataBinder.Eval(Container.DataItem, "DataNoticia", "{0:dd/MM/yyyy HH:mm}") %></p>
-                                </a>
-                            </div>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                    <div class="col-sm-12" style="margin-top: 10px;">
-                        <a href="~/Noticias.aspx" runat="server" class="btn btn-default pull-right">Ver todas&nbsp; <i class="glyphicon glyphicon-menu-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>--%>
         <div class="banner">
             <div class="container text-center">
                 <div class="fb-comments" data-href="http://ops.net.br" data-numposts="5" data-width="100%"></div>
@@ -118,7 +116,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center" style="margin-top: 15px;">
-                            <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+                            <div class="fb-like" data-href="http://ops.net.br" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
                         </div>
                         <p style="margin: 10px 0 0;" class="text-muted text-center">O controle social é indispensável para combatermos a corrupção em nosso país.</p>
                     </div>
@@ -128,11 +126,11 @@
     </div>
 
     <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1033624573364106";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+    <script>(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1033624573364106";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 </asp:Content>

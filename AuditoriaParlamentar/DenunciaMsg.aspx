@@ -2,9 +2,10 @@
     CodeBehind="DenunciaMsg.aspx.cs" Inherits="AuditoriaParlamentar.DenunciaMsg" %>
 
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeadContent" runat="server">
+    <link href="<%= ResolveClientUrl("~/") %>assets/css/auditoria.css?v=<%= Configuracao.VersaoSite %>" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container-fluid">
+    <div id="conteudo" class="container-fluid" style="overflow: auto">
         <div class="row">
             <div class="col-md-12">
                 <asp:Button ID="ButtonVoltar" runat="server" Text="Voltar" CssClass="btn btn-default btn-sm" OnClick="ButtonVoltar_Click" />

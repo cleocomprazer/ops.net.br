@@ -3,7 +3,7 @@
     AutoEventWireup="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/main.js?v=1"></script>
+    <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/main.js?v=<%= Configuracao.VersaoSite %>"></script>
     <script type="text/javascript">
         $(loadCidadesPendencia);
     </script>

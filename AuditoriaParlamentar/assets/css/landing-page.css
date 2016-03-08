@@ -4,7 +4,7 @@ body, h1, h2, h3, h4, h5, h6 { font-family: "Lato","Helvetica Neue",Helvetica,Ar
 
 form#form_auditoria { height: auto; overflow: auto; }
 
-.bg { background: url(../../assets/img/logo_opaca.png) no-repeat top 10px center; }
+.bg { background: url(../../assets/img/logo_opaca.jpg) no-repeat top 1px center; }
 
 .topnav { font-size: 14px; }
 
@@ -18,16 +18,22 @@ form#form_auditoria { height: auto; overflow: auto; }
 
 .intro-message > h3 { text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; -webkit-font-smoothing: antialiased; color: #000; }
 
-@media(max-width:767px) {
-    .intro-message { }
+@media(max-width:650px) {
+    .bg { background-size: contain; }
+
+    .intro-header { padding: 10px 0; }
+
+    .list-inline > li { padding-right: 4px; padding-left: 4px; }
 }
 
-@media(max-width:767px) {
-    .intro-message { padding-bottom: 15%; }
+@media(max-width:768px) {
+    .bg { background-position: top 34px center; }
 
-        .intro-message > h1 { font-size: 3em; }
+    .intro-message > h1 { font-size: 3em; }
 
     .intro-divider { width: 100%; }
+
+    .content-section-a h4, .ops-fiscalize-button { text-align: center; }
 }
 
 .content-section-a { padding: 50px 0; background-color: #f8f8f8; }
@@ -43,5 +49,9 @@ form#form_auditoria { height: auto; overflow: auto; }
 .banner { padding: 10px 0; }
 
     .banner h2 { margin: 0; font-size: 3em; }
+
+.bs-callout { padding: 20px; margin: 20px 0; border: 1px solid #eee; border-left-width: 5px; border-radius: 3px; }
+
+.bs-callout-info { border-left-color: #1b809e; }
 
 footer { padding: 0 0 15px; background-color: #f8f8f8; }

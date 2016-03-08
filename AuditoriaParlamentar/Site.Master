@@ -14,16 +14,16 @@
 
     <meta itemprop="name" content="OPS - Operação Política Supervisionada" />
     <meta itemprop="description" content="O controle social é indispensável para combatermos a corrupção em nosso país." />
-    <meta itemprop="image" content="http://ops.net.br/assets/img/social.png" />
+    <meta itemprop="image" content="http://ops.net.br/assets/img/logo200x200.jpg" />
     <meta itemprop="url" content="http://ops.net.br" />
 
-    <meta property="og:type" content="article" />
+    <meta property="og:type" content="website" />
     <meta property="og:title" content="OPS - Operação Política Supervisionada" />
     <meta property="og:site_name" content="Operação Política Supervisionada" />
     <meta property="og:url" content="http://ops.net.br" />
     <meta property="og:description" content="O controle social é indispensável para combatermos a corrupção em nosso país." />
     <meta property="og:locale" content="pt_BR" />
-    <meta property="og:image" content="http://ops.net.br/assets/img/social.png" />
+    <meta property="og:image" content="http://ops.net.br/assets/img/logo200x200.jpg" />
     <meta property="article:author" content="https://www.facebook.com/LucioBigg" />
     <meta property="fb:page_id" content="1033624573364106" />
 
@@ -32,7 +32,7 @@
     <meta name="twitter:title" content="OPS - Operação Política Supervisionada" />
     <meta name="twitter:site" content="@LucioBig" />
     <meta name="twitter:domain" content="OPS" />
-    <meta property="og:image" content="http://ops.net.br/assets/img/social.png" />
+    <meta property="og:image" content="http://ops.net.br/assets/img/logo200x200.jpg" />
 
     <link rel="alternate" hreflang="x-default" href="http://ops.net.br" />
     <meta name="msapplication-TileColor" content="#5A7A9A" />
@@ -44,7 +44,7 @@
 
     <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/main.js?v=1"></script>
+    <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/main.js?v=<%= Configuracao.VersaoSite %>"></script>
 
     <% if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
         { %>
