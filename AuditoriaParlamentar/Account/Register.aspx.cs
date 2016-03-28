@@ -23,6 +23,7 @@ namespace AuditoriaParlamentar.Account
             if (!IsPostBack)
             {
                 DropDownList dropDownListUF = (DropDownList)RegisterUser.CreateUserStep.ContentTemplateContainer.FindControl("dropDownListUF");
+                dropDownListUF.Items.Add(new ListItem("Selecione", ""));
                 dropDownListUF.Items.Add(new ListItem("Acre", "AC"));
                 dropDownListUF.Items.Add(new ListItem("Alagoas", "AL"));
                 dropDownListUF.Items.Add(new ListItem("Amapá", "AP"));

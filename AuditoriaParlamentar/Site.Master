@@ -107,7 +107,6 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Auditar<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#" id="HyperLinkDeputadoFederal" runat="server">Parlamentar</a></li>
-                                <li><a href="#" id="HyperLinkSenador" runat="server">Senado Tranparente</a></li>
                             </ul>
                         </li>
                         <asp:PlaceHolder ID="plcRevisor" runat="server">
@@ -119,7 +118,6 @@
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
-                        <%--<li><a href="~/Dossies.aspx" runat="server">Dossiês</a></li>--%>
                         <li><a href="~/CidadesPendencia.aspx" runat="server">Pendências</a></li>
                         <% if (autenticado)
                             { %>
@@ -133,8 +131,6 @@
                                     { %>
                                 <li><a href="~/Membros.aspx" runat="server">Auditores</a></li>
                                 <%} %>
-                                <li><a href="~/Noticias.aspx" runat="server">Notícias</a></li>
-                                <%--<li><a href="~/Sobre.aspx" runat="server"><i class="glyphicon glyphicon-info-sign"></i>&nbsp;Sobre</a></li>--%>
                                 <li><a href="http://luciobig.com.br/o-que-e-ops/" target="_blank">Sobre</a></li>
                             </ul>
                         </li>

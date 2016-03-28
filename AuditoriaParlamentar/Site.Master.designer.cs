@@ -40,15 +40,6 @@ namespace AuditoriaParlamentar {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor HyperLinkDeputadoFederal;
         
         /// <summary>
-        /// HyperLinkSenador control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor HyperLinkSenador;
-        
-        /// <summary>
         /// plcRevisor control.
         /// </summary>
         /// <remarks>

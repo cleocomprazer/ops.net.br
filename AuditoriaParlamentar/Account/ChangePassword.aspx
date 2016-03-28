@@ -9,7 +9,7 @@
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-md-6 col-md-offset-3">
             <h2>Alterar Senha
             </h2>
             <p>
@@ -25,50 +25,57 @@
                 <ChangePasswordTemplate>
                     <div id="dvFailureText" runat="server" class="alert alert-danger" role="alert" style="display: none;">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><i aria-hidden="true">&times;</i></button>
-                        <span><asp:Literal ID="FailureText" runat="server" EnableViewState="false"></asp:Literal></span>
+                        <span>
+                            <asp:Literal ID="FailureText" runat="server" EnableViewState="false"></asp:Literal></span>
                     </div>
                     <fieldset class="login">
                         <legend>Informações da Conta</legend>
                         <div class="row">
                             <div class="col-md-12">
-                                <asp:Label ID="CurrentPasswordLabel" runat="server" AssociatedControlID="CurrentPassword">Senha antiga:</asp:Label>
-                                <asp:RequiredFieldValidator ID="CurrentPasswordRequired" runat="server" ControlToValidate="CurrentPassword"
-                                    CssClass="small pull-right text-danger" ErrorMessage="" ToolTip="É necessário informar a senha antiga."
-                                    ValidationGroup="ChangeUserPasswordValidationGroup">* É necessário informar a senha antiga.</asp:RequiredFieldValidator>
-                                <asp:TextBox ID="CurrentPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                <div class="form-group">
+                                    <asp:Label ID="CurrentPasswordLabel" runat="server" AssociatedControlID="CurrentPassword">Senha antiga</asp:Label>
+                                    <asp:RequiredFieldValidator ID="CurrentPasswordRequired" runat="server" ControlToValidate="CurrentPassword"
+                                        CssClass="small pull-right text-danger" ErrorMessage="" ToolTip="É necessário informar a senha antiga."
+                                        ValidationGroup="ChangeUserPasswordValidationGroup">* Obrigatória</asp:RequiredFieldValidator>
+                                    <asp:TextBox ID="CurrentPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <asp:Label ID="NewPasswordLabel" runat="server" AssociatedControlID="NewPassword">Nova senha:</asp:Label>
-                                <asp:RequiredFieldValidator ID="NewPasswordRequired" runat="server" ControlToValidate="NewPassword"
-                                    CssClass="small pull-right text-danger" ErrorMessage="" ToolTip="É necessário informar a nova senha."
-                                    ValidationGroup="ChangeUserPasswordValidationGroup">* É necessário informar a nova senha.</asp:RequiredFieldValidator>
-                                <asp:TextBox ID="NewPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
-
+                                <div class="form-group">
+                                    <asp:Label ID="NewPasswordLabel" runat="server" AssociatedControlID="NewPassword">Nova senha</asp:Label>
+                                    <asp:RequiredFieldValidator ID="NewPasswordRequired" runat="server" ControlToValidate="NewPassword"
+                                        CssClass="small pull-right text-danger" ErrorMessage="" ToolTip="É necessário informar a nova senha."
+                                        ValidationGroup="ChangeUserPasswordValidationGroup">* Obrigatória</asp:RequiredFieldValidator>
+                                    <asp:TextBox ID="NewPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <asp:Label ID="ConfirmNewPasswordLabel" runat="server" AssociatedControlID="ConfirmNewPassword">Confirmar nova senha:</asp:Label>
-                                <asp:RequiredFieldValidator ID="ConfirmNewPasswordRequired" runat="server" ControlToValidate="ConfirmNewPassword"
-                                    CssClass="small pull-right text-danger" Display="Dynamic" ErrorMessage=""
-                                    ToolTip="É necessário informar a confirmação da senha."
-                                    ValidationGroup="ChangeUserPasswordValidationGroup">* Informe a confirmação da senha.</asp:RequiredFieldValidator>
-                                <asp:CompareValidator ID="NewPasswordCompare" runat="server" ControlToCompare="NewPassword" ControlToValidate="ConfirmNewPassword"
-                                    CssClass="small pull-right text-danger" Display="Dynamic" ErrorMessage=""
-                                    ValidationGroup="ChangeUserPasswordValidationGroup">* A nova senha e a confirmação devem ser iguais.</asp:CompareValidator>
-                                <asp:TextBox ID="ConfirmNewPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
-
+                                <div class="form-group">
+                                    <asp:Label ID="ConfirmNewPasswordLabel" runat="server" AssociatedControlID="ConfirmNewPassword">Confirmar nova senha</asp:Label>
+                                    <asp:RequiredFieldValidator ID="ConfirmNewPasswordRequired" runat="server" ControlToValidate="ConfirmNewPassword"
+                                        CssClass="small pull-right text-danger" Display="Dynamic" ErrorMessage=""
+                                        ToolTip="É necessário informar a confirmação da senha."
+                                        ValidationGroup="ChangeUserPasswordValidationGroup">* Obrigatória</asp:RequiredFieldValidator>
+                                    <asp:CompareValidator ID="NewPasswordCompare" runat="server" ControlToCompare="NewPassword" ControlToValidate="ConfirmNewPassword"
+                                        CssClass="small pull-right text-danger" Display="Dynamic" ErrorMessage=""
+                                        ValidationGroup="ChangeUserPasswordValidationGroup">* A nova senha e a confirmação devem ser iguais.</asp:CompareValidator>
+                                    <asp:TextBox ID="ConfirmNewPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                </div>
                             </div>
                         </div>
                         <br />
                         <div class="row">
                             <div class="col-md-12">
-                                <asp:Button ID="ChangePasswordPushButton" runat="server" CommandName="ChangePassword" Text="Alterar"
-                                    ValidationGroup="ChangeUserPasswordValidationGroup" CssClass="btn btn-success" />
-                                &nbsp;&nbsp;&nbsp;
+                                <div class="form-group">
+                                    <asp:Button ID="ChangePasswordPushButton" runat="server" CommandName="ChangePassword" Text="Alterar"
+                                        ValidationGroup="ChangeUserPasswordValidationGroup" CssClass="btn btn-success" />
+                                    &nbsp;&nbsp;&nbsp;
                               <a href="#" onclick="history.back();">Voltar</a>
+                                </div>
                             </div>
                         </div>
                     </fieldset>

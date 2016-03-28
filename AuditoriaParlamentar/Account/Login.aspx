@@ -10,11 +10,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                <asp:Login ID="LoginUser" runat="server" EnableViewState="false"
-                    RenderOuterTable="false"
+                <asp:Login ID="LoginUser" runat="server" EnableViewState="false" RenderOuterTable="false"
                     FailureText="Não foi possível conectar. Verifique se os dados estão corretos."
-                    OnLoginError="LoginUser_LoginError" OnLoggedIn="LoginUser_LoggedIn"
-                    RememberMeSet="True">
+                    OnLoginError="LoginUser_LoginError" OnLoggedIn="LoginUser_LoggedIn" RememberMeSet="True">
                     <TextBoxStyle CssClass="form-control" />
                     <LoginButtonStyle CssClass="btn btn-lg btn-primary btn-block" />
                     <CheckBoxStyle CssClass="form-control" />
@@ -28,27 +26,33 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">Usuário</asp:Label>
-                                    <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName"
-                                        CssClass="small pull-right text-danger" ValidationGroup="LoginUserValidationGroup">* É necessário informar o nome de usuário</asp:RequiredFieldValidator>
-                                    <asp:TextBox ID="UserName" runat="server" CssClass="form-control" autofocus="true"></asp:TextBox>
+                                    <div class="form-group">
+                                        <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">Usuário</asp:Label>
+                                        <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName"
+                                            CssClass="small pull-right text-danger" ValidationGroup="LoginUserValidationGroup">* É necessário informar o nome de usuário</asp:RequiredFieldValidator>
+                                        <asp:TextBox ID="UserName" runat="server" CssClass="form-control" autofocus="true"></asp:TextBox>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Senha</asp:Label>
-                                    <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password"
-                                        CssClass="small pull-right text-danger" ValidationGroup="LoginUserValidationGroup">* É necessário informar a senha</asp:RequiredFieldValidator>
-                                    <asp:TextBox ID="Password" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                    <div class="form-group">
+                                        <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Senha</asp:Label>
+                                        <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password"
+                                            CssClass="small pull-right text-danger" ValidationGroup="LoginUserValidationGroup">* É necessário informar a senha</asp:RequiredFieldValidator>
+                                        <asp:TextBox ID="Password" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="checkbox">
-                                        <label>
-                                            <asp:CheckBox ID="RememberMe" runat="server" />
-                                            <asp:Label ID="RememberMeLabel" runat="server" AssociatedControlID="RememberMe" CssClass="inline">Mantenha-me conectado</asp:Label>
-                                        </label>
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label>
+                                                <asp:CheckBox ID="RememberMe" runat="server" />
+                                                <asp:Label ID="RememberMeLabel" runat="server" AssociatedControlID="RememberMe" CssClass="inline">Mantenha-me conectado</asp:Label>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

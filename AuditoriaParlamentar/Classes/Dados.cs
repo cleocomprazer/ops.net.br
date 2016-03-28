@@ -365,21 +365,14 @@ namespace AuditoriaParlamentar
             //----------------- Parlamentares -----------------
 
             sql.Clear();
-            sql.Append(" INSERT INTO parlamentares (");
-            sql.Append("        ideCadastro,");
-            sql.Append("        txNomeParlamentar,");
-            sql.Append("        nuDeputadoId)");
-            sql.Append(" SELECT DISTINCT");
-            sql.Append("        lancamentos_tmp.ideCadastro,");
-            sql.Append("        lancamentos_tmp.txNomeParlamentar,");
-            sql.Append("        lancamentos_tmp.nuDeputadoId");
-            sql.Append("   FROM lancamentos_tmp");
-            sql.Append("  WHERE lancamentos_tmp.txNomeParlamentar <> ''");
-            sql.Append("    AND lancamentos_tmp.ideCadastro        > 0");
-            sql.Append("    AND NOT EXISTS (SELECT 1");
-            sql.Append("                      FROM parlamentares");
-            sql.Append("                     WHERE parlamentares.txNomeParlamentar = lancamentos_tmp.txNomeParlamentar)");
-            
+            sql.Append(" INSERT INTO parlamentares (ideCadastro, txNomeParlamentar, nuDeputadoId) (");
+            sql.Append("    SELECT DISTINCT lt.ideCadastro, lt.txNomeParlamentar, lt.nuDeputadoId ");
+            sql.Append("    FROM lancamentos_tmp lt");
+            sql.Append("    WHERE lt.txNomeParlamentar <> ''");
+            sql.Append("    AND lt.ideCadastro > 0");
+            sql.Append("    AND lt.ideCadastro NOT IN(SELECT p.ideCadastro FROM parlamentares p)");
+            sql.Append(")");
+
             banco.ExecuteNonQuery(sql.ToString(), 0);
 
             //----------------- Fornecedor -----------------

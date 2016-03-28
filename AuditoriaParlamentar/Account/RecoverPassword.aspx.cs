@@ -9,19 +9,6 @@ namespace AuditoriaParlamentar.Account
 {
     public partial class RecoverPassword : System.Web.UI.Page
     {
-        protected override void OnPreInit(EventArgs e)
-        {
-            if (Session["MasterPage"] == "Farejador")
-            {
-                Page.MasterPageFile = "~/OpsFarejador.Master";
-            }
-        }
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-
         protected void ButtonEnviar_Click(object sender, EventArgs e)
         {
             MySqlMembershipProvider member = new MySqlMembershipProvider();
@@ -29,7 +16,8 @@ namespace AuditoriaParlamentar.Account
 
             if (retorno == "")
             {
-                LabelMsg.Text = "Um e-mail foi enviado com instruções para recuperar sua senha.";
+                dvAlerta.Visible = true;
+                dvAlertaMensagem.InnerText = "Um e-mail foi enviado com instruções para recuperar sua senha.";
             }
             else
             {

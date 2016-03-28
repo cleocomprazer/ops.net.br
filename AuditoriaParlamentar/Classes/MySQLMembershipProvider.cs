@@ -447,7 +447,7 @@ namespace AuditoriaParlamentar
                       " FailedPasswordAnswerAttemptCount, FailedPasswordAnswerAttemptWindowStart)" +
                       " Values(?PKID, ?Username, ?Password, ?Email, ?PasswordQuestion, " +
                       " ?PasswordAnswer, ?IsApproved, ?Comment, ?CreationDate, ?LastPasswordChangedDate, " +
-                      " ?LastActivityDate, ?ApplicationName, ?IsLockedOut, ?LastLockedOutDate, " + 
+                      " ?LastActivityDate, ?ApplicationName, ?IsLockedOut, ?LastLockedOutDate, " +
                       " ?FailedPasswordAttemptCount, ?FailedPasswordAttemptWindowStart, " +
                       " ?FailedPasswordAnswerAttemptCount, ?FailedPasswordAnswerAttemptWindowStart)", conn);
 
@@ -456,7 +456,7 @@ namespace AuditoriaParlamentar
                 cmd.Parameters.Add("?Password", MySqlDbType.VarChar, 255).Value = EncodePassword(password);
                 cmd.Parameters.Add("?Email", MySqlDbType.VarChar, 128).Value = email;
                 cmd.Parameters.Add("?PasswordQuestion", MySqlDbType.VarChar, 255).Value = passwordQuestion;
-                cmd.Parameters.Add("?PasswordAnswer", MySqlDbType.VarChar, 255).Value = passwordAnswer==null?null: EncodePassword(passwordAnswer);
+                cmd.Parameters.Add("?PasswordAnswer", MySqlDbType.VarChar, 255).Value = passwordAnswer == null ? null : EncodePassword(passwordAnswer);
                 cmd.Parameters.Add("?IsApproved", MySqlDbType.Bit).Value = isApproved;
                 cmd.Parameters.Add("?Comment", MySqlDbType.VarChar, 255).Value = "";
                 cmd.Parameters.Add("?CreationDate", MySqlDbType.Datetime).Value = createDate;
@@ -595,26 +595,26 @@ namespace AuditoriaParlamentar
                          " WHERE ApplicationName = ?ApplicationName " +
                          " ORDER BY Username Asc";
 
-                using(reader = cmd.ExecuteReader())
-				{
-					int counter = 0;
-					int startIndex = pageSize * pageIndex;
-					int endIndex = startIndex + pageSize - 1;
-	
-					while (reader.Read())
-					{
-						if (counter >= startIndex)
-						{
-							MembershipUser u = GetUserFromReader(reader);
-							users.Add(u);
-						}
-	
-						if (counter >= endIndex) { cmd.Cancel(); }
-	
-						counter++;
-					}
-					reader.Close();
-				}
+                using (reader = cmd.ExecuteReader())
+                {
+                    int counter = 0;
+                    int startIndex = pageSize * pageIndex;
+                    int endIndex = startIndex + pageSize - 1;
+
+                    while (reader.Read())
+                    {
+                        if (counter >= startIndex)
+                        {
+                            MembershipUser u = GetUserFromReader(reader);
+                            users.Add(u);
+                        }
+
+                        if (counter >= endIndex) { cmd.Cancel(); }
+
+                        counter++;
+                    }
+                    reader.Close();
+                }
             }
             catch (MySqlException e)
             {
@@ -718,24 +718,24 @@ namespace AuditoriaParlamentar
             {
                 conn.Open();
 
-                using(reader = cmd.ExecuteReader(CommandBehavior.SingleRow))
-				{
-					if (reader.HasRows)
-					{
-						reader.Read();
-	
-						if (reader.GetBoolean(2))
-							throw new MembershipPasswordException("The supplied user is locked out.");
-	
-						password = reader.GetString(0);
-						passwordAnswer = reader.GetString(1);
-					}
-					else
-					{
-						throw new MembershipPasswordException("The supplied user name is not found.");
-					}
-					reader.Close();
-				}
+                using (reader = cmd.ExecuteReader(CommandBehavior.SingleRow))
+                {
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+
+                        if (reader.GetBoolean(2))
+                            throw new MembershipPasswordException("The supplied user is locked out.");
+
+                        password = reader.GetString(0);
+                        passwordAnswer = reader.GetString(1);
+                    }
+                    else
+                    {
+                        throw new MembershipPasswordException("The supplied user name is not found.");
+                    }
+                    reader.Close();
+                }
             }
             catch (MySqlException e)
             {
@@ -797,29 +797,29 @@ namespace AuditoriaParlamentar
             {
                 conn.Open();
 
-                using(reader = cmd.ExecuteReader())
-				{
-					if (reader.HasRows)
-					{
-						reader.Read();
-						u = GetUserFromReader(reader);
-						reader.Close();
-						
-						if (userIsOnline)
-						{
-							MySqlCommand updateCmd = new MySqlCommand("UPDATE `" + tableName + "` " +
-									  "SET LastActivityDate = ?LastActivityDate " +
-									  "WHERE Username = ?Username AND ApplicationName = ?ApplicationName", conn);
-	
-							updateCmd.Parameters.Add("?LastActivityDate", MySqlDbType.VarChar).Value = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-							updateCmd.Parameters.Add("?Username", MySqlDbType.VarChar, 255).Value = username;
-							updateCmd.Parameters.Add("?ApplicationName", MySqlDbType.VarChar, 255).Value = pApplicationName;
-	
-							updateCmd.ExecuteNonQuery();
-						}
-					}
-					reader.Close();
-				}
+                using (reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        u = GetUserFromReader(reader);
+                        reader.Close();
+
+                        if (userIsOnline)
+                        {
+                            MySqlCommand updateCmd = new MySqlCommand("UPDATE `" + tableName + "` " +
+                                      "SET LastActivityDate = ?LastActivityDate " +
+                                      "WHERE Username = ?Username AND ApplicationName = ?ApplicationName", conn);
+
+                            updateCmd.Parameters.Add("?LastActivityDate", MySqlDbType.VarChar).Value = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                            updateCmd.Parameters.Add("?Username", MySqlDbType.VarChar, 255).Value = username;
+                            updateCmd.Parameters.Add("?ApplicationName", MySqlDbType.VarChar, 255).Value = pApplicationName;
+
+                            updateCmd.ExecuteNonQuery();
+                        }
+                    }
+                    reader.Close();
+                }
             }
             catch (MySqlException e)
             {
@@ -866,29 +866,29 @@ namespace AuditoriaParlamentar
             {
                 conn.Open();
 
-                using(reader = cmd.ExecuteReader())
-				{
-					if (reader.HasRows)
-					{
-						reader.Read();
-						u = GetUserFromReader(reader);
-						
-						reader.Close();
-						
-						if (userIsOnline)
-						{
-							MySqlCommand updateCmd = new MySqlCommand("UPDATE `" + tableName + "` " +
-									  "SET LastActivityDate = ?LastActivityDate " +
-									  "WHERE PKID = ?PKID", conn);
-	
-							updateCmd.Parameters.Add("?LastActivityDate", MySqlDbType.VarChar).Value = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-							updateCmd.Parameters.Add("?PKID", MySqlDbType.VarChar).Value = providerUserKey;
-	
-							updateCmd.ExecuteNonQuery();
-						}
-					}
-					reader.Close();
-				}
+                using (reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        u = GetUserFromReader(reader);
+
+                        reader.Close();
+
+                        if (userIsOnline)
+                        {
+                            MySqlCommand updateCmd = new MySqlCommand("UPDATE `" + tableName + "` " +
+                                      "SET LastActivityDate = ?LastActivityDate " +
+                                      "WHERE PKID = ?PKID", conn);
+
+                            updateCmd.Parameters.Add("?LastActivityDate", MySqlDbType.VarChar).Value = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                            updateCmd.Parameters.Add("?PKID", MySqlDbType.VarChar).Value = providerUserKey;
+
+                            updateCmd.ExecuteNonQuery();
+                        }
+                    }
+                    reader.Close();
+                }
             }
             catch (MySqlException e)
             {
@@ -923,7 +923,7 @@ namespace AuditoriaParlamentar
 
         private MembershipUser GetUserFromReader(MySqlDataReader reader)
         {
-			object providerUserKey = new Guid(reader.GetValue(0).ToString());
+            object providerUserKey = new Guid(reader.GetValue(0).ToString());
             string username = reader.IsDBNull(1)                   ? "" : reader.GetString(1);
             string email = reader.IsDBNull(2)                      ? "" :reader.GetString(2);
             string passwordQuestion = reader.IsDBNull(3)           ? "" : reader.GetString(3);
@@ -1090,26 +1090,26 @@ namespace AuditoriaParlamentar
             {
                 banco.AddParameter("Username", username);
 
-                using(MySqlDataReader reader = banco.ExecuteReader("SELECT PasswordAnswer, IsLockedOut FROM " + tableName + " WHERE Username = @Username"))
+                using (MySqlDataReader reader = banco.ExecuteReader("SELECT PasswordAnswer, IsLockedOut FROM " + tableName + " WHERE Username = @Username"))
                 {
                     if (reader.HasRows)
-					{
-						reader.Read();
-	
-						if (reader.GetBoolean(1))
-							throw new MembershipPasswordException("The supplied user is locked out.");
+                    {
+                        reader.Read();
+
+                        if (reader.GetBoolean(1))
+                            throw new MembershipPasswordException("The supplied user is locked out.");
 
                         try { passwordAnswer = reader.GetString(0); }
                         catch { passwordAnswer = ""; }
-					}
-					else
-					{
-						throw new MembershipPasswordException("The supplied user name is not found.");
-					}
-					
+                    }
+                    else
+                    {
+                        throw new MembershipPasswordException("The supplied user name is not found.");
+                    }
+
                     reader.Close();
-				}
-				
+                }
+
                 if (RequiresQuestionAndAnswer && !CheckPassword(answer, passwordAnswer))
                 {
                     UpdateFailureCount(username, "passwordAnswer");
@@ -1120,9 +1120,9 @@ namespace AuditoriaParlamentar
                 banco.AddParameter("Password", EncodePassword(newPassword));
                 banco.AddParameter("LastPasswordChangedDate", DateTime.Now);
                 banco.AddParameter("Username", username);
-               
+
                 banco.ExecuteNonQuery("UPDATE " + tableName + " SET Password = @Password, LastPasswordChangedDate = @LastPasswordChangedDate WHERE Username = @Username AND IsLockedOut = 0");
-                
+
                 rowsAffected = Convert.ToInt32(banco.Rows);
             }
 
@@ -1205,21 +1205,21 @@ namespace AuditoriaParlamentar
             {
                 conn.Open();
 
-                using(reader = cmd.ExecuteReader(CommandBehavior.SingleRow))
-				{
-					if (reader.HasRows)
-					{
-						reader.Read();
-						pwd = reader.GetString(0);
-						isApproved = reader.GetBoolean(1);
-					}
-					else
-					{
-						return false;
-					}
-					reader.Close();
-				}
-				
+                using (reader = cmd.ExecuteReader(CommandBehavior.SingleRow))
+                {
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        pwd = reader.GetString(0);
+                        isApproved = reader.GetBoolean(1);
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    reader.Close();
+                }
+
                 if (CheckPassword(password, pwd))
                 {
                     if (isApproved)
@@ -1294,27 +1294,27 @@ namespace AuditoriaParlamentar
             {
                 conn.Open();
 
-                using(reader = cmd.ExecuteReader(CommandBehavior.SingleRow))
-				{
-					if (reader.HasRows)
-					{
-						reader.Read();
-	
-						if (failureType == "password")
-						{
-							failureCount = reader.GetInt32(0);
-							windowStart = reader.GetDateTime(1);
-						}
-	
-						if (failureType == "passwordAnswer")
-						{
-							failureCount = reader.GetInt32(2);
-							windowStart = reader.GetDateTime(3);
-						}
-					}
-					reader.Close();
-				}
-				
+                using (reader = cmd.ExecuteReader(CommandBehavior.SingleRow))
+                {
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+
+                        if (failureType == "password")
+                        {
+                            failureCount = reader.GetInt32(0);
+                            windowStart = reader.GetDateTime(1);
+                        }
+
+                        if (failureType == "passwordAnswer")
+                        {
+                            failureCount = reader.GetInt32(2);
+                            windowStart = reader.GetDateTime(3);
+                        }
+                    }
+                    reader.Close();
+                }
+
                 DateTime windowEnd = windowStart.AddMinutes(PasswordAttemptWindow);
 
                 if (failureCount == 0 || DateTime.Now > windowEnd)
@@ -1546,26 +1546,26 @@ namespace AuditoriaParlamentar
                   " WHERE Username LIKE ?UsernameSearch AND ApplicationName = ?ApplicationName " +
                   " ORDER BY Username Asc";
 
-                using(reader = cmd.ExecuteReader())
-				{
-					int counter = 0;
-					int startIndex = pageSize * pageIndex;
-					int endIndex = startIndex + pageSize - 1;
-	
-					while (reader.Read())
-					{
-						if (counter >= startIndex)
-						{
-							MembershipUser u = GetUserFromReader(reader);
-							users.Add(u);
-						}
-	
-						if (counter >= endIndex) { cmd.Cancel(); }
-	
-						counter++;
-					}
-					reader.Close();
-				}
+                using (reader = cmd.ExecuteReader())
+                {
+                    int counter = 0;
+                    int startIndex = pageSize * pageIndex;
+                    int endIndex = startIndex + pageSize - 1;
+
+                    while (reader.Read())
+                    {
+                        if (counter >= startIndex)
+                        {
+                            MembershipUser u = GetUserFromReader(reader);
+                            users.Add(u);
+                        }
+
+                        if (counter >= endIndex) { cmd.Cancel(); }
+
+                        counter++;
+                    }
+                    reader.Close();
+                }
             }
             catch (MySqlException e)
             {
@@ -1621,26 +1621,26 @@ namespace AuditoriaParlamentar
                          " WHERE Email LIKE ?Username AND ApplicationName = ?ApplicationName " +
                          " ORDER BY Username Asc";
 
-                using(reader = cmd.ExecuteReader())
-				{
-					int counter = 0;
-					int startIndex = pageSize * pageIndex;
-					int endIndex = startIndex + pageSize - 1;
-	
-					while (reader.Read())
-					{
-						if (counter >= startIndex)
-						{
-							MembershipUser u = GetUserFromReader(reader);
-							users.Add(u);
-						}
-	
-						if (counter >= endIndex) { cmd.Cancel(); }
-	
-						counter++;
-					}
-					reader.Close();
-				}
+                using (reader = cmd.ExecuteReader())
+                {
+                    int counter = 0;
+                    int startIndex = pageSize * pageIndex;
+                    int endIndex = startIndex + pageSize - 1;
+
+                    while (reader.Read())
+                    {
+                        if (counter >= startIndex)
+                        {
+                            MembershipUser u = GetUserFromReader(reader);
+                            users.Add(u);
+                        }
+
+                        if (counter >= endIndex) { cmd.Cancel(); }
+
+                        counter++;
+                    }
+                    reader.Close();
+                }
             }
             catch (MySqlException e)
             {
@@ -1689,49 +1689,60 @@ namespace AuditoriaParlamentar
 
         internal String RecuperaSenhaEmail(String userName)
         {
+            string email = "";
             using (Banco banco = new Banco())
             {
                 banco.AddParameter("username", userName);
-                Object email = banco.ExecuteScalar("SELECT Email FROM users WHERE username = @username");
-
-                if (email == DBNull.Value || email == null)
+                using (var dReader = banco.ExecuteReader("SELECT Email, UserName FROM users WHERE username = @username or Email = @username"))
                 {
-                    return "Usuário não encontrado.";
-                }
-                else
-                {
-                    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                    var random = new Random();
-                    var chave = new string(
-                        Enumerable.Repeat(chars, 30)
-                                  .Select(s => s[random.Next(s.Length)])
-                                  .ToArray());
-
-                    ArrayList destinatario = new ArrayList();
-                    destinatario.Add(email);
-
-                    Email envio = new Email();
-
-                    if (envio.Enviar(destinatario, "[O.P.S.] Recuperação de senha", @"<html><body><p>Você solicitou a recuperação de senha no portal da OPS. Caso não tenha feito esta solicitação ignore este e-mail. <a href='http://www.ops.net.br/Account/ResetPassword.aspx?chave=" + chave + @"'>Clique aqui para gerar uma nova senha.</a></p></body></html>") == false)
+                    if (dReader.Read())
                     {
-                        return "Ocorreu um problema ao tentar recuperar sua senha. Tente novamente.";
+                        if (dReader["Email"] == DBNull.Value)
+                        {
+                            return "Usuário não encontrado.";
+                        }
+
+                        userName = dReader["UserName"].ToString();
+                        email = dReader["Email"].ToString();
                     }
                     else
                     {
-                        banco.AddParameter("data", DateTime.Now.AddDays(-5));
-                        banco.ExecuteNonQuery("DELETE FROM user_recover WHERE data < @data");
-
-                        banco.AddParameter("chave", chave);
-                        banco.AddParameter("username", userName);
-                        banco.ExecuteNonQuery("INSERT INTO user_recover (chave, username, data) VALUES (@chave, @username, NOW())");
+                        return "Usuário não encontrado.";
                     }
+                }
+
+                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                var random = new Random();
+                var chave = new string(
+                    Enumerable.Repeat(chars, 30)
+                              .Select(s => s[random.Next(s.Length)])
+                              .ToArray());
+
+                ArrayList destinatario = new ArrayList();
+                destinatario.Add(email);
+
+                Email envio = new Email();
+
+                if (envio.Enviar(destinatario, "[O.P.S.] Recuperação de senha", @"<html><body><p>Você solicitou a recuperação de senha no portal da OPS. Caso não tenha feito esta solicitação ignore este e-mail. <a href='http://www.ops.net.br/Account/ResetPassword.aspx?chave=" + chave + @"'>Clique aqui para gerar uma nova senha.</a></p></body></html>") == false)
+                {
+                    return "Ocorreu um problema ao tentar recuperar sua senha. Tente novamente.";
+                }
+                else
+                {
+                    banco.AddParameter("data", DateTime.Now.AddDays(-5));
+                    banco.AddParameter("username", userName);
+                    banco.ExecuteNonQuery("DELETE FROM user_recover WHERE username = @username AND data < @data");
+
+                    banco.AddParameter("chave", chave);
+                    banco.AddParameter("username", userName);
+                    banco.ExecuteNonQuery("INSERT INTO user_recover (chave, username, data) VALUES (@chave, @username, NOW())");
                 }
 
                 return "";
             }
         }
 
-        internal String RecuperaSenha(String chave)
+        internal String RecuperaSenha(String chave, string novaSenha)
         {
             using (Banco banco = new Banco())
             {
@@ -1740,28 +1751,36 @@ namespace AuditoriaParlamentar
 
                 if (userName == DBNull.Value || userName == null)
                 {
-                    return "";
+                    return "Chave de Redefinição Invalida.";
                 }
-
-                String senha = "";
 
                 try
                 {
                     pEnablePasswordReset = true;
                     pPasswordFormat = MembershipPasswordFormat.Hashed;
 
-                    senha = "Nova senha: " + ResetPassword(Convert.ToString(userName), null);
+                    banco.AddParameter("Password", EncodePassword(novaSenha));
+                    banco.AddParameter("LastPasswordChangedDate", DateTime.Now);
+                    banco.AddParameter("Username", userName.ToString());
+
+                    banco.ExecuteNonQuery("UPDATE " + tableName + " SET Password = @Password, LastPasswordChangedDate = @LastPasswordChangedDate WHERE Username = @Username AND IsLockedOut = 0");
+
+                    int rowsAffected = Convert.ToInt32(banco.Rows);
+
+                    if (rowsAffected == 0)
+                    {
+                        return "Usuário não encontrado ou bloqueado. Senha não alterada.";
+                    }
 
                     banco.AddParameter("username", Convert.ToString(userName));
                     banco.ExecuteScalar("DELETE FROM user_recover WHERE username = @username");
-
                 }
                 catch (Exception ex)
                 {
                     return "Não foi possível recuperar sua senha";
                 }
 
-                return senha;
+                return string.Empty;
             }
         }
     }

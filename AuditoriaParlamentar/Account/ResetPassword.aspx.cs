@@ -9,24 +9,35 @@ namespace AuditoriaParlamentar.Account
 {
     public partial class ResetPassword : System.Web.UI.Page
     {
-        protected override void OnPreInit(EventArgs e)
-        {
-            if (Session["MasterPage"] == "Farejador")
-            {
-                Page.MasterPageFile = "~/OpsFarejador.Master";
-            }
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 String chave = Request.QueryString["chave"];
-
-                if (chave != null)
+                if (chave == null)
                 {
-                    MySqlMembershipProvider member = new MySqlMembershipProvider();
-                    LabelSenha.Text = member.RecuperaSenha(chave);
+                    Response.Redirect(System.Web.Security.FormsAuthentication.LoginUrl);
+                }
+            }
+        }
+
+        protected void ButtonEnviar_Click(object sender, EventArgs e)
+        {
+            String chave = Request.QueryString["chave"];
+
+            if (chave != null)
+            {
+                MySqlMembershipProvider member = new MySqlMembershipProvider();
+                string retorno = member.RecuperaSenha(chave, NewPassword.Text);
+
+                if (string.IsNullOrEmpty(retorno))
+                {
+                    Response.Redirect(System.Web.Security.FormsAuthentication.LoginUrl);
+                }
+                else
+                {
+                    dvAlerta.Visible = true;
+                    dvAlertaMensagem.InnerText = retorno;
                 }
             }
         }
