@@ -205,12 +205,6 @@ namespace AuditoriaParlamentar
 
         protected void ButtonSenadores_Click(object sender, EventArgs e)
         {
-            Cache.Remove("menorAnoSenadores");
-            Cache.Remove("ultimaAtualizacaoSenadores");
-            Cache.Remove("tableSenadores");
-            Cache.Remove("tableDespesaSenadores");
-            Cache.Remove("tablePartidoSenadores");
-
             String atualDir = Server.MapPath("Upload");
 
             if (FileUpload.FileName != "")
@@ -256,6 +250,12 @@ namespace AuditoriaParlamentar
                     CarregarSenadores(file.DirectoryName);
                 }
             }
+
+            Cache.Remove("menorAnoSenadores");
+            Cache.Remove("ultimaAtualizacaoSenadores");
+            Cache.Remove("tableSenadores");
+            Cache.Remove("tableDespesaSenadores");
+            Cache.Remove("tablePartidoSenadores");
         }
 
         private void CarregarSenadores(String atualDir)

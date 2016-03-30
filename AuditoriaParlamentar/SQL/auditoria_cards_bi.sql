@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 5.7.9, for Win32 (AMD64)
+-- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
 --
 -- Host: localhost    Database: auditoria
 -- ------------------------------------------------------
@@ -23,13 +23,14 @@ DROP TABLE IF EXISTS `cards_bi`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cards_bi` (
-  `idParlamentar` int(11) NOT NULL,
+  `idParlamentar` int(11) DEFAULT NULL,
   `nomeParlamentar` varchar(45) DEFAULT NULL,
+  `cargoParlamentar` varchar(45) DEFAULT NULL,
   `valorCard` decimal(11,2) DEFAULT NULL,
   `tipoCartao` varchar(45) DEFAULT NULL,
-  `casaParlamentar` int(11) DEFAULT NULL,
+  `urlImagem` varchar(100) DEFAULT NULL,
   `descricaoCartao` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idParlamentar`)
+  `ordemExibicao` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -39,7 +40,16 @@ CREATE TABLE `cards_bi` (
 
 LOCK TABLES `cards_bi` WRITE;
 /*!40000 ALTER TABLE `cards_bi` DISABLE KEYS */;
-INSERT INTO `cards_bi` VALUES (765,'FRANCISCO DORNELLES',997280.10,'SENADOR_MAIOR_DIV',1,'Divulgação P.'),(2632,'FERNANDO RIBEIRO',159.94,'SENADOR_MENOR_DIV',1,'Divulgação P.'),(4525,'FERNANDO COLLOR',2440676.94,'SENADOR_GASTADOR',1,'Geral'),(5635,'RICARDO FRANCO',6356.45,'SENADOR_ECONOMICO',1,'Geral'),(73892,'ELISEU PADILHA',-1487.52,'DEPUTADOR_ECONOMICO',2,'Geral'),(178961,'SHÉRIDAN',560551.26,'DEPUTADOR_GASTADOR',2,'Geral');
+INSERT INTO `cards_bi` VALUES 
+	(178884,'HILDO ROCHA','Deputado(a)',123144.51,'MAIOR','DEPFEDERAL/178884.jpg','Geral',1),
+	(178849,'HISSA ABRAHÃO','Deputado(a)',75500.00,'MAIOR','DEPFEDERAL/178849.jpg','Divulgação Atividade Parlamentar',2),
+	(74141,'JOSIAS GOMES','Deputado(a)',7.56,'MENOR','DEPFEDERAL/74141.jpg','Geral',1),
+	(178978,'FLAVINHO','Deputado(a)',20.45,'MENOR','DEPFEDERAL/178978.jpg','Divulgação Atividade Parlamentar',2),
+	(5012,'RANDOLFE RODRIGUES','Senador(a)',119868.55,'MAIOR','SENADOR/5012.jpg','Geral',3),
+	(5322,'ROMÁRIO','Senador(a)',36500.00,'MAIOR','SENADOR/5322.jpg','Divulgação Atividade Parlamentar',4),
+	(5100,'HÉLIO JOSÉ','Senador(a)',9588.21,'MENOR','SENADOR/5100.jpg','Geral',3),
+	(3823,'BENEDITO DE LIRA','Senador(a)',98.67,'MENOR','SENADOR/3823.jpg','Divulgação Atividade Parlamentar',4);
+
 /*!40000 ALTER TABLE `cards_bi` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-28 10:16:58
+-- Dump completed on 2016-03-29 22:09:45

@@ -331,11 +331,16 @@ namespace AuditoriaParlamentar.Classes
                     {
                         if (!File.Exists(DirFiguras + @"\Parlamentares\SENADOR\" + row["CodigoParlamentar"].ToString() + ".jpg"))
                         {
-                            using (WebClient client = new WebClient())
+                            try
                             {
-                                client.Headers.Add("User-Agent: Other");
-                                client.DownloadFile(row["Foto"].ToString(), DirFiguras + @"\Parlamentares\SENADOR\" + row["CodigoParlamentar"].ToString() + ".jpg");
+                                using (WebClient client = new WebClient())
+                                {
+                                    client.Headers.Add("User-Agent: Other");
+                                    client.DownloadFile(row["Foto"].ToString(), DirFiguras + @"\Parlamentares\SENADOR\" + row["CodigoParlamentar"].ToString() + ".jpg");
+                                }
                             }
+                            catch (Exception)
+                            { }
                         }
                     }
                 }

@@ -328,11 +328,16 @@ namespace AuditoriaParlamentar
                     {
                         if (!File.Exists(DirFiguras + @"\Parlamentares\DEPFEDERAL\" + row["ideCadastro"].ToString() + ".jpg"))
                         {
-                            using (WebClient client = new WebClient())
+                            try
                             {
-                                client.Headers.Add("User-Agent: Other");
-                                client.DownloadFile("http://www.camara.gov.br/internet/deputado/bandep/" + row["ideCadastro"].ToString() + ".jpg", DirFiguras + @"\Parlamentares\DEPFEDERAL\" + row["ideCadastro"].ToString() + ".jpg");
+                                using (WebClient client = new WebClient())
+                                {
+                                    client.Headers.Add("User-Agent: Other");
+                                    client.DownloadFile("http://www.camara.gov.br/internet/deputado/bandep/" + row["ideCadastro"].ToString() + ".jpg", DirFiguras + @"\Parlamentares\DEPFEDERAL\" + row["ideCadastro"].ToString() + ".jpg");
+                                }
                             }
+                            catch (Exception)
+                            { }
                         }
                     }
                 }

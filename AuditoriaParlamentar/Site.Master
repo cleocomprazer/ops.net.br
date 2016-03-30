@@ -108,7 +108,6 @@
                             <ul class="dropdown-menu">
                                 <li><a href="#" id="HyperLinkDeputadoFederal" runat="server">Parlamentar</a></li>
                                 <li><a href="#" id="HyperLinkFuncionarios" runat="server">Funcionários por Parlamentar</a></li>
-                                <li><a href="#" id="HyperLinkDashBoard" runat="server">DashBoard</a></li>
                             </ul>
                         </li>
                         <asp:PlaceHolder ID="plcRevisor" runat="server">

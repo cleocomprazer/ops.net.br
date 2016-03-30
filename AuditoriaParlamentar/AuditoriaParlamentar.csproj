@@ -89,7 +89,6 @@
     <Content Include="assets\css\bootstrap-theme.min.css" />
     <Content Include="assets\css\bootstrap.css" />
     <Content Include="assets\css\bootstrap.min.css" />
-    <Content Include="assets\css\cards.css" />
     <Content Include="assets\css\landing-page.css" />
     <Content Include="assets\css\auditoria.css" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
@@ -119,9 +118,6 @@
     <Content Include="CidadesPendenciaGrid.aspx" />
     <Content Include="AuditarSenador.aspx" />
     <Content Include="AuditoriaPF.aspx" />
-    <Content Include="Componentes\CardPolitico.ascx" />
-    <Content Include="Componentes\LoadUserControlHelper.ascx" />
-    <Content Include="DashBoard.aspx" />
     <Content Include="DetalhesSecretarios.aspx" />
     <Content Include="EmailPendente.aspx" />
     <Content Include="FuncionariosPorParlamentar.aspx" />
@@ -243,27 +239,6 @@
     <Compile Include="Classes\FormatarDados.cs" />
     <Compile Include="Classes\FornecedorQuadroSocietario.cs" />
     <Compile Include="Classes\Parlamentar.cs" />
-    <Compile Include="Componentes\CardPolitico.ascx.cs">
-      <DependentUpon>CardPolitico.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Componentes\CardPolitico.ascx.designer.cs">
-      <DependentUpon>CardPolitico.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Componentes\LoadUserControlHelper.ascx.cs">
-      <DependentUpon>LoadUserControlHelper.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Componentes\LoadUserControlHelper.ascx.designer.cs">
-      <DependentUpon>LoadUserControlHelper.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="DashBoard.aspx.cs">
-      <DependentUpon>DashBoard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DashBoard.aspx.designer.cs">
-      <DependentUpon>DashBoard.aspx</DependentUpon>
-    </Compile>
     <Compile Include="DetalhesSecretarios.aspx.cs">
       <DependentUpon>DetalhesSecretarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

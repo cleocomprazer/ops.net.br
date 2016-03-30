@@ -1,10 +1,6 @@
 ﻿using AuditoriaParlamentar.Classes;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace AuditoriaParlamentar
@@ -13,6 +9,8 @@ namespace AuditoriaParlamentar
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            grdSecretarios.PreRender += grdSecretarios_PreRender;
+
             DataTable vdt_Teste = new Parlamentar().recuperaSecretariosParlamentar(Request.QueryString["ideCadastro"]);
             if (vdt_Teste.Rows.Count > 0)
             {
@@ -24,6 +22,17 @@ namespace AuditoriaParlamentar
             {
                 lblParlamentar.Text = "Deputado não encontrado no Banco de dados";
             } 
+        }
+
+        private void grdSecretarios_PreRender(object sender, EventArgs e)
+        {
+            try
+            {
+                grdSecretarios.HeaderRow.TableSection = TableRowSection.TableHeader;
+            }
+            catch (Exception ex)
+            {
+            }
         }
     }
 }

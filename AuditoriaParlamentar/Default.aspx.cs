@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using AuditoriaParlamentar.Classes;
+using System.Data;
 
 namespace AuditoriaParlamentar
 {
@@ -29,15 +30,19 @@ namespace AuditoriaParlamentar
                     rptResumoAuditoria.Visible = false;
                 }
 
-                //try
-                //{
-                //    Noticia noticia = new Noticia();
-                //    noticia.UltimasNoticias(Cache, rptNoticia);
-                //}
-                //catch (Exception)
-                //{
-                //    dvNoticias.Visible = false;
-                //}
+                try
+                {
+                    Parlamentar vo_Parl = new Parlamentar();
+                    DataTable vdt_Card = vo_Parl.recuperaCards();
+
+                    rptMaioresGastos.DataSource = vdt_Card.Select("tipoCartao='MAIOR'").CopyToDataTable();
+                    rptMaioresGastos.DataBind();
+
+                    rptMenoresGastos.DataSource = vdt_Card.Select("tipoCartao='MENOR'").CopyToDataTable();
+                    rptMenoresGastos.DataBind();
+                }
+                catch (Exception)
+                { }
             }
         }
     }

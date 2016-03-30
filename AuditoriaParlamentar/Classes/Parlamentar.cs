@@ -39,19 +39,18 @@ namespace AuditoriaParlamentar.Classes
         /// <returns></returns>
         public DataTable recuperaParlamentares()
         {
-            String vs_Query =" SELECT parlamentares.ideCadastro as id,parlamentares.txNomeParlamentar as nome, count(secretario.deputado) as qtd" +
-                             " FROM secretario INNER JOIN parlamentares ON parlamentares.ideCadastro = secretario.deputado" +
-                             " GROUP BY parlamentares.ideCadastro,secretario.deputado order by count(secretario.deputado) DESC";                                
+            String vs_Query =" SELECT p.ideCadastro as id, p.txNomeParlamentar as nome, count(secretario.deputado) as qtd" +
+                             " FROM secretario INNER JOIN parlamentares p ON p.ideCadastro = secretario.deputado" +
+                             " GROUP BY p.ideCadastro,secretario.deputado order by count(secretario.deputado) DESC, p.txNomeParlamentar ASC";                                
             return ConexaoStatica.recuperaDataTable(vs_Query,null);        
         }
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="vs_TipoCard"></param>
         /// <returns></returns>
-        public DataTable recuperaCards(string vs_TipoCard)
+        public DataTable recuperaCards()
         {
-            String vs_Query = "SELECT * FROM cards_bi WHERE tipoCartao = '" + vs_TipoCard + "'";
+            String vs_Query = "SELECT * FROM cards_bi order by ordemExibicao";
             return ConexaoStatica.recuperaDataTable(vs_Query, null);        
         } 
     }

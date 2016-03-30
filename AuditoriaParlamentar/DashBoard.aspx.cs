@@ -24,8 +24,8 @@ namespace AuditoriaParlamentar
         {
             Page page = new Page();
             Parlamentar vo_Parl = new Parlamentar();
-            DataTable vdt_Card = vo_Parl.recuperaCards(tipoCard);
-            LoadUserControlHelper componenteCard = (LoadUserControlHelper)page.LoadControl("/Componentes/CardPolitico.ascx");
+            DataTable vdt_Card = vo_Parl.recuperaCards();
+            LoadUserControlHelper componenteCard = (LoadUserControlHelper)page.LoadControl("~/Componentes/CardPolitico.ascx");
             (componenteCard.FindControl("lblNome") as Label).Text = vdt_Card.Rows[0]["nomeParlamentar"].ToString();
             (componenteCard.FindControl("lblGasto") as Label).Text = vdt_Card.Rows[0]["valorCard"].ToString();
             (componenteCard.FindControl("lblTipoCard") as Label).Text = vdt_Card.Rows[0]["descricaoCartao"].ToString();

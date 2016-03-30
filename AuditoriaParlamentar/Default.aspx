@@ -30,26 +30,68 @@
                 </div>
             </div>
         </div>
-
-        <div class="container" id="info-geral">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="bs-callout bs-callout-info">
-                        <h4 class="media-heading">O que é CEAP (CEAPS)?</h4>
-                        <br />
-                        <p class="text-justify">CEAP é a sigla da Cota para o Exercício da Atividade Parlamentar (No Senado se chama CEAPS).</p>
-                        <p class="text-justify">Trata-se de um recurso público disponível mensalmente aos deputados e senadores para o custeio de suas atividades parlamentares.</p>
-                        <p class="text-justify">Apesar de ser dinheiro público, fato que já implicaria no seu enquadramento à Lei Nº 8.666, o uso da verba dispensa qualquer tipo de burocracia exigida pela lei de licitações, dando ao deputado e ao senador a livre escolha da empresa a ser contratada para fornecimento do produto ou serviço.</p>
-                        <p class="text-justify">Não é raro encontrar irregularidades escandalosas, como locações de veículos feitas em padarias ou cópias de trabalhos escolares transformados em «pareceres jurídicos» generosamente pagos com o dinheiro do contribuinte.</p>
+        <div class="content-section-a resumo-gastos">
+            <div class="container">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">Quem mais gastou em 2015</div>
+                    <div class="panel-body">
+                        <asp:Repeater runat="server" ID="rptMaioresGastos">
+                            <ItemTemplate>
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="card form-group">
+                                        <canvas class="header-desempenho bg-danger" width="250" height="70"></canvas>
+                                        <div class="avatar">
+                                            <img src='./Figuras/Parlamentares/<%# DataBinder.Eval(Container.DataItem, "urlImagem") %>' alt='<%# DataBinder.Eval(Container.DataItem, "nomeParlamentar") %>'>
+                                        </div>
+                                        <div class="content">
+                                            <p title="Nome do parlamentar">
+                                                <%# DataBinder.Eval(Container.DataItem, "nomeParlamentar") %>
+                                            </p>
+                                            <p title="Cargo">
+                                                <%# DataBinder.Eval(Container.DataItem, "cargoParlamentar") %>
+                                            </p>
+                                            <p title="Despesa">
+                                                <%# DataBinder.Eval(Container.DataItem, "descricaoCartao") %>
+                                            </p>
+                                            <p title="Valor gasto em reais">
+                                                R$ <%# DataBinder.Eval(Container.DataItem, "valorCard", "{0:#,###.00}") %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="bs-callout bs-callout-info">
-                        <h4 class="media-heading">O que é a OPS?</h4>
-                        <br />
-                        <p class="text-justify">A Operação Política Supervisionada - OPS - fiscaliza de forma detalhada os gastos realizados via CEAP ou CEAPS. Até o momento já foram economizados mais de R$ 5,5 milhões do dinheiro público graças a estas fiscalizações e às exigências feitas diretamente aos parlamentares para que devolvam o dinheiro público indevidamente utilizado.</p>
-                        <p class="text-justify">A OPS conta com a ajuda de seus colaboradores, espalhados pelo Brasil, para o levantamento de informações necessárias para a conclusão de fiscalizações, como por exemplo, o envio de fotos de endereços suspeitos em diversas cidades do país. Além disso, qualquer um pode ser um fiscal dos gastos públicos e este site oferece dados suficientes para isso.</p>
-                        <p class="text-justify">Apesar de ser especialista na fiscalização dos gastos com a verba indenizatória, a OPS também aceita denúncias de outros setores públicos, dando a elas o destino certo para que sejam apuradas pelas autoridades competentes.</p>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Quem menos gastou em 2015</div>
+                    <div class="panel-body">
+                        <asp:Repeater runat="server" ID="rptMenoresGastos">
+                            <ItemTemplate>
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="card form-group">
+                                        <canvas class="header-desempenho bg-primary" width="250" height="70"></canvas>
+                                        <div class="avatar">
+                                            <img src='./Figuras/Parlamentares/<%# DataBinder.Eval(Container.DataItem, "urlImagem") %>' alt='<%# DataBinder.Eval(Container.DataItem, "nomeParlamentar") %>'>
+                                        </div>
+                                        <div class="content">
+                                            <p title="Nome do parlamentar">
+                                                <%# DataBinder.Eval(Container.DataItem, "nomeParlamentar") %>
+                                            </p>
+                                            <p title="Cargo">
+                                                <%# DataBinder.Eval(Container.DataItem, "cargoParlamentar") %>
+                                            </p>
+                                            <p title="Despesa">
+                                                <%# DataBinder.Eval(Container.DataItem, "descricaoCartao") %>
+                                            </p>
+                                            <p title="Valor gasto em reais">
+                                                R$ <%# DataBinder.Eval(Container.DataItem, "valorCard", "{0:#,###.00}") %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </div>
                 </div>
             </div>
@@ -102,6 +144,29 @@
                                 <a href="https://www.microsoft.com/pt-br/store/apps/ops-fiscalize/9nblggh686vc" class="btn btn-primary" target="_blank" rel="nofollow">Windows Phone&nbsp;<i class="glyphicon glyphicon-menu-right"></i></a>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="info-geral">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="bs-callout bs-callout-info">
+                        <h4 class="media-heading">O que é CEAP (CEAPS)?</h4>
+                        <br />
+                        <p class="text-justify">CEAP é a sigla da Cota para o Exercício da Atividade Parlamentar (No Senado se chama CEAPS).</p>
+                        <p class="text-justify">Trata-se de um recurso público disponível mensalmente aos deputados e senadores para o custeio de suas atividades parlamentares.</p>
+                        <p class="text-justify">Apesar de ser dinheiro público, fato que já implicaria no seu enquadramento à Lei Nº 8.666, o uso da verba dispensa qualquer tipo de burocracia exigida pela lei de licitações, dando ao deputado e ao senador a livre escolha da empresa a ser contratada para fornecimento do produto ou serviço.</p>
+                        <p class="text-justify">Não é raro encontrar irregularidades escandalosas, como locações de veículos feitas em padarias ou cópias de trabalhos escolares transformados em «pareceres jurídicos» generosamente pagos com o dinheiro do contribuinte.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="bs-callout bs-callout-info">
+                        <h4 class="media-heading">O que é a OPS?</h4>
+                        <br />
+                        <p class="text-justify">A Operação Política Supervisionada - OPS - fiscaliza de forma detalhada os gastos realizados via CEAP ou CEAPS. Até o momento já foram economizados mais de R$ 5,5 milhões do dinheiro público graças a estas fiscalizações e às exigências feitas diretamente aos parlamentares para que devolvam o dinheiro público indevidamente utilizado.</p>
+                        <p class="text-justify">A OPS conta com a ajuda de seus colaboradores, espalhados pelo Brasil, para o levantamento de informações necessárias para a conclusão de fiscalizações, como por exemplo, o envio de fotos de endereços suspeitos em diversas cidades do país. Além disso, qualquer um pode ser um fiscal dos gastos públicos e este site oferece dados suficientes para isso.</p>
+                        <p class="text-justify">Apesar de ser especialista na fiscalização dos gastos com a verba indenizatória, a OPS também aceita denúncias de outros setores públicos, dando a elas o destino certo para que sejam apuradas pelas autoridades competentes.</p>
                     </div>
                 </div>
             </div>

@@ -24,7 +24,6 @@ namespace AuditoriaParlamentar
                 }
                 HyperLinkDeputadoFederal.HRef = "PesquisaInicio.aspx"; //?CARGO=" + Pesquisa.CARGO_DEPUTADO_FEDERAL;
                 HyperLinkFuncionarios.HRef = "FuncionariosPorParlamentar.aspx";
-                HyperLinkDashBoard.HRef = "DashBoard.aspx"; 
             }
         }
     }

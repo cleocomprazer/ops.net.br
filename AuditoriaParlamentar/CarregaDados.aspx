@@ -4,8 +4,6 @@
     <style type="text/css">
         .Grid { font-size: small; font-family: Verdana; }
 
-        .Grid { font-size: small; font-family: Verdana; }
-
         .style2 { color: #333333; border-collapse: collapse; text-align: left; font-size: 1em; }
     </style>
 </asp:Content>
@@ -18,7 +16,7 @@
                 &nbsp;&nbsp;&nbsp;
             <a href="http://www2.camara.leg.br/transparencia/cota-para-exercicio-da-atividade-parlamentar/dados-abertos-cota-parlamentar" target="_blank">Cota Parlamentar Camâra</a>
                 &nbsp;&nbsp;&nbsp;
-            <a href="http://www.senado.gov.br/transparencia/dadosAbertos/dadosAbertos.asp" target="_blank">Cota Parlamentar Senado</a>
+            <a href="https://www12.senado.gov.br/transparencia/dados-abertos/dados-abertos-ceaps" target="_blank">Cota Parlamentar Senado</a> (criar .zip para upload)
             </div>
             <div class="form-group">
                 <div class="checkbox">
