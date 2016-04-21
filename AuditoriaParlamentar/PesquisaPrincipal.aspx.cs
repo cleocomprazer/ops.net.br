@@ -507,7 +507,7 @@ namespace AuditoriaParlamentar
 
 							long refDoc;
 
-							if (Int64.TryParse(e.Row.Cells[9].Text, out refDoc))
+							if (Int64.TryParse(e.Row.Cells[10].Text, out refDoc))
 							{
 								if (refDoc > 0)
 								{
