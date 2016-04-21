@@ -35,9 +35,9 @@ namespace AuditoriaParlamentar
             {
                 var dv = (DataRowView)e.Row.DataItem;
 
-                Button buttonAuditar = (Button)e.Row.FindControl("ButtonSite");
-                buttonAuditar.Text = "Site";
-                buttonAuditar.OnClientClick = "window.open('http://www.camara.leg.br/internet/Deputado/dep_Detalhe.asp?id=" + dv["id"].ToString() + "');return false;";
+                //Button buttonAuditar = (Button)e.Row.FindControl("ButtonSite");
+                //buttonAuditar.Text = "Site";
+                //buttonAuditar.OnClientClick = "window.open('DeputadoFederal.aspx?id=" + dv["id"].ToString() + "');return false;";
 
                 Button buttonFunc = (Button)e.Row.FindControl("ButtonFuncionarios");
                 buttonFunc.Text = "Ver Secretários";

@@ -1,9 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FuncionariosPorParlamentar.aspx.cs" Inherits="AuditoriaParlamentar.FuncionariosPorParlamentar" %>
+﻿<%@ Page Title="OPS :: Secretários Parlamentares por Lotação" Language="C#" MasterPageFile="~/PaginaInterna.Master" AutoEventWireup="true" 
+	CodeBehind="FuncionariosPorParlamentar.aspx.cs" Inherits="AuditoriaParlamentar.FuncionariosPorParlamentar" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container">
+    <div class="container-fluid">
         <div class="panel panel-default">
             <div class="panel-heading">Secretários Parlamentares por Lotação</div>
             <div class="table-responsive">
@@ -13,7 +14,7 @@
                     <Columns>
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:Button ID="ButtonSite" runat="server" CssClass="btn btn-default btn-sm" />
+                                <%--<asp:Button ID="ButtonSite" runat="server" CssClass="btn btn-default btn-sm" />--%>
                                 <asp:Button ID="ButtonFuncionarios" runat="server" CssClass="popover-link btn btn-primary btn-sm" />
                             </ItemTemplate>
                         </asp:TemplateField>

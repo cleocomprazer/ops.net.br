@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuditoriaParlamentar", "AuditoriaParlamentar\AuditoriaParlamentar.csproj", "{B7A0C9E6-AE6F-4C5E-9D86-25DDCBC32E1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuditoriaParlamentar.Classes", "AuditoriaParlamentar.Classes\AuditoriaParlamentar.Classes.csproj", "{54F281B8-FCB4-48A4-B286-B91690C72458}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B7A0C9E6-AE6F-4C5E-9D86-25DDCBC32E1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7A0C9E6-AE6F-4C5E-9D86-25DDCBC32E1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7A0C9E6-AE6F-4C5E-9D86-25DDCBC32E1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54F281B8-FCB4-48A4-B286-B91690C72458}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54F281B8-FCB4-48A4-B286-B91690C72458}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54F281B8-FCB4-48A4-B286-B91690C72458}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54F281B8-FCB4-48A4-B286-B91690C72458}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

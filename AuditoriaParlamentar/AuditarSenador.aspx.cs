@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AuditoriaParlamentar.Classes;
+using System;
 using System.Data;
 using System.Text;
 using System.Web;

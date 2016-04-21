@@ -3,7 +3,7 @@
     EnableEventValidation="false" ClientIDMode="Static" %>
 
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeadContent" runat="server">
-    <link href="<%= ResolveClientUrl("~/") %>assets/css/auditoria.css?v=<%= Configuracao.VersaoSite %>" rel="stylesheet" />
+    <link href="<%= ResolveClientUrl("~/") %>assets/css/auditoria.css?v=<%= AuditoriaParlamentar.Classes.Configuracao.VersaoSite %>" rel="stylesheet" />
         <script type="text/javascript">
             $(loadPesquisaResultado);
     </script>

@@ -36,10 +36,15 @@ namespace AuditoriaParlamentar
                 Pagina = "CidadesPendenciaGrid.aspx";
                 Titulo = "Pendências de Fotos e Documentos";
             }
-            else
+			else if (opcao == "S")
+			{
+				Pagina = "FuncionariosPorParlamentar.aspx";
+				Titulo = "Secretários Parlamentares";
+			}
+			else
             {
-                Pagina = "PesquisaPrincipal.aspx";
-                Titulo = "Auditar";
+                Pagina = "PesquisaPrincipal.aspx?" + Request.QueryString.ToString();
+				Titulo = "Auditar";
             }           
         }
     }

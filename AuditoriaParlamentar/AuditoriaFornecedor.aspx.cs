@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using AuditoriaParlamentar.Classes;
-using System.Net;
-using System.Text.RegularExpressions;
-using System.Text;
+﻿using AuditoriaParlamentar.Classes;
+using System;
 using System.IO;
+using System.Net;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.Services;
+using System.Web.UI.WebControls;
 
 namespace AuditoriaParlamentar
 {
@@ -145,7 +142,7 @@ namespace AuditoriaParlamentar
                         else
                         {
                             rptQuadroSocietario.Visible = false;
-                            ltrSemQuadroSocios.Text = "<td colspan=\"2\" class=\"text - center\">A natureza jurídica não permite o preenchimento do QSA</td>";
+                            ltrSemQuadroSocios.Text = "<td colspan=\"4\" class=\"text-center\">A natureza jurídica não permite o preenchimento do QSA</td>";
                         }
                     }
                     else
@@ -351,7 +348,7 @@ namespace AuditoriaParlamentar
 
                     var UserName = HttpContext.Current.User.Identity.Name;
 
-                    fornecedor.IdAtualizacao = Comum.Encrypt(fornecedor.PreparaAtualizacao(UserName).ToString());
+                    //fornecedor.IdAtualizacao = Comum.Encrypt(fornecedor.PreparaAtualizacao(UserName).ToString());
                     fornecedor.UsuarioInclusao = UserName;
                     fornecedor.DataInclusao = DateTime.Now;
 

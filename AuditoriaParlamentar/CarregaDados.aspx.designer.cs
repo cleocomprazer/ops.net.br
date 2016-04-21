@@ -67,24 +67,6 @@ namespace AuditoriaParlamentar {
         protected global::System.Web.UI.WebControls.Button ButtonEfetivaSen;
         
         /// <summary>
-        /// GridViewAcerto control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewAcerto;
-        
-        /// <summary>
-        /// GridViewPrevia control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewPrevia;
-        
-        /// <summary>
         /// Label2 control.
         /// </summary>
         /// <remarks>
@@ -121,12 +103,39 @@ namespace AuditoriaParlamentar {
         protected global::System.Web.UI.WebControls.Button ButtonSuspeitas;
         
         /// <summary>
-        /// ButtonFotos control.
+        /// btnFotosDeputados control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonFotos;
+        protected global::System.Web.UI.WebControls.Button btnFotosDeputados;
+        
+        /// <summary>
+        /// btnPerfilDeputados control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPerfilDeputados;
+        
+        /// <summary>
+        /// btnFotosSenadores control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnFotosSenadores;
+        
+        /// <summary>
+        /// btnPerfilSenadores control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPerfilSenadores;
     }
 }

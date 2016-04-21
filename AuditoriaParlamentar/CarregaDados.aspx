@@ -36,7 +36,7 @@
                     <asp:Button ID="ButtonEfetivaSen" runat="server" OnClick="ButtonEfetivaSen_Click" Text="Efetiva Cotas Senadores" Width="200px" CssClass="btn btn-default btn-sm" />
                 </div>
             </div>
-            <div class="table-responsive">
+           <%-- <div class="table-responsive">
                 <asp:GridView ID="GridViewAcerto" runat="server" AllowSorting="false" AutoGenerateColumns="false"
                     UseAccessibleHeader="true" CssClass="table table-hover table-striped" GridLines="None"
                     EmptyDataText="Nenhum Anexo Adicionado!" EmptyDataRowStyle-HorizontalAlign="Center">
@@ -45,7 +45,7 @@
                     UseAccessibleHeader="true" CssClass="table table-hover table-striped" GridLines="None"
                     EmptyDataText="Nenhum Anexo Adicionado!" EmptyDataRowStyle-HorizontalAlign="Center">
                 </asp:GridView>
-            </div>
+            </div>--%>
         </fieldset>
 
         <fieldset>
@@ -67,10 +67,20 @@
         </fieldset>
 
         <fieldset>
-            <legend>Cargas das Imagens dos Deputados e Senadores</legend>
+            <legend>Cargas de informações dos deputados</legend>
 
             <div class="form-group">
-                <asp:Button ID="ButtonFotos" runat="server" OnClick="ButtonFotos_Click" Text="Download Fotos" CssClass="btn btn-default btn-sm" />
+                <asp:Button ID="btnFotosDeputados" runat="server" OnClick="btnFotosDeputados_Click" Text="Download Fotos" CssClass="btn btn-default btn-sm" />
+				<asp:Button ID="btnPerfilDeputados" runat="server" OnClick="btnPerfilDeputados_Click" Text="Informações (perfil)" CssClass="btn btn-default btn-sm" />
+            </div>
+        </fieldset>
+
+		<fieldset>
+            <legend>Cargas de informações dos senadores</legend>
+
+            <div class="form-group">
+                <asp:Button ID="btnFotosSenadores" runat="server" OnClick="btnFotosSenadores_Click" Text="Download Fotos" CssClass="btn btn-default btn-sm" />
+				<asp:Button ID="btnPerfilSenadores" runat="server" OnClick="btnPerfilSenadores_Click" Text="Informações (perfil)" CssClass="btn btn-default btn-sm" />
             </div>
         </fieldset>
     </div>

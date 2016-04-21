@@ -2,7 +2,7 @@
     CodeBehind="ChangePassword.aspx.cs" Inherits="AuditoriaParlamentar.Account.ChangePassword" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
-    <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/main.js?v=<%= Configuracao.VersaoSite %>"></script>
+    <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/main.js?v=<%= AuditoriaParlamentar.Classes.Configuracao.VersaoSite %>"></script>
     <script type="text/javascript">
         $(loadChangePassword);
     </script>

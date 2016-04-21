@@ -11,15 +11,10 @@ namespace AuditoriaParlamentar
     {
         protected override void OnPreInit(EventArgs e)
         {
-            if (Session["MasterPage"] == "Farejador")
-            {
-                Page.MasterPageFile = "~/OpsFarejador.Master";
-            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
     }
 }

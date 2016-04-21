@@ -1,0 +1,16 @@
+﻿ALTER TABLE `auditoria`.`parlamentares` 
+CHANGE COLUMN `ideCadastro` `ideCadastro` BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID do parlamentar' ,
+CHANGE COLUMN `txNomeParlamentar` `txNomeParlamentar` VARCHAR(100) NOT NULL COMMENT 'Nome de tratamento do parlamentar' ,
+ADD COLUMN `condicao` VARCHAR(50) NULL COMMENT 'Retorna se o deputado e Titular ou suplente' AFTER `nuDeputadoId`,
+ADD COLUMN `nome` VARCHAR(255) NULL COMMENT 'Nome civil do parlamentar' AFTER `condicao`,
+ADD COLUMN `urlFoto` VARCHAR(255) NULL COMMENT 'URL para a foto do parlamentar' AFTER `nome`,
+ADD COLUMN `sexo` VARCHAR(10) NULL COMMENT 'Sexo (masculino ou feminino)' AFTER `urlFoto`,
+ADD COLUMN `uf` VARCHAR(2) NULL COMMENT 'Unidade da Federação de representação do parlamentar' AFTER `sexo`,
+ADD COLUMN `partido` VARCHAR(50) NULL COMMENT 'Sigla do partido que o parlamentar representa' AFTER `uf`,
+ADD COLUMN `gabinete` VARCHAR(20) NULL COMMENT 'Numero do Gabinete do parlamentar' AFTER `partido`,
+ADD COLUMN `anexo` VARCHAR(50) NULL COMMENT 'Anexo (prédio) onde o gabinete está localizado' AFTER `gabinete`,
+ADD COLUMN `fone` VARCHAR(100) NULL COMMENT 'Numero do telefone do gabinete' AFTER `anexo`,
+ADD COLUMN `email` VARCHAR(100) NULL COMMENT 'Email institucional do parlamentar' AFTER `fone`,
+ADD COLUMN `idParlamentar` INT(11) NULL AFTER `email`,
+ADD COLUMN `codOrcamento` INT(11) NULL AFTER `idParlamentar`,
+ADD COLUMN `matricula` INT(11) NULL AFTER `codOrcamento`;

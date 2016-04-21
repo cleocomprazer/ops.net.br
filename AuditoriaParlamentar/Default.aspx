@@ -2,7 +2,7 @@
     AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="AuditoriaParlamentar.Default" %>
 
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeadContent" runat="server">
-    <link href="<%= ResolveClientUrl("~/") %>assets/css/landing-page.css?v=<%= Configuracao.VersaoSite %>" rel="stylesheet" />
+    <link href="<%= ResolveClientUrl("~/") %>assets/css/landing-page.css?v=<%= AuditoriaParlamentar.Classes.Configuracao.VersaoSite %>" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="bg">
@@ -16,10 +16,10 @@
                             <hr class="intro-divider" />
                             <ul class="list-inline">
                                 <li>
-                                    <a href="http://luciobig.com.br/o-que-e-ops/" class="btn btn-primary btn-lg" target="_blank"><i class="glyphicon glyphicon-heart"></i>&nbsp;Conheça</a>
+                                    <a href="Sobre.aspx" class="btn btn-primary btn-lg"><i class="glyphicon glyphicon-heart"></i>&nbsp;Conheça</a>
                                 </li>
                                 <li>
-                                    <a id="btnAuditar" runat="server" href="PesquisaInicio.aspx" class="btn btn-success btn-lg" target="_blank"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;Fiscalize</a>
+                                    <a id="btnAuditar" runat="server" href="PesquisaInicio.aspx" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;Fiscalize</a>
                                 </li>
                                 <li>
                                     <a href="http://luciobig.com.br/pagina-para-doacoes_16-html/" class="btn btn-default btn-lg" target="_blank"><i class="glyphicon glyphicon-usd"></i>&nbsp;Doe</a>
@@ -54,7 +54,7 @@
                                                 <%# DataBinder.Eval(Container.DataItem, "descricaoCartao") %>
                                             </p>
                                             <p title="Valor gasto em reais">
-                                                R$ <%# DataBinder.Eval(Container.DataItem, "valorCard", "{0:#,###.00}") %>
+                                                R$ <%# DataBinder.Eval(Container.DataItem, "valorCard", "{0:#,##0.00}") %>
                                             </p>
                                         </div>
                                     </div>
@@ -85,7 +85,7 @@
                                                 <%# DataBinder.Eval(Container.DataItem, "descricaoCartao") %>
                                             </p>
                                             <p title="Valor gasto em reais">
-                                                R$ <%# DataBinder.Eval(Container.DataItem, "valorCard", "{0:#,###.00}") %>
+                                                R$ <%# DataBinder.Eval(Container.DataItem, "valorCard", "{0:#,##0.00}") %>
                                             </p>
                                         </div>
                                     </div>
@@ -144,29 +144,6 @@
                                 <a href="https://www.microsoft.com/pt-br/store/apps/ops-fiscalize/9nblggh686vc" class="btn btn-primary" target="_blank" rel="nofollow">Windows Phone&nbsp;<i class="glyphicon glyphicon-menu-right"></i></a>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container" id="info-geral">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="bs-callout bs-callout-info">
-                        <h4 class="media-heading">O que é CEAP (CEAPS)?</h4>
-                        <br />
-                        <p class="text-justify">CEAP é a sigla da Cota para o Exercício da Atividade Parlamentar (No Senado se chama CEAPS).</p>
-                        <p class="text-justify">Trata-se de um recurso público disponível mensalmente aos deputados e senadores para o custeio de suas atividades parlamentares.</p>
-                        <p class="text-justify">Apesar de ser dinheiro público, fato que já implicaria no seu enquadramento à Lei Nº 8.666, o uso da verba dispensa qualquer tipo de burocracia exigida pela lei de licitações, dando ao deputado e ao senador a livre escolha da empresa a ser contratada para fornecimento do produto ou serviço.</p>
-                        <p class="text-justify">Não é raro encontrar irregularidades escandalosas, como locações de veículos feitas em padarias ou cópias de trabalhos escolares transformados em «pareceres jurídicos» generosamente pagos com o dinheiro do contribuinte.</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="bs-callout bs-callout-info">
-                        <h4 class="media-heading">O que é a OPS?</h4>
-                        <br />
-                        <p class="text-justify">A Operação Política Supervisionada - OPS - fiscaliza de forma detalhada os gastos realizados via CEAP ou CEAPS. Até o momento já foram economizados mais de R$ 5,5 milhões do dinheiro público graças a estas fiscalizações e às exigências feitas diretamente aos parlamentares para que devolvam o dinheiro público indevidamente utilizado.</p>
-                        <p class="text-justify">A OPS conta com a ajuda de seus colaboradores, espalhados pelo Brasil, para o levantamento de informações necessárias para a conclusão de fiscalizações, como por exemplo, o envio de fotos de endereços suspeitos em diversas cidades do país. Além disso, qualquer um pode ser um fiscal dos gastos públicos e este site oferece dados suficientes para isso.</p>
-                        <p class="text-justify">Apesar de ser especialista na fiscalização dos gastos com a verba indenizatória, a OPS também aceita denúncias de outros setores públicos, dando a elas o destino certo para que sejam apuradas pelas autoridades competentes.</p>
                     </div>
                 </div>
             </div>

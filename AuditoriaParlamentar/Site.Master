@@ -44,7 +44,7 @@
 
     <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/main.js?v=<%= Configuracao.VersaoSite %>"></script>
+    <script type="text/javascript" src="<%= ResolveClientUrl("~/") %>assets/js/main.js?v=<%= AuditoriaParlamentar.Classes.Configuracao.VersaoSite %>"></script>
 
     <% if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
         { %>
@@ -106,8 +106,9 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Auditar<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#" id="HyperLinkDeputadoFederal" runat="server">Parlamentar</a></li>
-                                <li><a href="#" id="HyperLinkFuncionarios" runat="server">Funcionários por Parlamentar</a></li>
+                                <li><a href="#" id="HyperLinkDeputadoFederal" runat="server">Deputado Federal</a></li>
+								<li><a href="#" id="HyperLinkSenador" runat="server">Senador</a></li>
+                                <li><a href="PesquisaInicio.aspx?op=S">Secretários (Deputado Federal)</a></li>
                             </ul>
                         </li>
                         <asp:PlaceHolder ID="plcRevisor" runat="server">
@@ -132,7 +133,7 @@
                                     { %>
                                 <li><a href="~/Membros.aspx" runat="server">Auditores</a></li>
                                 <%} %>
-                                <li><a href="http://luciobig.com.br/o-que-e-ops/" target="_blank">Sobre</a></li>
+                                <li><a href="Sobre.aspx">Sobre a OPS</a></li>
                             </ul>
                         </li>
                     </ul>

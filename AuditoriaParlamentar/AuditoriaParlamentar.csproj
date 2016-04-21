@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -25,6 +25,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,6 +39,7 @@
     <PublishDatabases>false</PublishDatabases>
     <ExcludeApp_Data>true</ExcludeApp_Data>
     <PackageAsSingleFile>false</PackageAsSingleFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -50,30 +52,29 @@
     <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
     <PackageAsSingleFile>false</PackageAsSingleFile>
     <ExcludeApp_Data>true</ExcludeApp_Data>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ICSharpCode.SharpZipLib.dll.0.85.4.369\lib\net20\ICSharpCode.SharpZipLib.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MySql.Data.6.9.8\lib\net40\MySql.Data.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="MySql.Web, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MySql.Web.6.9.8\lib\net40\MySql.Web.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -81,6 +82,7 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\bootstrap-select.css" />
@@ -116,11 +118,12 @@
     <Content Include="CidadesPendencia.aspx" />
     <Content Include="CidadesPendenciaGerenciar.aspx" />
     <Content Include="CidadesPendenciaGrid.aspx" />
-    <Content Include="AuditarSenador.aspx" />
     <Content Include="AuditoriaPF.aspx" />
+    <Content Include="DeputadoFederal.aspx" />
     <Content Include="DetalhesSecretarios.aspx" />
     <Content Include="EmailPendente.aspx" />
     <Content Include="FuncionariosPorParlamentar.aspx" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Sobre.aspx" />
     <Content Include="Account\ChangePassword.aspx" />
     <Content Include="Account\ChangePasswordSuccess.aspx" />
@@ -140,7 +143,6 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="assets\js\bootstrap-select.js.map" />
     <Content Include="assets\js\jquery-1.11.3.min.map" />
-    <Content Include="Dossies.aspx" />
     <Content Include="FornecedorParlamentares.aspx" />
     <Content Include="Membros.aspx" />
     <Content Include="Noticias.aspx" />
@@ -166,6 +168,7 @@
     <Content Include="SolicitaDocumentos.aspx" />
     <Content Include="SQL\1.sql" />
     <Content Include="Global.asax" />
+    <Content Include="SQL\2.sql" />
     <Content Include="SQL\auditoria_cards_bi.sql" />
     <Content Include="SQL\auditoria_secretario.sql" />
     <Content Include="Suspeitas.aspx" />
@@ -174,6 +177,7 @@
     </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -209,13 +213,6 @@
     <Compile Include="CidadesPendenciaGrid.aspx.designer.cs">
       <DependentUpon>CidadesPendenciaGrid.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AuditarSenador.aspx.cs">
-      <DependentUpon>AuditarSenador.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AuditarSenador.aspx.designer.cs">
-      <DependentUpon>AuditarSenador.aspx</DependentUpon>
-    </Compile>
     <Compile Include="AuditoriaPF.aspx.cs">
       <DependentUpon>AuditoriaPF.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -223,22 +220,13 @@
     <Compile Include="AuditoriaPF.aspx.designer.cs">
       <DependentUpon>AuditoriaPF.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Backup.cs" />
-    <Compile Include="Classes\Coluna.cs" />
-    <Compile Include="Classes\ComandoSQL.cs" />
-    <Compile Include="Classes\Comum.cs" />
-    <Compile Include="Classes\ConexaoMySQL.cs" />
-    <Compile Include="Classes\Configuracao.cs" />
-    <Compile Include="Classes\CookieAwareWebClient.cs">
-      <SubType>Component</SubType>
+    <Compile Include="DeputadoFederal.aspx.cs">
+      <DependentUpon>DeputadoFederal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Classes\CsvHelper.cs" />
-    <Compile Include="Classes\DbShare.cs" />
-    <Compile Include="Classes\Empresa.cs" />
-    <Compile Include="Classes\Extenssion.cs" />
-    <Compile Include="Classes\FormatarDados.cs" />
-    <Compile Include="Classes\FornecedorQuadroSocietario.cs" />
-    <Compile Include="Classes\Parlamentar.cs" />
+    <Compile Include="DeputadoFederal.aspx.designer.cs">
+      <DependentUpon>DeputadoFederal.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DetalhesSecretarios.aspx.cs">
       <DependentUpon>DetalhesSecretarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -330,27 +318,12 @@
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Anexos.cs" />
-    <Compile Include="Classes\DadosSenadores.cs" />
-    <Compile Include="Classes\DbEstatisticas.cs" />
-    <Compile Include="Classes\Dossie.cs" />
-    <Compile Include="Classes\Email.cs" />
-    <Compile Include="Classes\Noticia.cs" />
-    <Compile Include="Classes\PesquisaSenadores.cs" />
-    <Compile Include="Classes\SuspeitasFornecedor.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Dossies.aspx.cs">
-      <DependentUpon>Dossies.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Dossies.aspx.designer.cs">
-      <DependentUpon>Dossies.aspx</DependentUpon>
     </Compile>
     <Compile Include="FornecedorParlamentares.aspx.cs">
       <DependentUpon>FornecedorParlamentares.aspx</DependentUpon>
@@ -401,9 +374,6 @@
     <Compile Include="RelParlamentarFornecedor.aspx.designer.cs">
       <DependentUpon>RelParlamentarFornecedor.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\AcompanhaDenuncias.cs" />
-    <Compile Include="Classes\Comentarios.cs" />
-    <Compile Include="Classes\Notificacoes.cs" />
     <Compile Include="DenunciasGrid.aspx.cs">
       <DependentUpon>DenunciasGrid.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -418,7 +388,6 @@
     <Compile Include="AuditoriaFornecedor.aspx.designer.cs">
       <DependentUpon>AuditoriaFornecedor.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Banco.cs" />
     <Compile Include="CarregaDados.aspx.cs">
       <DependentUpon>CarregaDados.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -426,13 +395,6 @@
     <Compile Include="CarregaDados.aspx.designer.cs">
       <DependentUpon>CarregaDados.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Denuncia.cs" />
-    <Compile Include="Classes\Eleicao.cs" />
-    <Compile Include="Classes\EncryptDecrypt.cs" />
-    <Compile Include="Classes\Dados.cs" />
-    <Compile Include="Classes\Fornecedor.cs" />
-    <Compile Include="Classes\MySQLMembershipProvider.cs" />
-    <Compile Include="Classes\MySQLRoleProvider.cs" />
     <Compile Include="DenunciarFornecedor.aspx.cs">
       <DependentUpon>DenunciarFornecedor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -464,7 +426,6 @@
     <Compile Include="PesquisaInicio.aspx.designer.cs">
       <DependentUpon>PesquisaInicio.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Pesquisa.cs" />
     <Compile Include="Oops.aspx.cs">
       <DependentUpon>Oops.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -527,7 +488,6 @@
     <Compile Include="PesquisaAbas.aspx.designer.cs">
       <DependentUpon>PesquisaAbas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Usuario.cs" />
     <Compile Include="SolicitaDocumentos.aspx.cs">
       <DependentUpon>SolicitaDocumentos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -545,6 +505,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Classes\" />
     <Folder Include="Upload\" />
   </ItemGroup>
   <ItemGroup>
@@ -563,6 +524,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AuditoriaParlamentar.Classes\AuditoriaParlamentar.Classes.csproj">
+      <Project>{54f281b8-fcb4-48a4-b286-b91690c72458}</Project>
+      <Name>AuditoriaParlamentar.Classes</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

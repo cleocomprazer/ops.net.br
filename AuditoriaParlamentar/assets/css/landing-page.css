@@ -19,26 +19,28 @@ form#form_auditoria { height: auto; overflow: auto; }
 .intro-message > h3 { text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; -webkit-font-smoothing: antialiased; color: #000; }
 
 @media(max-width:650px) {
-    .bg { background-size: contain; }
+	.bg { background-size: contain; }
 
-    .intro-header { padding: 10px 0; }
+	.intro-header { padding: 10px 0; }
 
-    .list-inline > li { padding-right: 4px; padding-left: 4px; }
+	.list-inline > li { padding-right: 4px; padding-left: 4px; }
+
+	.btn-group-lg > .btn, .btn-lg { padding: 7px 10px; font-size: 13px; }
 }
 
 @media(max-width:768px) {
-    .bg { background-position: top 34px center; }
+	.bg { background-position: top 34px center; }
 
-    .intro-message > h1 { font-size: 3em; }
+	.intro-message > h1 { font-size: 3em; }
 
-    .intro-divider { width: 100%; }
+	.intro-divider { width: 100%; }
 
-    .content-section-a h4, .ops-fiscalize-button { text-align: center; }
+	.content-section-a h4, .ops-fiscalize-button { text-align: center; }
 }
 
 .content-section-a { padding: 30px 0 10px; background-color: #f8f8f8; }
 
-    .content-section-a .ops-fiscalize-button div { display: inline-block; }
+	.content-section-a .ops-fiscalize-button div { display: inline-block; }
 
 .content-section-b { padding: 50px 0; border-top: 1px solid #e7e7e7; border-bottom: 1px solid #e7e7e7; }
 
@@ -48,7 +50,7 @@ form#form_auditoria { height: auto; overflow: auto; }
 
 .banner { padding: 10px 0; }
 
-    .banner h2 { margin: 0; font-size: 3em; }
+	.banner h2 { margin: 0; font-size: 3em; }
 
 .bs-callout { padding: 20px; margin: 20px 0; border: 1px solid #eee; border-left-width: 5px; border-radius: 3px; }
 
@@ -65,7 +67,7 @@ footer { padding: 0 0 15px; background-color: #f8f8f8; }
 
 .card { overflow: hidden; position: relative; border: 1px solid #CCC; border-radius: 8px; text-align: center; padding: 0; background-color: #FFFFFF; color: #000; }
 
-    .card .avatar { position: relative; margin-top: 15px; z-index: 100; margin-bottom: 10px; }
+	.card .avatar { position: relative; margin-top: 15px; z-index: 100; margin-bottom: 10px; }
 
 .header-bgTituloCard { position: absolute; background-color: lightcyan; top: 0; left: 0; width: 100%; height: 70px; border-bottom: 1px #1b809e solid; z-index: 1; }
 

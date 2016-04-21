@@ -3,7 +3,7 @@
     ViewStateMode="Disabled" %>
 
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeadContent" runat="server">
-    <link href="<%= ResolveClientUrl("~/") %>assets/css/auditoria.css?v=<%= Configuracao.VersaoSite %>" rel="stylesheet" />
+    <link href="<%= ResolveClientUrl("~/") %>assets/css/auditoria.css?v=<%= AuditoriaParlamentar.Classes.Configuracao.VersaoSite %>" rel="stylesheet" />
     <style type="text/css">
         #dialog label, #dialog input { display: block; }
 
@@ -31,7 +31,7 @@
     <br />
     <div id="tab-content" class="tab-content">
         <div class="tab-pane active" id="tabs-1">
-            <iframe id="frame" src="<%= Pagina%>" frameborder="0" width="100%" style="height: 100%;" />
+            <iframe id="frame" src="<%= Pagina%>" frameborder="0" width="100%" style="height: 100%;"></iframe>
         </div>
     </div>
 
