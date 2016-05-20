@@ -13,10 +13,7 @@ namespace AuditoriaParlamentar.Account
     {
         protected override void OnPreInit(EventArgs e)
         {
-            if (Session["MasterPage"] == "Farejador")
-            {
-                Page.MasterPageFile = "~/OpsFarejador.Master";
-            }
+            
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -72,6 +69,10 @@ namespace AuditoriaParlamentar.Account
 
             if (usuario.AtualizaDadosComplementares(userName, DropDownListUF.SelectedValue, TextBoxCidade.Text, CheckBoxMostraEmail.Checked) == true)
                 Response.Redirect("~/Account/UpdateAccountSuccess.aspx");
+        }
+        protected void btnLogoff_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

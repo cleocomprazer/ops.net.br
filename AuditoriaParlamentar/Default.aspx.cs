@@ -10,11 +10,20 @@ namespace AuditoriaParlamentar
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
+            {                
                 if (!HttpContext.Current.User.Identity.IsAuthenticated)
                 {
                     btnAuditar.HRef = System.Web.Security.FormsAuthentication.LoginUrl;
+                    Session.Abandon();
                 }
+
+                try
+                {
+                    DataTable vdt = new DataTable();
+                    // teste de algo 
+                }catch 
+                {}
+
 
                 try
                 {
@@ -25,20 +34,12 @@ namespace AuditoriaParlamentar
                 {
                     rptResumoAuditoria.Visible = false;
                 }
-
-                try
                 {
                     Parlamentar vo_Parl = new Parlamentar();
-                    DataTable vdt_Card = vo_Parl.recuperaCards();
+                    DataTable  vdt_Card = vo_Parl.recuperaCards();
 
-                    rptMaioresGastos.DataSource = vdt_Card.Select("tipoCartao='MAIOR'").CopyToDataTable();
-                    rptMaioresGastos.DataBind();
-
-                    rptMenoresGastos.DataSource = vdt_Card.Select("tipoCartao='MENOR'").CopyToDataTable();
-                    rptMenoresGastos.DataBind();
+                    
                 }
-                catch (Exception)
-                { }
             }
         }
     }

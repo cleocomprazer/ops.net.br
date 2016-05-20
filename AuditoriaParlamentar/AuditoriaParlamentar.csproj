@@ -19,7 +19,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -55,6 +55,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Hammock.ClientProfile, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\Hammock.ClientProfile.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ICSharpCode.SharpZipLib.dll.0.85.4.369\lib\net20\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -67,6 +71,10 @@
     <Reference Include="MySql.Web, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MySql.Web.6.9.8\lib\net40\MySql.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -83,8 +91,21 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="TweetSharp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\TweetSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Twitterizer.Data">
+      <HintPath>..\..\..\..\Users\cezar\Downloads\Twitterizer-develop\Twitterizer-develop\ExampleApplications\Twitterizer-Web\Bin\Twitterizer.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Twitterizer2">
+      <HintPath>..\..\..\..\Users\cezar\Downloads\Twitterizer-develop\Twitterizer-develop\ExampleApplications\Twitterizer-Web\Bin\Twitterizer2.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Account\LoginOAuth.aspx" />
+    <Content Include="Account\LoginOPS.aspx" />
+    <Content Include="Account\Logoff.aspx" />
     <Content Include="assets\css\bootstrap-select.css" />
     <Content Include="assets\css\bootstrap-select.min.css" />
     <Content Include="assets\css\bootstrap-theme.css" />
@@ -93,8 +114,11 @@
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\landing-page.css" />
     <Content Include="assets\css\auditoria.css" />
+    <Content Include="assets\css\login.css" />
+    <Content Include="assets\css\loginOAuth.css" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\img\ajax-loader-facebook.gif" />
+    <Content Include="assets\img\gmail.png" />
     <Content Include="assets\img\logo200x200.jpg" />
     <Content Include="assets\img\logo_fiscalize.png" />
     <Content Include="assets\img\logo_grande.png" />
@@ -112,6 +136,8 @@
     <Content Include="assets\js\bootstrap.js" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\jquery-1.11.3.min.js" />
+    <Content Include="assets\js\loginFacebook.js" />
+    <Content Include="assets\js\loginGoogle.js" />
     <Content Include="assets\js\main.js" />
     <Content Include="assets\js\MaxLength.min.js" />
     <Content Include="BackupViaSchedule.aspx" />
@@ -123,6 +149,10 @@
     <Content Include="DetalhesSecretarios.aspx" />
     <Content Include="EmailPendente.aspx" />
     <Content Include="FuncionariosPorParlamentar.aspx" />
+    <Content Include="Auditoria\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Properties\PublishProfiles\publicacao.pubxml" />
     <None Include="Scripts\_references.js" />
     <Content Include="Sobre.aspx" />
     <Content Include="Account\ChangePassword.aspx" />
@@ -151,9 +181,9 @@
     <Content Include="Relatorio.aspx" />
     <Content Include="RelParlamentarFornecedor.aspx" />
     <Content Include="DenunciasGrid.aspx" />
-    <Content Include="AuditoriaFornecedor.aspx" />
+    <Content Include="Auditoria\AuditoriaFornecedor.aspx" />
     <Content Include="CarregaDados.aspx" />
-    <Content Include="DenunciarFornecedor.aspx" />
+    <Content Include="Auditoria\DenunciarFornecedor.aspx" />
     <Content Include="DenunciaMsg.aspx" />
     <Content Include="Denuncias.aspx" />
     <Content Include="PesquisaInicio.aspx" />
@@ -176,8 +206,30 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="PesquisaAbas.aspx" />
+    <Content Include="Servicos\servicoAutenticacao.ashx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\LoginOAuth.aspx.cs">
+      <DependentUpon>LoginOAuth.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\LoginOAuth.aspx.designer.cs">
+      <DependentUpon>LoginOAuth.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\LoginOPS.aspx.cs">
+      <DependentUpon>LoginOPS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\LoginOPS.aspx.designer.cs">
+      <DependentUpon>LoginOPS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Logoff.aspx.cs">
+      <DependentUpon>Logoff.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Logoff.aspx.designer.cs">
+      <DependentUpon>Logoff.aspx</DependentUpon>
+    </Compile>
     <Compile Include="BackupViaSchedule.aspx.cs">
       <DependentUpon>BackupViaSchedule.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -247,6 +299,9 @@
     </Compile>
     <Compile Include="PaginaInterna.Master.designer.cs">
       <DependentUpon>PaginaInterna.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Servicos\servicoAutenticacao.ashx.cs">
+      <DependentUpon>servicoAutenticacao.ashx</DependentUpon>
     </Compile>
     <Compile Include="Sobre.aspx.cs">
       <DependentUpon>Sobre.aspx</DependentUpon>
@@ -374,11 +429,11 @@
     <Compile Include="DenunciasGrid.aspx.designer.cs">
       <DependentUpon>DenunciasGrid.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AuditoriaFornecedor.aspx.cs">
+    <Compile Include="Auditoria\AuditoriaFornecedor.aspx.cs">
       <DependentUpon>AuditoriaFornecedor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AuditoriaFornecedor.aspx.designer.cs">
+    <Compile Include="Auditoria\AuditoriaFornecedor.aspx.designer.cs">
       <DependentUpon>AuditoriaFornecedor.aspx</DependentUpon>
     </Compile>
     <Compile Include="CarregaDados.aspx.cs">
@@ -388,11 +443,11 @@
     <Compile Include="CarregaDados.aspx.designer.cs">
       <DependentUpon>CarregaDados.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DenunciarFornecedor.aspx.cs">
+    <Compile Include="Auditoria\DenunciarFornecedor.aspx.cs">
       <DependentUpon>DenunciarFornecedor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DenunciarFornecedor.aspx.designer.cs">
+    <Compile Include="Auditoria\DenunciarFornecedor.aspx.designer.cs">
       <DependentUpon>DenunciarFornecedor.aspx</DependentUpon>
     </Compile>
     <Compile Include="DenunciaMsg.aspx.cs">
@@ -524,6 +579,10 @@
       <Name>AuditoriaParlamentar.Classes</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\codecracker.CSharp.1.0.0\analyzers\dotnet\cs\CodeCracker.Common.dll" />
+    <Analyzer Include="..\packages\codecracker.CSharp.1.0.0\analyzers\dotnet\cs\CodeCracker.CSharp.dll" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -539,7 +598,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1139</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/AuditoriaParlamentar</IISUrl>
+          <IISUrl>http://localhost:1139/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

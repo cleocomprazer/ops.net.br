@@ -11,17 +11,15 @@
                     <div class="row" id="dvAlerta" runat="server" visible="false" enableviewstate="false">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <div class="alert alert-success" runat="server" id="dvAlertaMensagem"></div>
+                                <div class="alert alert-success" runat="server" id="dvAlertaMensagem">                                    
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <asp:Label ID="Label3" runat="server" Text="Informe o Email ou Usuário"></asp:Label>
-                                <asp:RequiredFieldValidator ID="UsernameValidator" runat="server"
-                                    ControlToValidate="TextBoxUser" CssClass="small pull-right text-danger" SetFocusOnError="True"
-                                    ValidationGroup="ValidationGroup">* Usuário não informado</asp:RequiredFieldValidator>
+                                <asp:Label ID="Label3" runat="server" Text="Informe o Email ou Usuário"></asp:Label>                                
                                 <asp:TextBox ID="TextBoxUser" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>

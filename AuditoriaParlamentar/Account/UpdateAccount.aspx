@@ -5,10 +5,12 @@
     <style type="text/css">
         .style2 { margin-left: 80px; }
     </style>
+
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <div class="row">
         <div class="row">
+            
             <div class="col-md-6 col-md-offset-3">
                 <h2>Alterar Conta
                 </h2>
@@ -61,6 +63,13 @@
                                 OnClick="UpdateUserButton_Click" CssClass="btn btn-success" />
                             &nbsp;&nbsp;&nbsp;
                         <a href="#" onclick="history.back();">Voltar</a>
+                        </div>
+                    </div>
+                    <div class="row">    
+                        <div class="col-md-12">
+                            <p>
+                                <asp:Button ID="btnLogoff" runat="server"  Text="Efetuar Logoff" OnClick="btnLogoff_Click" CssClass="btn btn-danger"  />
+                            </p>                       
                         </div>
                     </div>
                 </fieldset>

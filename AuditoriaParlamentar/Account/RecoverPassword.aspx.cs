@@ -12,18 +12,19 @@ namespace AuditoriaParlamentar.Account
     {
         protected void ButtonEnviar_Click(object sender, EventArgs e)
         {
-            MySqlMembershipProvider member = new MySqlMembershipProvider();
-            String retorno = member.RecuperaSenhaEmail(TextBoxUser.Text);
+            dvAlerta.Visible = true;
+            if (TextBoxUser.Text.Equals(string.Empty))
+            {
+                dvAlertaMensagem.InnerText = "Você precisa inserir o seu usuário.";
+            }else{
+                MySqlMembershipProvider member = new MySqlMembershipProvider();
+                MySqlMembershipProvider provider = new MySqlMembershipProvider();                
+                String retorno = member.RecuperaSenhaEmail(TextBoxUser.Text);
 
-            if (retorno == "")
-            {
-                dvAlerta.Visible = true;
-                dvAlertaMensagem.InnerText = "Um e-mail foi enviado com instruções para recuperar sua senha.";
-            }
-            else
-            {
-                UsernameValidator.ErrorMessage = retorno;
-                UsernameValidator.IsValid = false;
+                if (retorno == "")                                    
+                    dvAlertaMensagem.InnerText = "Um e-mail foi enviado com instruções para recuperar sua senha.";                
+                else                
+                    dvAlertaMensagem.InnerText = retorno;                
             }
         }
     }

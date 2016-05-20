@@ -109,17 +109,18 @@
                                 <li><a href="#" id="HyperLinkDeputadoFederal" runat="server">Deputado Federal</a></li>
 								<li><a href="#" id="HyperLinkSenador" runat="server">Senador</a></li>
                                 <li><a href="PesquisaInicio.aspx?op=S">Secretários (Deputado Federal)</a></li>
+                                <li><a href="~/Auditoria/AuditoriaFornecedor.aspx" runat="server">Fornecedores</a></li>
+                                <li><a href="~/Auditoria/DenunciarFornecedor.aspx" runat="server">Denunciar Fornecedores</a></li>
                             </ul>
                         </li>
-                        <asp:PlaceHolder ID="plcRevisor" runat="server">
+                        <!--<asp:PlaceHolder ID="plcRevisor" runat="server">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Revisar<span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Auditar<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="~/Revisao.aspx" runat="server">Revisão</a></li>
-                                    <li><a href="~/RelParlamentarFornecedor.aspx" runat="server">Relatórios</a></li>
+                                    
                                 </ul>
                             </li>
-                        </asp:PlaceHolder>
+                        </asp:PlaceHolder>-->
                         <li><a href="~/CidadesPendencia.aspx" runat="server">Pendências</a></li>
                         <% if (autenticado)
                             { %>
@@ -140,15 +141,20 @@
                     <ul class="nav navbar-nav navbar-right">
                         <asp:LoginView ID="HeadLoginView" runat="server">
                             <AnonymousTemplate>
-                                <li><a href="~/Account/Login.aspx" runat="server"><i class="glyphicon glyphicon-log-in"></i>&nbsp;Entrar</a></li>
+                                <li><a href="~/Account/LoginOAuth.aspx" runat="server"><i class="glyphicon glyphicon-log-in"></i>
+                                    <asp:Label ID="lblStatus" runat="server" Text="&nbsp;Entrar"></asp:Label>
+                                    </a>
+                                </li>
                             </AnonymousTemplate>
                             <LoggedInTemplate>
-                                <li><a href="~/Account/UpdateAccount.aspx" runat="server" title="Visualizar Perfil">
-                                    <i class='glyphicon glyphicon-user'></i>
-                                    <asp:LoginName ID="LoginName1" runat="server" />
-                                </a></li>
                                 <li>
-                                    <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="<i class='glyphicon glyphicon-log-in'></i>&nbsp;Sair" LogoutPageUrl="~/" />
+                                    <a style="text-decoration:none" runat="server" title="Seu nome de Perfil na OPS">
+                                        <i class='glyphicon glyphicon-user'></i>
+                                    <asp:LoginName ID="LoginName1" runat="server" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="<i class='glyphicon glyphicon-log-in'></i>&nbsp;Sair" LogoutPageUrl="~/Account/Logoff.aspx" />
                                 </li>
                             </LoggedInTemplate>
                         </asp:LoginView>

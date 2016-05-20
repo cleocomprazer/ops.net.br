@@ -30,72 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="content-section-a resumo-gastos">
-            <div class="container">
-                <div class="panel panel-danger">
-                    <div class="panel-heading">Quem mais gastou em 2015</div>
-                    <div class="panel-body">
-                        <asp:Repeater runat="server" ID="rptMaioresGastos">
-                            <ItemTemplate>
-                                <div class="col-xs-12 col-sm-6 col-md-3">
-                                    <div class="card form-group">
-                                        <canvas class="header-desempenho bg-danger" width="250" height="70"></canvas>
-                                        <div class="avatar">
-                                            <img src='./Figuras/Parlamentares/<%# DataBinder.Eval(Container.DataItem, "urlImagem") %>' alt='<%# DataBinder.Eval(Container.DataItem, "nomeParlamentar") %>'>
-                                        </div>
-                                        <div class="content">
-                                            <p title="Nome do parlamentar">
-                                                <%# DataBinder.Eval(Container.DataItem, "nomeParlamentar") %>
-                                            </p>
-                                            <p title="Cargo">
-                                                <%# DataBinder.Eval(Container.DataItem, "cargoParlamentar") %>
-                                            </p>
-                                            <p title="Despesa">
-                                                <%# DataBinder.Eval(Container.DataItem, "descricaoCartao") %>
-                                            </p>
-                                            <p title="Valor gasto em reais">
-                                                R$ <%# DataBinder.Eval(Container.DataItem, "valorCard", "{0:#,##0.00}") %>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </div>
-                </div>
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Quem menos gastou em 2015</div>
-                    <div class="panel-body">
-                        <asp:Repeater runat="server" ID="rptMenoresGastos">
-                            <ItemTemplate>
-                                <div class="col-xs-12 col-sm-6 col-md-3">
-                                    <div class="card form-group">
-                                        <canvas class="header-desempenho bg-primary" width="250" height="70"></canvas>
-                                        <div class="avatar">
-                                            <img src='./Figuras/Parlamentares/<%# DataBinder.Eval(Container.DataItem, "urlImagem") %>' alt='<%# DataBinder.Eval(Container.DataItem, "nomeParlamentar") %>'>
-                                        </div>
-                                        <div class="content">
-                                            <p title="Nome do parlamentar">
-                                                <%# DataBinder.Eval(Container.DataItem, "nomeParlamentar") %>
-                                            </p>
-                                            <p title="Cargo">
-                                                <%# DataBinder.Eval(Container.DataItem, "cargoParlamentar") %>
-                                            </p>
-                                            <p title="Despesa">
-                                                <%# DataBinder.Eval(Container.DataItem, "descricaoCartao") %>
-                                            </p>
-                                            <p title="Valor gasto em reais">
-                                                R$ <%# DataBinder.Eval(Container.DataItem, "valorCard", "{0:#,##0.00}") %>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
         <div class="container banner1">
             <div class="row">
